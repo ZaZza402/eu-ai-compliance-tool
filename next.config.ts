@@ -8,14 +8,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.clerk.accounts.dev" },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/clerk-proxy/:path*",
-        destination: "https://frontend-api.clerk.services/:path*",
-      },
-    ];
-  },
 };
 
 export default nextConfig;
