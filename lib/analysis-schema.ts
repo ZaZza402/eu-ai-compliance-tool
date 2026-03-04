@@ -158,6 +158,13 @@ export const AnalysisOutputSchema = z.object({
       "True ONLY if riskLevel is 'gpai' AND there are indicators the model training compute exceeds 10^25 FLOPs (frontier/foundation models like GPT-4 class). False for all non-GPAI systems or clearly smaller GPAI models. Omit only if riskLevel is not gpai.",
     ),
 
+  plainLanguageSummary: z
+    .string()
+    .optional()
+    .describe(
+      "Plain English explanation of the entire analysis for a non-lawyer. 3-5 short paragraphs. No article numbers, no legal jargon. Cover: (1) what the risk verdict means in practice, (2) who is responsible and in what capacity, (3) the top concrete tasks translated into plain language, (4) the timeline and worst-case consequence of non-compliance.",
+    ),
+
   disclaimer: z
     .string()
     .describe(

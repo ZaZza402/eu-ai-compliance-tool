@@ -24,6 +24,7 @@ import {
   Gavel,
   FileText,
   AlertTriangle,
+  Lightbulb,
 } from "lucide-react";
 import { ArticleBadge } from "@/components/analysis/ArticleBadge";
 import { ExportPdfButton } from "@/components/analysis/ExportPdfButton";
@@ -434,6 +435,26 @@ export function StructuredAnalysisDisplay({
         <MarkdownProse content={result.penaltyExposure} />
       </ProseSection>
 
+      {/* Section 8 — Plain Language Summary */}
+      {result.plainLanguageSummary && (
+        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 shadow-sm dark:border-emerald-500/20 dark:bg-emerald-500/10">
+          <div className="flex items-center justify-between px-5 py-3.5">
+            <div className="flex items-center gap-2.5">
+              <Lightbulb className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-sm font-semibold text-emerald-800 dark:text-emerald-200">
+                8. What This Means For You — Plain Language Summary
+              </span>
+            </div>
+          </div>
+          <div className="border-t border-emerald-500/20 px-5 pb-5 pt-4">
+            <p className="mb-3 text-xs font-medium text-emerald-700 dark:text-emerald-400">
+              A plain English explanation of the analysis above — no legal terminology.
+            </p>
+            <MarkdownProse content={result.plainLanguageSummary} />
+          </div>
+        </div>
+      )}
+
       {/* Disclaimer */}
       <div className="flex items-start gap-2 rounded-lg border border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
         <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
@@ -462,10 +483,7 @@ export function StructuredAnalysisDisplay({
             </span>
           )}
         </div>
-        <a
-          href="/feedback"
-          className="hover:text-foreground hover:underline"
-        >
+        <a href="/feedback" className="hover:text-foreground hover:underline">
           Found an inaccuracy? Report it →
         </a>
       </div>

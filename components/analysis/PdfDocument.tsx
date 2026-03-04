@@ -919,6 +919,52 @@ export function StructuredComplianceReportPdf({
           </View>
         )}
 
+        {/* ── Plain Language Summary (Section 8) ───────────────────────── */}
+        {result.plainLanguageSummary && (
+          <View
+            style={[
+              s.sectionWrapper,
+              {
+                backgroundColor: "#f0fdf4",
+                borderRadius: 4,
+                borderWidth: 1,
+                borderColor: "#bbf7d0",
+                paddingHorizontal: 12,
+                paddingVertical: 10,
+              },
+            ]}
+          >
+            <View style={s.sectionHeader} wrap={false}>
+              <Text style={[s.sectionNumber, { backgroundColor: "#16a34a" }]}>8</Text>
+              <Text style={[s.sectionTitle, { color: "#14532d" }]}>
+                What This Means For You — Plain Language Summary
+              </Text>
+            </View>
+            <View style={[s.sectionDivider, { backgroundColor: "#bbf7d0" }]} />
+            <Text
+              style={[
+                s.paragraph,
+                {
+                  fontSize: 8,
+                  color: "#166534",
+                  fontFamily: "Helvetica-Oblique",
+                  marginBottom: 8,
+                },
+              ]}
+            >
+              Plain English explanation — no legal terminology.
+            </Text>
+            {result.plainLanguageSummary
+              .split(/\n+/)
+              .filter((p) => p.trim().length > 0)
+              .map((para, i) => (
+                <Text key={i} style={[s.paragraph, { color: "#1a2e1a" }]}>
+                  {para.trim()}
+                </Text>
+              ))}
+          </View>
+        )}
+
         {/* ── Footer (fixed on every page) ────────────────────────────── */}
         <View style={s.footer} fixed>
           <View style={s.footerLeft}>

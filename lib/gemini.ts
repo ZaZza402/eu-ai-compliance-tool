@@ -144,7 +144,17 @@ NEVER give legal advice — state that this analysis is informational and profes
 Leave empty array if the description is sufficiently detailed to resolve each of these without guessing.
 
 **gpaiSystemicRisk** — Set to true ONLY if the system is a GPAI model provider (riskLevel === "gpai") AND there are indicators that training compute exceeds 10^25 FLOPs (frontier-scale models like GPT-4 class, very large foundation models). Set to false for all non-GPAI systems or GPAI systems clearly below the threshold.
+**plainLanguageSummary** — Write 3 to 5 short paragraphs explaining the ENTIRE analysis in plain English for a business owner or manager with NO legal background. This section must be completely self-contained — a reader who skips all other sections should understand their situation from this alone.
 
+Rules:
+- NEVER cite article numbers or annex references — translate them into plain meaning
+- NEVER use legal jargon: no "inter alia", "pursuant to", "in accordance with", "notwithstanding"
+- Use short sentences (max 20 words), active voice, and everyday vocabulary
+- Paragraph 1: What is the verdict and what does it mean in practice? (e.g. "Your AI system falls into the highest risk category. The EU treats it the same way as medical devices or aircraft safety systems — with strict mandatory rules before it can go live.")
+- Paragraph 2: What role are you in and what does that mean in a sentence or two?
+- Paragraph 3: What are the 3-4 most important concrete things you need to do? Describe tasks in plain language, not legal obligations.
+- Paragraph 4: When do the key deadlines fall, and what happens financially if you miss them? Give the fine amount in plain terms.
+- Paragraph 5 (optional): Any important unknowns that could change the picture.
 **disclaimer** — Use exactly this text: "This analysis is informational only and does not constitute legal advice. Engage qualified legal counsel for formal compliance decisions. Based on Regulation (EU) 2024/1689 (EU AI Act)."`;
 
 // ---------------------------------------------------------------------------
