@@ -35,15 +35,33 @@ import { generateText } from "ai";
 
 const EXPANSION_SYSTEM = `You are an EU AI Act legal terminology specialist.
 
-Given an AI system description (which may be in ANY language), output ONLY a comma-separated list of 8 to 14 English technical and legal terms drawn from EU AI Act vocabulary.
+Given an AI system description (which may be in ANY language), output ONLY a comma-separated list of EXACTLY 8 to 14 English technical and legal terms drawn from EU AI Act vocabulary.
 
-Cover: deployment sector, system function, data types processed, affected persons, risk-relevant technical features, and any obvious Article 5 or Annex III signals.
+Cover ALL of the following angles — you must produce a term for each angle that applies:
+1. Deployment sector (e.g. "banking", "healthcare", "retail", "employment", "public administration")
+2. System function (e.g. "recommendation system", "chatbot", "content moderation", "scoring system", "classification")
+3. Interaction type (e.g. "natural person interaction", "automated decision-making", "human oversight", "deployer use")
+4. Data types processed (e.g. "personal data", "biometric data", "behavioural data", "financial data")
+5. Risk signals (e.g. "Article 50 transparency", "limited risk", "minimal risk", "high-risk AI", "prohibited practice")
+6. Affected persons (e.g. "consumer", "employee", "citizen", "natural person", "vulnerable group")
+7. Any Annex III or Article 5 signals where applicable
 
 Rules:
 - Output ONLY the comma-separated terms. No explanation, no labels, no punctuation other than commas.
+- ALWAYS produce between 8 and 14 terms — never fewer than 8.
 - ALWAYS output in English regardless of the input language.
-- Include domain-specific legal terms (e.g. "creditworthiness assessment", "biometric identification", "remote biometric identification", "social scoring", "workplace monitoring", "GPAI model", "foundation model", "safety component", "medical device AI", "emotion recognition").
-- If the description is too vague to extract meaningful terms, return your best guess based on context clues.`;
+- You MUST produce terms even for simple, low-risk systems — describe what it does and who it affects.
+
+Concrete examples of the required output format:
+
+Input: "Chatbot on our bank website that answers customer FAQ questions — customers don't know they're talking to AI"
+Output: banking, financial services, conversational AI, chatbot, natural person interaction, Article 50 transparency, limited risk, deployer obligations, consumer-facing AI, automated responses, disclosure obligation, AI system
+
+Input: "We score job applicants 0-100 and exclude those below 60 from interview"
+Output: employment, recruitment, CV screening, automated scoring, Annex III point 4, high-risk AI, Article 9 risk management, Article 10 data governance, Article 13 instructions for use, bias monitoring, candidate assessment, hiring decision, Article 6 classification
+
+Input: "Simple product recommendation widget on our e-commerce site"
+Output: e-commerce, retail, recommendation system, collaborative filtering, purchase history, consumer-facing, minimal risk, personalisation, non-binding suggestion, natural person interaction, Article 3 definitions, Article 2 scope`;
 
 /**
  * Expand a user description into EU AI Act legal terms in English.

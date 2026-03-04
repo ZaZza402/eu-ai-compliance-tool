@@ -130,6 +130,9 @@ NEVER give legal advice — state that this analysis is informational and profes
 **penaltyExposure** — Apply Article 99: Prohibited practices = up to EUR 35m or 7% worldwide annual turnover (whichever is higher); Violations of high-risk obligations = up to EUR 15m or 3%; False information to authorities = up to EUR 7.5m or 1.5%. For SMEs and micro-enterprises, note that the lower of the fixed amount or the percentage cap applies (Article 99(6)). Also note Article 101 (penalties for natural persons in certain circumstances).
 
 **articlesReferenced** — Complete deduplicated list of every article number cited anywhere in the analysis. Include annexes as "Annex_III", "Annex_IV" etc. Include only the base article number, not sub-paragraphs (e.g. "9" not "9(1)(a)").
+- MANDATORY: If your analysis discusses deployer obligations OR if the operatorRole is deployer, the string "26" MUST appear in this array.
+- MANDATORY: If your analysis discusses FRIA obligations, the string "27" MUST appear in this array.
+- MANDATORY: The string "4" must ALWAYS appear in this array — Article 4 AI literacy applies to every operator at every risk level.
 
 **clarificationsNeeded** — List specific pieces of information absent from the description that MATERIALLY affect the analysis outcome. Use clear, question-style phrasing. Priority examples to check for:
 - Geography: "Deployment geography not specified — EU territorial scope cannot be confirmed"
