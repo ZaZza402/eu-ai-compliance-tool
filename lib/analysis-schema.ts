@@ -121,9 +121,9 @@ export const AnalysisOutputSchema = z.object({
 
   keyActions: z
     .array(KeyActionSchema)
-    .min(3)
+    .min(1)
     .describe(
-      "Ordered list of compliance actions. Start with IMMEDIATE actions, then PRE_MARKET, then ONGOING. Each action must cite a specific article.",
+      "Ordered list of compliance actions. Start with IMMEDIATE actions, then PRE_MARKET, then ONGOING. Each action must cite a specific article. For prohibited systems 1-2 IMMEDIATE actions suffice.",
     ),
 
   timeline: z
