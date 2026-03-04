@@ -171,7 +171,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {creditEvents.map((ev) => (
+                {creditEvents.map((ev: (typeof creditEvents)[number]) => (
                   <tr key={ev.id} className="hover:bg-muted/20">
                     <td className="px-4 py-3 font-medium">
                       {CREDIT_EVENT_LABELS[ev.type] ?? ev.type}
@@ -219,7 +219,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {transactions.map((tx) => (
+                {transactions.map((tx: (typeof transactions)[number]) => (
                   <tr key={tx.id} className="hover:bg-muted/20">
                     <td className="px-4 py-3 font-medium">{tx.packName}</td>
                     <td className="px-4 py-3 text-muted-foreground">
