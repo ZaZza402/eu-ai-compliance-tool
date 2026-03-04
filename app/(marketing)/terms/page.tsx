@@ -3,8 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description:
-    "Terms of Use for Regumatrix — read before using the service.",
+  description: "Terms of Use for Regumatrix — read before using the service.",
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -107,11 +106,10 @@ export default function TermsPage() {
           {/* 1 */}
           <Section id="service" title="1. About the Service">
             <P>
-              Regumatrix (&ldquo;the Service&rdquo;,
-              &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a web application that
-              helps individuals and organisations understand how Regulation (EU)
-              2024/1689 — the EU AI Act — may apply to an AI system they
-              describe in plain text.
+              Regumatrix (&ldquo;the Service&rdquo;, &ldquo;we&rdquo;,
+              &ldquo;us&rdquo;) is a web application that helps individuals and
+              organisations understand how Regulation (EU) 2024/1689 — the EU AI
+              Act — may apply to an AI system they describe in plain text.
             </P>
             <P>
               By creating an account or using any part of the Service, you
