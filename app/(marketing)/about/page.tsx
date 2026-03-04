@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-  title: "Why this tool exists — EU AI Act Compliance Checker",
+  title: "Why this tool exists — Regumatrix",
   description:
     "A developer's honest take on EU AI Act compliance — why this tool was built, what it actually does, and why it's priced the way it is.",
 };

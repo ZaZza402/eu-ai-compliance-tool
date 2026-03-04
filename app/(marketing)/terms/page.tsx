@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description:
-    "Terms of Use for the EU AI Act Compliance Tool — read before using the service.",
+    "Terms of Use for Regumatrix — read before using the service.",
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -107,7 +107,7 @@ export default function TermsPage() {
           {/* 1 */}
           <Section id="service" title="1. About the Service">
             <P>
-              The EU AI Act Compliance Tool (&ldquo;the Service&rdquo;,
+              Regumatrix (&ldquo;the Service&rdquo;,
               &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a web application that
               helps individuals and organisations understand how Regulation (EU)
               2024/1689 — the EU AI Act — may apply to an AI system they

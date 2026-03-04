@@ -448,7 +448,8 @@ export function StructuredAnalysisDisplay({
           </div>
           <div className="border-t border-emerald-500/20 px-5 pb-5 pt-4">
             <p className="mb-3 text-xs font-medium text-emerald-700 dark:text-emerald-400">
-              A plain English explanation of the analysis above — no legal terminology.
+              A plain English explanation of the analysis above — no legal
+              terminology.
             </p>
             <MarkdownProse content={result.plainLanguageSummary} />
           </div>

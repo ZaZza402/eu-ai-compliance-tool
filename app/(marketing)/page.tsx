@@ -7,7 +7,7 @@ import type { RiskLevel } from "@/lib/analysis-schema";
 import { TestimonialsSection } from "@/components/marketing/TestimonialsSection";
 
 export const metadata: Metadata = {
-  title: "EU AI Act Compliance Checker — Article-Grounded AI Analysis",
+  title: "Regumatrix — Article-Grounded EU AI Act Compliance Checker",
   description:
     "Instantly determine your EU AI Act risk classification, applicable obligations, and key actions. Grounded in the full 113-article corpus of Regulation (EU) 2024/1689. 3 free analyses on sign-up — no credit card required.",
 };

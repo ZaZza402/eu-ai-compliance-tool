@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   }
 
   const text = [
-    `New feedback from EU AI Act Compliance Tool`,
+    `New feedback from Regumatrix`,
     ``,
     `Message:`,
     message,
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: `EU AI Act Compliance Tool <${FROM_EMAIL}>`,
+        from: `Regumatrix <${FROM_EMAIL}>`,
         to: [TO_EMAIL],
         reply_to: email ?? undefined,
         subject: "New feedback submission",

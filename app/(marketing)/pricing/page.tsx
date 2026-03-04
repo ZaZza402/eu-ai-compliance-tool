@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-  title: "Pricing — EU AI Act Compliance Checker",
+  title: "Pricing — Regumatrix",
   description:
     "Simple credit-based pricing. Buy once, credits never expire. 3 free analyses on every new account — no credit card required.",
 };

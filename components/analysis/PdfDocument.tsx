@@ -522,9 +522,9 @@ export function ComplianceReportPdf({
   return (
     <Document
       title="EU AI Act Compliance Report"
-      author="EU AI Act Compliance Tool"
+      author="Regumatrix"
       subject="AI System Compliance Analysis"
-      creator="EU AI Act Compliance Platform"
+      creator="Regumatrix"
     >
       <Page size="A4" style={s.page}>
         {/* ── Page Header ─────────────────────────────────────────────── */}
@@ -591,7 +591,7 @@ export function ComplianceReportPdf({
         {/* ── Footer (fixed on every page) ────────────────────────────── */}
         <View style={s.footer} fixed>
           <View style={s.footerLeft}>
-            <Text style={s.footerLogo}>EU AI ACT COMPLIANCE PLATFORM</Text>
+            <Text style={s.footerLogo}>REGUMATRIX</Text>
             <Text style={s.footerDisclaimer}>
               This report is informational only and does not constitute legal
               advice. Engage qualified legal counsel for formal compliance
@@ -667,9 +667,9 @@ export function StructuredComplianceReportPdf({
   return (
     <Document
       title="EU AI Act Compliance Report"
-      author="EU AI Act Compliance Tool"
+      author="Regumatrix"
       subject="AI System Compliance Analysis"
-      creator="EU AI Act Compliance Platform"
+      creator="Regumatrix"
     >
       <Page size="A4" style={s.page}>
         {/* ── Page Header ─────────────────────────────────────────────── */}
@@ -935,7 +935,9 @@ export function StructuredComplianceReportPdf({
             ]}
           >
             <View style={s.sectionHeader} wrap={false}>
-              <Text style={[s.sectionNumber, { backgroundColor: "#16a34a" }]}>8</Text>
+              <Text style={[s.sectionNumber, { backgroundColor: "#16a34a" }]}>
+                8
+              </Text>
               <Text style={[s.sectionTitle, { color: "#14532d" }]}>
                 What This Means For You — Plain Language Summary
               </Text>
@@ -968,7 +970,7 @@ export function StructuredComplianceReportPdf({
         {/* ── Footer (fixed on every page) ────────────────────────────── */}
         <View style={s.footer} fixed>
           <View style={s.footerLeft}>
-            <Text style={s.footerLogo}>EU AI ACT COMPLIANCE PLATFORM</Text>
+            <Text style={s.footerLogo}>REGUMATRIX</Text>
             <Text style={s.footerDisclaimer}>
               This report is informational only and does not constitute legal
               advice. Engage qualified legal counsel for formal compliance

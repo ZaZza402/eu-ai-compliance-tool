@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — EU AI Act Compliance Tool",
+  title: "Privacy Policy — Regumatrix",
   description:
-    "How we collect, use, and protect your personal data. GDPR-compliant privacy policy for the EU AI Act Compliance Tool.",
+    "How we collect, use, and protect your personal data. GDPR-compliant privacy policy for Regumatrix.",
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
         <div className="mb-12 rounded-xl border border-border bg-card p-5 shadow-sm">
           <p className="text-sm leading-relaxed text-muted-foreground">
             We take your privacy seriously. This policy explains what personal
-            data we collect when you use the EU AI Act Compliance Tool, why we
+            data we collect when you use Regumatrix, why we
             collect it, how long we keep it, and what rights you have. This
             policy complies with the General Data Protection Regulation (GDPR)
             and the Irish Data Protection Acts 1988–2018.
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
           {/* 1 */}
           <Section id="controller" title="1. Who we are (Data Controller)">
             <P>
-              The data controller for the EU AI Act Compliance Tool is the
+              The data controller for Regumatrix is the
               operator of this service, reachable at{" "}
               <a
                 href="mailto:support@caustic.app"

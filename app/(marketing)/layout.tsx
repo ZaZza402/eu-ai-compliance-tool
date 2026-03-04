@@ -23,8 +23,8 @@ export default function MarketingLayout({
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <span className="text-lg leading-none">⚖️</span>
-            <span className="hidden sm:inline-block">EU AI Act Compliance</span>
-            <span className="sm:hidden">EU AI Act</span>
+            <span className="hidden sm:inline-block">Regumatrix</span>
+            <span className="sm:hidden">Regumatrix</span>
           </Link>
 
           {/* Nav links */}
@@ -99,7 +99,7 @@ export default function MarketingLayout({
       <footer className="border-t border-border/40 py-6">
         <div className="container mx-auto max-w-7xl px-4 text-center text-sm text-muted-foreground">
           <p>
-            EU AI Act Compliance Tool — Powered by{" "}
+            Regumatrix — Powered by{" "}
             <a
               href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689"
               target="_blank"
