@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         // Forward /clerk-proxy/* directly to Clerk's API server.
         // The browser only ever calls regumatrix.eu — never clerk.regumatrix.eu.
         source: "/clerk-proxy/:path*",
-        destination: "https://frontend-api.clerk.services/:path*",
+        destination: "https://clerk.regumatrix.eu/:path*",
       },
     ];
   },
