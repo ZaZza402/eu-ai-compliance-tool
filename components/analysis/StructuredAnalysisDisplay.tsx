@@ -439,6 +439,36 @@ export function StructuredAnalysisDisplay({
         <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         <span>{result.disclaimer}</span>
       </div>
+
+      {/* Regulation basis + article count + report link */}
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3 text-[11px] text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-3">
+          <span>
+            Based on{" "}
+            <a
+              href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-foreground"
+            >
+              Regulation (EU) 2024/1689
+            </a>{" "}
+            · OJ 12 July 2024
+          </span>
+          {result.articlesReferenced.length > 0 && (
+            <span>
+              {result.articlesReferenced.length} article
+              {result.articlesReferenced.length !== 1 ? "s" : ""} consulted
+            </span>
+          )}
+        </div>
+        <a
+          href="/feedback"
+          className="hover:text-foreground hover:underline"
+        >
+          Found an inaccuracy? Report it →
+        </a>
+      </div>
     </div>
   );
 }

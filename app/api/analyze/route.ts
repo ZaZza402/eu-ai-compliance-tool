@@ -15,6 +15,7 @@ import { z } from "zod";
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { retriever } from "@/lib/retriever";
+import { expandQuery } from "@/lib/query-expansion";
 import { analyzeLimiter } from "@/lib/rate-limit";
 import { generateStructuredAnalysis } from "@/lib/gemini";
 
@@ -72,13 +73,19 @@ export async function POST(req: Request) {
 
   const { description } = parsed.data;
 
-  // ── Credit check & upsert user ───────────────────────────────────────────
-  const dbUser = await db.user.upsert({
-    where: { id: userId },
-    create: { id: userId, email: `${userId}@pending.clerk`, credits: 3 },
-    update: {},
-    select: { credits: true },
-  });
+  // ── Credit check & query expansion (run in parallel) ──────────────────────
+  // expandQuery converts the description (any language) into EU AI Act English
+  // terms, solving both the multilingual gap and vague-terminology retrieval gap.
+  // It runs in parallel with the DB call so it adds zero extra latency.
+  const [dbUser, expandedTerms] = await Promise.all([
+    db.user.upsert({
+      where: { id: userId },
+      create: { id: userId, email: `${userId}@pending.clerk`, credits: 3 },
+      update: {},
+      select: { credits: true },
+    }),
+    expandQuery(description),
+  ]);
 
   if (dbUser.credits < 1) {
     return NextResponse.json(
@@ -91,7 +98,12 @@ export async function POST(req: Request) {
   }
 
   // ── Heuristic pre-filter (candidate articles) ────────────────────────────
-  const suggestions = retriever.suggestArticlesForDescription(description);
+  // Append expanded terms to the retrieval query while keeping the original
+  // description for the main Gemini analysis call.
+  const retrievalQuery = expandedTerms
+    ? `${description} ${expandedTerms}`
+    : description;
+  const suggestions = retriever.suggestArticlesForDescription(retrievalQuery);
   const suggestionKeys = Object.keys(suggestions.candidate_articles);
 
   // Pure numeric articles from keyword matching (up to 14 unique refs).
