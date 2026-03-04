@@ -248,8 +248,8 @@ export default async function DashboardPage() {
                   </p>
                 </div>
                 {(() => {
-                  const risk =
-                    a.riskLevel && isKnownRisk(a.riskLevel)
+                  const risk: RiskLevel | null =
+                    a.riskLevel != null && isKnownRisk(a.riskLevel)
                       ? a.riskLevel
                       : null;
                   return risk ? (
