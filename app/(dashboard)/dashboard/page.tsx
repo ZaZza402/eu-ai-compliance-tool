@@ -247,18 +247,24 @@ export default async function DashboardPage() {
                     })}
                   </p>
                 </div>
-                {a.riskLevel && isKnownRisk(a.riskLevel) && (
-                  <span
-                    className={cn(
-                      "shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium",
-                      RISK_COLORS[a.riskLevel].pillBg,
-                      RISK_COLORS[a.riskLevel].pillBorder,
-                      RISK_COLORS[a.riskLevel].text,
-                    )}
-                  >
-                    {RISK_LABELS[a.riskLevel]}
-                  </span>
-                )}
+                {(() => {
+                  const risk =
+                    a.riskLevel && isKnownRisk(a.riskLevel)
+                      ? a.riskLevel
+                      : null;
+                  return risk ? (
+                    <span
+                      className={cn(
+                        "shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium",
+                        RISK_COLORS[risk].pillBg,
+                        RISK_COLORS[risk].pillBorder,
+                        RISK_COLORS[risk].text,
+                      )}
+                    >
+                      {RISK_LABELS[risk]}
+                    </span>
+                  ) : null;
+                })()}
               </Link>
             ))}
           </div>
