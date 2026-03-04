@@ -12,6 +12,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { retriever } from "@/lib/retriever";
 import { analyzeLimiter } from "@/lib/rate-limit";
@@ -184,33 +185,35 @@ export async function POST(req: Request) {
 
   let savedAnalysis;
   try {
-    savedAnalysis = await db.$transaction(async (tx) => {
-      const analysis = await tx.analysis.create({
-        data: {
-          userId,
-          description,
-          result: storedResult,
-          articlesHit: analysisOutput.articlesReferenced,
-          riskLevel: analysisOutput.riskLevel,
-          roleFound: analysisOutput.operatorRole,
-          creditsUsed: 1,
-        },
-        select: { id: true },
-      });
-      await tx.user.update({
-        where: { id: userId },
-        data: { credits: { decrement: 1 } },
-      });
-      await tx.creditEvent.create({
-        data: {
-          userId,
-          type: "usage",
-          amount: -1,
-          referenceId: analysis.id,
-        },
-      });
-      return analysis;
-    });
+    savedAnalysis = await db.$transaction(
+      async (tx: Prisma.TransactionClient) => {
+        const analysis = await tx.analysis.create({
+          data: {
+            userId,
+            description,
+            result: storedResult,
+            articlesHit: analysisOutput.articlesReferenced,
+            riskLevel: analysisOutput.riskLevel,
+            roleFound: analysisOutput.operatorRole,
+            creditsUsed: 1,
+          },
+          select: { id: true },
+        });
+        await tx.user.update({
+          where: { id: userId },
+          data: { credits: { decrement: 1 } },
+        });
+        await tx.creditEvent.create({
+          data: {
+            userId,
+            type: "usage",
+            amount: -1,
+            referenceId: analysis.id,
+          },
+        });
+        return analysis;
+      },
+    );
   } catch (dbErr) {
     console.error("[analyze] DB save failed:", dbErr);
     // The AI generation succeeded — return the result even if saving failed.
