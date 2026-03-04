@@ -63,7 +63,10 @@ export default async function DashboardPage() {
   });
 
   const riskMap = Object.fromEntries(
-    riskGroups.map((g) => [g.riskLevel, g._count._all]),
+    riskGroups.map((g: (typeof riskGroups)[number]) => [
+      g.riskLevel,
+      g._count._all,
+    ]),
   );
 
   // Fetch the 5 most recent analyses
@@ -225,7 +228,7 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-            {recentAnalyses.map((a) => (
+            {recentAnalyses.map((a: (typeof recentAnalyses)[number]) => (
               <Link
                 key={a.id}
                 href={`/history/${a.id}`}
