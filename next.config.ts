@@ -8,16 +8,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.clerk.accounts.dev" },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        // Forward /clerk-proxy/* directly to Clerk's API server.
-        // The browser only ever calls regumatrix.eu — never clerk.regumatrix.eu.
-        source: "/clerk-proxy/:path*",
-        destination: "https://clerk.regumatrix.eu/:path*",
-      },
-    ];
-  },
 };
 
 export default nextConfig;
