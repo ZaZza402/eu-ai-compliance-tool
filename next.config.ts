@@ -11,9 +11,13 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        // Match bare /clerk-proxy (no trailing path) — needed for Clerk's validation check.
+        source: "/clerk-proxy",
+        destination: "https://clerk.regumatrix.eu",
+      },
+      {
         // Proxy all Clerk frontend-API calls through our own domain.
-        // This means the browser never needs to resolve clerk.regumatrix.eu —
-        // all traffic goes to regumatrix.eu/clerk-proxy/... instead.
+        // The browser only ever calls regumatrix.eu/clerk-proxy/... — never clerk.regumatrix.eu.
         source: "/clerk-proxy/:path*",
         destination: "https://clerk.regumatrix.eu/:path*",
       },
