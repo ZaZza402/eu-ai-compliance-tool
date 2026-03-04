@@ -13,25 +13,15 @@ const isPublicRoute = createRouteMatcher([
   "/api/contact(.*)",
 ]);
 
-export default clerkMiddleware(
-  async (auth, req) => {
-    if (!isPublicRoute(req)) await auth.protect();
-  },
-  {
-    // Built-in proxy: routes all Clerk Frontend API calls through
-    // regumatrix.eu/__clerk/... so no external subdomain is needed.
-    // Works on all networks including those with aggressive DNS filtering.
-    frontendApiProxy: {
-      enabled: true,
-    },
-  },
-);
+export default clerkMiddleware(async (auth, req) => {
+  if (!isPublicRoute(req)) await auth.protect();
+});
 
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes AND the Clerk proxy path
-    "/(api|trpc|__clerk)(.*)",
+    // Always run for API routes
+    "/(api|trpc)(.*)",
   ],
 };
