@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider proxyUrl="/clerk-proxy">
       <html lang="en" className={inter.variable} suppressHydrationWarning>
         <body className="min-h-screen overflow-x-hidden bg-background font-sans antialiased">
           <Providers>{children}</Providers>
