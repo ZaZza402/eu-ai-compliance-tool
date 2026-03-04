@@ -1,0 +1,995 @@
+{
+  "metadata": {
+    "regulation": "EU 2024/1689",
+    "title": "Artificial Intelligence Act",
+    "total_articles": 113,
+    "total_chapters": 13,
+    "total_sections": 16
+  },
+  "articles": [
+    {
+      "article": "1",
+      "title": "Subject matter",
+      "chapter": "CHAPTER I",
+      "chapter_title": "GENERAL PROVISIONS",
+      "section": null,
+      "file": "01_chapter_I.json"
+    },
+    {
+      "article": "2",
+      "title": "Scope",
+      "chapter": "CHAPTER I",
+      "chapter_title": "GENERAL PROVISIONS",
+      "section": null,
+      "file": "01_chapter_I.json"
+    },
+    {
+      "article": "3",
+      "title": "Definitions",
+      "chapter": "CHAPTER I",
+      "chapter_title": "GENERAL PROVISIONS",
+      "section": null,
+      "file": "01_chapter_I.json"
+    },
+    {
+      "article": "4",
+      "title": "AI literacy",
+      "chapter": "CHAPTER I",
+      "chapter_title": "GENERAL PROVISIONS",
+      "section": null,
+      "file": "01_chapter_I.json"
+    },
+    {
+      "article": "5",
+      "title": "Prohibited AI practices",
+      "chapter": "CHAPTER II",
+      "chapter_title": "PROHIBITED AI PRACTICES",
+      "section": null,
+      "file": "02_chapter_II.json"
+    },
+    {
+      "article": "6",
+      "title": "Classification rules for high-risk AI systems",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 1",
+      "section_title": "Classification of AI systems as high-risk",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "7",
+      "title": "Amendments to Annex III",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 1",
+      "section_title": "Classification of AI systems as high-risk",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "8",
+      "title": "Compliance with the requirements",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "9",
+      "title": "Risk management system",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "10",
+      "title": "Data and data governance",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "11",
+      "title": "Technical documentation",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "12",
+      "title": "Record-keeping",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "13",
+      "title": "Transparency and provision of information to deployers",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "14",
+      "title": "Human oversight",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "15",
+      "title": "Accuracy, robustness and cybersecurity",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 2",
+      "section_title": "Requirements for high-risk AI systems",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "16",
+      "title": "Obligations of providers of high-risk AI systems",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "17",
+      "title": "Quality management system",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "18",
+      "title": "Documentation keeping",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "19",
+      "title": "Automatically generated logs",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "20",
+      "title": "Corrective actions and duty of information",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "21",
+      "title": "Cooperation with competent authorities",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "22",
+      "title": "Authorised representatives of providers of high-risk AI systems",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "23",
+      "title": "Obligations of importers",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "24",
+      "title": "Obligations of distributors",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "25",
+      "title": "Responsibilities along the AI value chain",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "26",
+      "title": "Obligations of deployers of high-risk AI systems",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "27",
+      "title": "Fundamental rights impact assessment for high-risk AI systems",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers and deployers of high-risk AI systems and other parties",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "28",
+      "title": "Notifying authorities",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "29",
+      "title": "Application of a conformity assessment body for notification",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "30",
+      "title": "Notification procedure",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "31",
+      "title": "Requirements relating to notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "32",
+      "title": "Presumption of conformity with requirements relating to notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "33",
+      "title": "Subsidiaries of notified bodies and subcontracting",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "34",
+      "title": "Operational obligations of notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "35",
+      "title": "Identification numbers and lists of notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "36",
+      "title": "Changes to notifications",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "37",
+      "title": "Challenge to the competence of notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "38",
+      "title": "Coordination of notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "39",
+      "title": "Conformity assessment bodies of third countries",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 4",
+      "section_title": "Notifying authorities and notified bodies",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "40",
+      "title": "Harmonised standards and standardisation deliverables",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "41",
+      "title": "Common specifications",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "42",
+      "title": "Presumption of conformity with certain requirements",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "43",
+      "title": "Conformity assessment",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "44",
+      "title": "Certificates",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "45",
+      "title": "Information obligations of notified bodies",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "46",
+      "title": "Derogation from conformity assessment procedure",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "47",
+      "title": "EU declaration of conformity",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "48",
+      "title": "CE marking",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "49",
+      "title": "Registration",
+      "chapter": "CHAPTER III",
+      "chapter_title": "HIGH-RISK AI SYSTEMS",
+      "section": "SECTION 5",
+      "section_title": "Standards, conformity assessment, certificates, registration",
+      "file": "03_chapter_III.json"
+    },
+    {
+      "article": "50",
+      "title": "Transparency obligations for providers and deployers of certain AI systems",
+      "chapter": "CHAPTER IV",
+      "chapter_title": "TRANSPARENCY OBLIGATIONS FOR PROVIDERS AND DEPLOYERS OF CERTAIN AI SYSTEMS",
+      "section": null,
+      "file": "04_chapter_IV.json"
+    },
+    {
+      "article": "51",
+      "title": "Classification of general-purpose AI models as general-purpose AI models with systemic risk",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 1",
+      "section_title": "Classification rules",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "52",
+      "title": "Procedure",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 1",
+      "section_title": "Classification rules",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "53",
+      "title": "Obligations for providers of general-purpose AI models",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 2",
+      "section_title": "Obligations for providers of general-purpose AI models",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "54",
+      "title": "Authorised representatives of providers of general-purpose AI models",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 2",
+      "section_title": "Obligations for providers of general-purpose AI models",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "55",
+      "title": "Obligations of providers of general-purpose AI models with systemic risk",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 3",
+      "section_title": "Obligations of providers of general-purpose AI models with systemic risk",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "56",
+      "title": "Codes of practice",
+      "chapter": "CHAPTER V",
+      "chapter_title": "GENERAL-PURPOSE AI MODELS",
+      "section": "SECTION 4",
+      "section_title": "Codes of practice",
+      "file": "05_chapter_V.json"
+    },
+    {
+      "article": "57",
+      "title": "AI regulatory sandboxes",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "58",
+      "title": "Detailed arrangements for, and functioning of, AI regulatory sandboxes",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "59",
+      "title": "Further processing of personal data for developing certain AI systems in the public interest in the AI regulatory sandbox",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "60",
+      "title": "Testing of high-risk AI systems in real world conditions outside AI regulatory sandboxes",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "61",
+      "title": "Informed consent to participate in testing in real world conditions outside AI regulatory sandboxes",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "62",
+      "title": "Measures for providers and deployers, in particular SMEs, including start-ups",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "63",
+      "title": "Derogations for specific operators",
+      "chapter": "CHAPTER VI",
+      "chapter_title": "MEASURES IN SUPPORT OF INNOVATION",
+      "section": null,
+      "file": "06_chapter_VI.json"
+    },
+    {
+      "article": "64",
+      "title": "AI Office",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "65",
+      "title": "Establishment and structure of the European Artificial Intelligence Board",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "66",
+      "title": "Tasks of the Board",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "67",
+      "title": "Advisory forum",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "68",
+      "title": "Scientific panel of independent experts",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "69",
+      "title": "Access to the pool of experts by the Member States",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 1",
+      "section_title": "Governance at Union level",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "70",
+      "title": "Designation of national competent authorities and single points of contact",
+      "chapter": "CHAPTER VII",
+      "chapter_title": "GOVERNANCE",
+      "section": "SECTION 2",
+      "section_title": "National competent authorities",
+      "file": "07_chapter_VII.json"
+    },
+    {
+      "article": "71",
+      "title": "EU database for high-risk AI systems listed in Annex III",
+      "chapter": "CHAPTER VIII",
+      "chapter_title": "EU DATABASE FOR HIGH-RISK AI SYSTEMS",
+      "section": null,
+      "file": "08_chapter_VIII.json"
+    },
+    {
+      "article": "72",
+      "title": "Post-market monitoring by providers and post-market monitoring plan for high-risk AI systems",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 1",
+      "section_title": "Post-market monitoring",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "73",
+      "title": "Reporting of serious incidents",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 2",
+      "section_title": "Sharing of information on serious incidents",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "74",
+      "title": "Market surveillance and control of AI systems in the Union market",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "75",
+      "title": "Mutual assistance, market surveillance and control of general-purpose AI systems",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "76",
+      "title": "Supervision of testing in real world conditions by market surveillance authorities",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "77",
+      "title": "Powers of authorities protecting fundamental rights",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "78",
+      "title": "Confidentiality",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "79",
+      "title": "Procedure at national level for dealing with AI systems presenting a risk",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "80",
+      "title": "Procedure for dealing with AI systems classified by the provider as non-high-risk in application of Annex III",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "81",
+      "title": "Union safeguard procedure",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "82",
+      "title": "Compliant AI systems which present a risk",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "83",
+      "title": "Formal non-compliance",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "84",
+      "title": "Union AI testing support structures",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 3",
+      "section_title": "Enforcement",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "85",
+      "title": "Right to lodge a complaint with a market surveillance authority",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 4",
+      "section_title": "Remedies",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "86",
+      "title": "Right to explanation of individual decision-making",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 4",
+      "section_title": "Remedies",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "87",
+      "title": "Reporting of infringements and protection of reporting persons",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 4",
+      "section_title": "Remedies",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "88",
+      "title": "Enforcement of the obligations of providers of general-purpose AI models",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "89",
+      "title": "Monitoring actions",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "90",
+      "title": "Alerts of systemic risks by the scientific panel",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "91",
+      "title": "Power to request documentation and information",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "92",
+      "title": "Power to conduct evaluations",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "93",
+      "title": "Power to request measures",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "94",
+      "title": "Procedural rights of economic operators of the general-purpose AI model",
+      "chapter": "CHAPTER IX",
+      "chapter_title": "POST-MARKET MONITORING, INFORMATION SHARING AND MARKET SURVEILLANCE",
+      "section": "SECTION 5",
+      "section_title": "Supervision, investigation, enforcement and monitoring in respect of providers of general-purpose AI models",
+      "file": "09_chapter_IX.json"
+    },
+    {
+      "article": "95",
+      "title": "Codes of conduct for voluntary application of specific requirements",
+      "chapter": "CHAPTER X",
+      "chapter_title": "CODES OF CONDUCT AND GUIDELINES",
+      "section": null,
+      "file": "10_chapter_X.json"
+    },
+    {
+      "article": "96",
+      "title": "Guidelines from the Commission on the implementation of this Regulation",
+      "chapter": "CHAPTER X",
+      "chapter_title": "CODES OF CONDUCT AND GUIDELINES",
+      "section": null,
+      "file": "10_chapter_X.json"
+    },
+    {
+      "article": "97",
+      "title": "Exercise of the delegation",
+      "chapter": "CHAPTER XI",
+      "chapter_title": "DELEGATION OF POWER AND COMMITTEE PROCEDURE",
+      "section": null,
+      "file": "11_chapter_XI.json"
+    },
+    {
+      "article": "98",
+      "title": "Committee procedure",
+      "chapter": "CHAPTER XI",
+      "chapter_title": "DELEGATION OF POWER AND COMMITTEE PROCEDURE",
+      "section": null,
+      "file": "11_chapter_XI.json"
+    },
+    {
+      "article": "99",
+      "title": "Penalties",
+      "chapter": "CHAPTER XII",
+      "chapter_title": "PENALTIES",
+      "section": null,
+      "file": "12_chapter_XII.json"
+    },
+    {
+      "article": "100",
+      "title": "Administrative fines on Union institutions, bodies, offices and agencies",
+      "chapter": "CHAPTER XII",
+      "chapter_title": "PENALTIES",
+      "section": null,
+      "file": "12_chapter_XII.json"
+    },
+    {
+      "article": "101",
+      "title": "Fines for providers of general-purpose AI models",
+      "chapter": "CHAPTER XII",
+      "chapter_title": "PENALTIES",
+      "section": null,
+      "file": "12_chapter_XII.json"
+    },
+    {
+      "article": "102",
+      "title": "Amendment to Regulation (EC) No 300/2008",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "103",
+      "title": "Amendment to Regulation (EU) No 167/2013",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "104",
+      "title": "Amendment to Regulation (EU) No 168/2013",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "105",
+      "title": "Amendment to Directive 2014/90/EU",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "106",
+      "title": "Amendment to Directive (EU) 2016/797",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "107",
+      "title": "Amendment to Regulation (EU) 2018/858",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "108",
+      "title": "Amendments to Regulation (EU) 2018/1139",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "109",
+      "title": "Amendment to Regulation (EU) 2019/2144",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "110",
+      "title": "Amendment to Directive (EU) 2020/1828",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "111",
+      "title": "AI systems already placed on the market or put into service and general-purpose AI models already placed on the marked",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "112",
+      "title": "Evaluation and review",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    },
+    {
+      "article": "113",
+      "title": "Entry into force and application",
+      "chapter": "CHAPTER XIII",
+      "chapter_title": "FINAL PROVISIONS",
+      "section": null,
+      "file": "13_chapter_XIII.json"
+    }
+  ]
+}

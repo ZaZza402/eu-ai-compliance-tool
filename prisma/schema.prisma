@@ -1,0 +1,114 @@
+// This is your Prisma schema file.
+// Documentation: https://pris.ly/d/prisma-schema
+// Prisma v7 — using datasource with both url (pooled) and directUrl (for migrations)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // URL is configured in prisma.config.ts (Prisma 7 requirement)
+}
+
+// ----------------------------------------------------------------------------
+// User
+// Synced from Clerk via webhook on user.created / user.updated / user.deleted
+// ----------------------------------------------------------------------------
+model User {
+  id           String        @id           // Clerk user ID (user_...)
+  email        String        @unique
+  firstName    String?
+  lastName     String?
+  imageUrl     String?
+  credits      Int           @default(3)   // 3 free analyses on sign-up
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  analyses     Analysis[]
+  transactions Transaction[]
+  creditEvents CreditEvent[]
+
+  @@map("users")
+}
+
+// ----------------------------------------------------------------------------
+// Analysis
+// One record per compliance analysis run
+// ----------------------------------------------------------------------------
+model Analysis {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  description String   @db.Text             // The user's AI system description
+  result      Json                          // Full structured AI response object
+  articlesHit String[]                      // e.g. ["5", "6", "9", "Annex_III"]
+  riskLevel   String?                       // prohibited | high_risk | limited | gpai | minimal
+  roleFound   String?                       // provider | deployer | importer | distributor
+  creditsUsed Int      @default(1)
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("analyses")
+}
+
+// ----------------------------------------------------------------------------
+// Transaction
+// PayPal order records — one per credit pack purchase
+// ----------------------------------------------------------------------------
+model Transaction {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  paypalOrderId    String   @unique
+  creditsPurchased Int
+  amountUsd        Float
+  packName         String                    // e.g. "Starter", "Growth", "Pro"
+  status           String   @default("pending") // pending | completed | failed | refunded
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userId])
+  @@map("transactions")
+}
+
+// ----------------------------------------------------------------------------
+// CreditEvent
+// Immutable audit ledger for all credit changes.
+// Every credit addition or deduction writes a row here.
+// ----------------------------------------------------------------------------
+model CreditEvent {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        String                        // "signup" | "purchase" | "usage"
+  amount      Int                           // positive = credit, negative = debit
+  referenceId String?                       // analysisId or paypalOrderId
+
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("credit_events")
+}
+
+// ----------------------------------------------------------------------------
+// Feedback
+// User-submitted feedback from the /feedback page.
+// Not linked to a User record — submitted anonymously or by signed-out users.
+// ----------------------------------------------------------------------------
+model Feedback {
+  id        String   @id @default(cuid())
+  message   String   @db.Text
+  email     String?                         // Optional — if they want a reply
+  userId    String?                         // Set if the submitter was signed in
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+  @@map("feedback")
+}

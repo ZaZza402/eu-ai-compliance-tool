@@ -1,0 +1,632 @@
+{
+  "1": {
+    "title": "Subject matter",
+    "file": "01_chapter_I.json",
+    "chapter": "CHAPTER I"
+  },
+  "2": {
+    "title": "Scope",
+    "file": "01_chapter_I.json",
+    "chapter": "CHAPTER I"
+  },
+  "3": {
+    "title": "Definitions",
+    "file": "01_chapter_I.json",
+    "chapter": "CHAPTER I"
+  },
+  "4": {
+    "title": "AI literacy",
+    "file": "01_chapter_I.json",
+    "chapter": "CHAPTER I"
+  },
+  "5": {
+    "title": "Prohibited AI practices",
+    "file": "02_chapter_II.json",
+    "chapter": "CHAPTER II"
+  },
+  "6": {
+    "title": "Classification rules for high-risk AI systems",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "7": {
+    "title": "Amendments to Annex III",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "8": {
+    "title": "Compliance with the requirements",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "9": {
+    "title": "Risk management system",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "10": {
+    "title": "Data and data governance",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "11": {
+    "title": "Technical documentation",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "12": {
+    "title": "Record-keeping",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "13": {
+    "title": "Transparency and provision of information to deployers",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "14": {
+    "title": "Human oversight",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "15": {
+    "title": "Accuracy, robustness and cybersecurity",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "16": {
+    "title": "Obligations of providers of high-risk AI systems",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "17": {
+    "title": "Quality management system",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "18": {
+    "title": "Documentation keeping",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "19": {
+    "title": "Automatically generated logs",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "20": {
+    "title": "Corrective actions and duty of information",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "21": {
+    "title": "Cooperation with competent authorities",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "22": {
+    "title": "Authorised representatives of providers of high-risk AI systems",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "23": {
+    "title": "Obligations of importers",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "24": {
+    "title": "Obligations of distributors",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "25": {
+    "title": "Responsibilities along the AI value chain",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "26": {
+    "title": "Obligations of deployers of high-risk AI systems",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "27": {
+    "title": "Fundamental rights impact assessment for high-risk AI systems",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "28": {
+    "title": "Notifying authorities",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "29": {
+    "title": "Application of a conformity assessment body for notification",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "30": {
+    "title": "Notification procedure",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "31": {
+    "title": "Requirements relating to notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "32": {
+    "title": "Presumption of conformity with requirements relating to notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "33": {
+    "title": "Subsidiaries of notified bodies and subcontracting",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "34": {
+    "title": "Operational obligations of notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "35": {
+    "title": "Identification numbers and lists of notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "36": {
+    "title": "Changes to notifications",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "37": {
+    "title": "Challenge to the competence of notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "38": {
+    "title": "Coordination of notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "39": {
+    "title": "Conformity assessment bodies of third countries",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "40": {
+    "title": "Harmonised standards and standardisation deliverables",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "41": {
+    "title": "Common specifications",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "42": {
+    "title": "Presumption of conformity with certain requirements",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "43": {
+    "title": "Conformity assessment",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "44": {
+    "title": "Certificates",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "45": {
+    "title": "Information obligations of notified bodies",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "46": {
+    "title": "Derogation from conformity assessment procedure",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "47": {
+    "title": "EU declaration of conformity",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "48": {
+    "title": "CE marking",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "49": {
+    "title": "Registration",
+    "file": "03_chapter_III.json",
+    "chapter": "CHAPTER III"
+  },
+  "50": {
+    "title": "Transparency obligations for providers and deployers of certain AI systems",
+    "file": "04_chapter_IV.json",
+    "chapter": "CHAPTER IV"
+  },
+  "51": {
+    "title": "Classification of general-purpose AI models as general-purpose AI models with systemic risk",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "52": {
+    "title": "Procedure",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "53": {
+    "title": "Obligations for providers of general-purpose AI models",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "54": {
+    "title": "Authorised representatives of providers of general-purpose AI models",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "55": {
+    "title": "Obligations of providers of general-purpose AI models with systemic risk",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "56": {
+    "title": "Codes of practice",
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V"
+  },
+  "57": {
+    "title": "AI regulatory sandboxes",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "58": {
+    "title": "Detailed arrangements for, and functioning of, AI regulatory sandboxes",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "59": {
+    "title": "Further processing of personal data for developing certain AI systems in the public interest in the AI regulatory sandbox",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "60": {
+    "title": "Testing of high-risk AI systems in real world conditions outside AI regulatory sandboxes",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "61": {
+    "title": "Informed consent to participate in testing in real world conditions outside AI regulatory sandboxes",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "62": {
+    "title": "Measures for providers and deployers, in particular SMEs, including start-ups",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "63": {
+    "title": "Derogations for specific operators",
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI"
+  },
+  "64": {
+    "title": "AI Office",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "65": {
+    "title": "Establishment and structure of the European Artificial Intelligence Board",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "66": {
+    "title": "Tasks of the Board",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "67": {
+    "title": "Advisory forum",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "68": {
+    "title": "Scientific panel of independent experts",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "69": {
+    "title": "Access to the pool of experts by the Member States",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "70": {
+    "title": "Designation of national competent authorities and single points of contact",
+    "file": "07_chapter_VII.json",
+    "chapter": "CHAPTER VII"
+  },
+  "71": {
+    "title": "EU database for high-risk AI systems listed in Annex III",
+    "file": "08_chapter_VIII.json",
+    "chapter": "CHAPTER VIII"
+  },
+  "72": {
+    "title": "Post-market monitoring by providers and post-market monitoring plan for high-risk AI systems",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "73": {
+    "title": "Reporting of serious incidents",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "74": {
+    "title": "Market surveillance and control of AI systems in the Union market",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "75": {
+    "title": "Mutual assistance, market surveillance and control of general-purpose AI systems",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "76": {
+    "title": "Supervision of testing in real world conditions by market surveillance authorities",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "77": {
+    "title": "Powers of authorities protecting fundamental rights",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "78": {
+    "title": "Confidentiality",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "79": {
+    "title": "Procedure at national level for dealing with AI systems presenting a risk",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "80": {
+    "title": "Procedure for dealing with AI systems classified by the provider as non-high-risk in application of Annex III",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "81": {
+    "title": "Union safeguard procedure",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "82": {
+    "title": "Compliant AI systems which present a risk",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "83": {
+    "title": "Formal non-compliance",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "84": {
+    "title": "Union AI testing support structures",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "85": {
+    "title": "Right to lodge a complaint with a market surveillance authority",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "86": {
+    "title": "Right to explanation of individual decision-making",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "87": {
+    "title": "Reporting of infringements and protection of reporting persons",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "88": {
+    "title": "Enforcement of the obligations of providers of general-purpose AI models",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "89": {
+    "title": "Monitoring actions",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "90": {
+    "title": "Alerts of systemic risks by the scientific panel",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "91": {
+    "title": "Power to request documentation and information",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "92": {
+    "title": "Power to conduct evaluations",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "93": {
+    "title": "Power to request measures",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "94": {
+    "title": "Procedural rights of economic operators of the general-purpose AI model",
+    "file": "09_chapter_IX.json",
+    "chapter": "CHAPTER IX"
+  },
+  "95": {
+    "title": "Codes of conduct for voluntary application of specific requirements",
+    "file": "10_chapter_X.json",
+    "chapter": "CHAPTER X"
+  },
+  "96": {
+    "title": "Guidelines from the Commission on the implementation of this Regulation",
+    "file": "10_chapter_X.json",
+    "chapter": "CHAPTER X"
+  },
+  "97": {
+    "title": "Exercise of the delegation",
+    "file": "11_chapter_XI.json",
+    "chapter": "CHAPTER XI"
+  },
+  "98": {
+    "title": "Committee procedure",
+    "file": "11_chapter_XI.json",
+    "chapter": "CHAPTER XI"
+  },
+  "99": {
+    "title": "Penalties",
+    "file": "12_chapter_XII.json",
+    "chapter": "CHAPTER XII"
+  },
+  "100": {
+    "title": "Administrative fines on Union institutions, bodies, offices and agencies",
+    "file": "12_chapter_XII.json",
+    "chapter": "CHAPTER XII"
+  },
+  "101": {
+    "title": "Fines for providers of general-purpose AI models",
+    "file": "12_chapter_XII.json",
+    "chapter": "CHAPTER XII"
+  },
+  "102": {
+    "title": "Amendment to Regulation (EC) No 300/2008",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "103": {
+    "title": "Amendment to Regulation (EU) No 167/2013",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "104": {
+    "title": "Amendment to Regulation (EU) No 168/2013",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "105": {
+    "title": "Amendment to Directive 2014/90/EU",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "106": {
+    "title": "Amendment to Directive (EU) 2016/797",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "107": {
+    "title": "Amendment to Regulation (EU) 2018/858",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "108": {
+    "title": "Amendments to Regulation (EU) 2018/1139",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "109": {
+    "title": "Amendment to Regulation (EU) 2019/2144",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "110": {
+    "title": "Amendment to Directive (EU) 2020/1828",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "111": {
+    "title": "AI systems already placed on the market or put into service and general-purpose AI models already placed on the marked",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "112": {
+    "title": "Evaluation and review",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "113": {
+    "title": "Entry into force and application",
+    "file": "13_chapter_XIII.json",
+    "chapter": "CHAPTER XIII"
+  },
+  "Annex_I": {
+    "title": "List of Union harmonisation legislation referred to in Article 6(1)",
+    "file": "annex_I.json",
+    "chapter": "ANNEX I"
+  },
+  "Annex_II": {
+    "title": "List of criminal offences referred to in Article 5(1), first subparagraph, point (h)(iii)",
+    "file": "annex_II.json",
+    "chapter": "ANNEX II"
+  },
+  "Annex_III": {
+    "title": "High-risk AI systems referred to in Article 6(2)",
+    "file": "annex_III.json",
+    "chapter": "ANNEX III"
+  },
+  "Annex_IV": {
+    "title": "Technical documentation referred to in Article 11(1)",
+    "file": "annex_IV.json",
+    "chapter": "ANNEX IV"
+  },
+  "Annex_V": {
+    "title": "EU declaration of conformity referred to in Article 47",
+    "file": "annex_V.json",
+    "chapter": "ANNEX V"
+  },
+  "Annex_VI": {
+    "title": "Conformity assessment procedure based on internal control referred to in Article 43(2)",
+    "file": "annex_VI.json",
+    "chapter": "ANNEX VI"
+  },
+  "Annex_VII": {
+    "title": "Conformity assessment based on assessment of quality management system and technical documentation referred to in Article 43(3)",
+    "file": "annex_VII.json",
+    "chapter": "ANNEX VII"
+  },
+  "Annex_VIII": {
+    "title": "Information to be submitted to the EU database pursuant to Articles 49(1) and 71(1)",
+    "file": "annex_VIII.json",
+    "chapter": "ANNEX VIII"
+  },
+  "Annex_IX": {
+    "title": "Information referred to in Article 60(4) to be provided and kept up to date for registration of testing in real world conditions",
+    "file": "annex_IX.json",
+    "chapter": "ANNEX IX"
+  },
+  "Annex_X": {
+    "title": "List of Union law on large-scale biometric and border IT systems",
+    "file": "annex_X.json",
+    "chapter": "ANNEX X"
+  },
+  "Annex_XI": {
+    "title": "Technical documentation referred to in Article 53(1), point (a)",
+    "file": "annex_XI.json",
+    "chapter": "ANNEX XI"
+  },
+  "Annex_XII": {
+    "title": "Information referred to in Article 53(1), point (b), to be provided to downstream providers",
+    "file": "annex_XII.json",
+    "chapter": "ANNEX XII"
+  },
+  "Annex_XIII": {
+    "title": "Criteria for the determination of general-purpose AI models with systemic risk referred to in Article 51",
+    "file": "annex_XIII.json",
+    "chapter": "ANNEX XIII"
+  }
+}

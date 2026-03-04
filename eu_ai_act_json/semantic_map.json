@@ -1,0 +1,2026 @@
+{
+  "_meta": {
+    "purpose": "Semantic navigation map for EU AI Act — used to ground an LLM into the correct articles given a user AI system description.",
+    "regulation": "EU 2024/1689 — Artificial Intelligence Act",
+    "legal_baseline_date": "2024-07-12",
+    "legal_baseline_note": "Based on Regulation (EU) 2024/1689 as published in the Official Journal of the European Union on 12 July 2024. Any amendments after this date are not reflected in this map.",
+    "how_to_use": "Follow the reasoning_workflow steps. Match the user's AI system against the decision_tree_questions, then use the article references to retrieve exact text from the chapter JSON files.",
+    "retrieval_instruction": "When an article is identified, read it from its source file using the article_lookup.json mapping. Always cite the article number and paragraph id (e.g. Article 9, §9.001)."
+  },
+  "reasoning_workflow": {
+    "description": "Step-by-step reasoning process an LLM must follow to identify applicable articles.",
+    "steps": [
+      {
+        "step": 1,
+        "label": "Determine applicability (scope)",
+        "question": "Does this AI system fall within the scope of the EU AI Act?",
+        "guidance": "Check Article 2 (Scope). Exclusions include: national security / military use (Art. 2(3)), scientific R&D only (Art. 2(6)), personal non-professional use (Art. 2(10)), open-source unless high-risk or Article 5/50 applies (Art. 2(12)).",
+        "articles": [
+          "2",
+          "3"
+        ],
+        "if_out_of_scope": "No obligations apply. State the relevant exclusion from Article 2."
+      },
+      {
+        "step": 2,
+        "label": "Classify risk level — MANDATORY top-down hierarchy",
+        "question": "What is the risk classification of this AI system?",
+        "critical_rule": "ALWAYS evaluate sub-steps in the exact order listed. Each sub-step is a hard gate: if a system triggers 2a (prohibited), the analysis stops — do NOT continue to 2b or 2c. Only advance to the next sub-step if the current one does NOT apply.",
+        "articles": [
+          "5",
+          "6",
+          "50",
+          "51"
+        ],
+        "annexes": [
+          "annex_I.json",
+          "annex_III.json"
+        ],
+        "sub_steps": [
+          {
+            "sub": "2a",
+            "label": "PROHIBITION CHECK — hard stop",
+            "article": "5",
+            "question": "Does the system use any of the 8 prohibited practices listed in Article 5?",
+            "trigger_examples": [
+              "Subliminal or manipulative techniques that impair free will (Art 5(1)(a))",
+              "Exploitation of vulnerabilities of age, disability, or economic situation (Art 5(1)(b))",
+              "Social scoring by public authorities or private operators for unrelated purposes (Art 5(1)(c))",
+              "Criminal risk assessment purely from profiling or personality traits (Art 5(1)(d))",
+              "Untargeted scraping of facial images to build biometric databases (Art 5(1)(e))",
+              "Emotion recognition in workplace or educational settings (Art 5(1)(f))",
+              "Biometric categorisation to infer sensitive attributes: race, political opinions, religion, sexual orientation (Art 5(1)(g))",
+              "Real-time remote biometric identification in public spaces by law enforcement (Art 5(1)(h))"
+            ],
+            "if_triggered": "STOP. The system cannot be placed on the market or put into service. State the specific Article 5 paragraph. Do not proceed to sub-step 2b."
+          },
+          {
+            "sub": "2b",
+            "label": "HIGH-RISK — Annex I pathway (safety component of regulated product)",
+            "article": "6(1)",
+            "annex": "annex_I.json",
+            "question": "Is the AI system a safety component of a product covered by EU harmonisation legislation listed in Annex I (e.g. Machinery Regulation, Medical Devices Regulation, Radio Equipment Directive, Aviation, Vehicles)?",
+            "if_triggered": "Classify as HIGH-RISK. Third-party notified body conformity assessment is required. Proceed to Step 3 (operator role).",
+            "if_not_triggered": "Continue to sub-step 2c."
+          },
+          {
+            "sub": "2c",
+            "label": "HIGH-RISK — Annex III pathway (standalone high-risk domain)",
+            "article": "6(2)",
+            "annex": "annex_III.json",
+            "question": "Does the system fall within one of the 8 high-risk domains listed in Annex III?",
+            "domains_reference": "See risk_classification.high_risk.annex_III_pathway.domains (HR-1 through HR-8).",
+            "if_triggered": "Provisionally classify as HIGH-RISK. MANDATORY: proceed immediately to sub-step 2d to determine whether the Art 6(3) derogation applies before confirming classification.",
+            "if_not_triggered": "Continue to sub-step 2d is not required. Proceed to sub-step 2e."
+          },
+          {
+            "sub": "2d",
+            "label": "Art 6(3) DEROGATION — strict self-assessment gate",
+            "article": "6(3)",
+            "question": "Can the provider credibly document that this Annex III system does NOT pose a significant risk of harm to health, safety, or fundamental rights — for example because it performs a purely ancillary or preparatory task?",
+            "critical_implementation_note": "This derogation is a legal risk, NOT a convenience escape. The tool MUST NOT simply tell the user 'it is fine.' If the AI system appears in Annex III, the DEFAULT classification is HIGH-RISK. The derogation requires: (1) the provider formally documents the reasoning BEFORE market placement; (2) the documentation must withstand scrutiny by national market surveillance authorities; (3) misclassification (claiming derogation when system is actually high-risk) is a violation of Art 6 and exposes the provider to fines up to €15,000,000 or 3% of global annual turnover under Art 99(3).",
+            "derogation_example": "A tool that only spell-checks a CV before it reaches a recruitment AI is ancillary and may qualify. A tool that scores or ranks candidates does NOT qualify — it is squarely within Annex III(4).",
+            "required_action_if_claimed": "The Art 6(3) derogation is only available if ALL FOUR of the following conditions are satisfied simultaneously — instruct the user to verify each one and document compliance in writing BEFORE market placement: (1) the AI system performs a narrow procedural or preparatory task only; (2) the AI system is intended only to improve the result of a previously completed human activity (it does not initiate or determine the activity itself); (3) the AI system detects decision patterns or deviations from prior human decisions but does not itself make any decision, recommendation, or ranking; (4) the AI system is designed for a preparatory task only and cannot influence a substantive decision affecting persons. PROFILING VOID RULE: if the system performs profiling within the meaning of Article 3(68) of Regulation (EU) 2016/679 (GDPR), the Art 6(3) derogation is automatically void — the system remains high-risk regardless of any ancillary or preparatory claims. Instruct the user to also: (a) document the specific functional reasons each condition is met; (b) retain this documentation for authorities on request; (c) register the self-assessment outcome in the EU database where required under Art 49.",
+            "if_derogation_valid": "Reclassify as non-high-risk. Still check sub-step 2e (transparency obligations may still apply).",
+            "if_derogation_not_valid_or_uncertain": "Maintain HIGH-RISK classification. Proceed to Step 3."
+          },
+          {
+            "sub": "2e",
+            "label": "TRANSPARENCY ONLY (Article 50) — independent check",
+            "article": "50",
+            "question": "Does the system: (a) interact conversationally with humans (chatbot/voice assistant); (b) generate synthetic images, video or audio (deepfake); (c) perform emotion recognition or biometric categorisation; or (d) generate text on matters of public interest?",
+            "note": "This check applies to ALL systems that reach this point, including systems that passed the Art 6(3) derogation. A non-high-risk system can still carry Art 50 transparency obligations.",
+            "if_triggered": "Apply Art 50 disclosure obligations only. No full high-risk regime unless sub-step 2b or 2c also triggered.",
+            "if_not_triggered": "Continue to sub-step 2f."
+          },
+          {
+            "sub": "2f",
+            "label": "GENERAL-PURPOSE AI MODEL (GPAI) — independent parallel track",
+            "articles": [
+              "51",
+              "52",
+              "53",
+              "54",
+              "55",
+              "56"
+            ],
+            "question": "Is this a foundation model / LLM / multimodal model placed on the market independently with broad capabilities across many tasks?",
+            "note": "GPAI obligations run on a SEPARATE TRACK from the high-risk classification. A GPAI provider may simultaneously face GPAI obligations (Arts 51–55) AND high-risk obligations if their model is integrated into a high-risk AI system. The systemic risk threshold is training compute > 10^25 FLOPs.",
+            "if_triggered": "Apply GPAI obligations (Arts 53–55). If systemic risk threshold met, apply Art 55 additional obligations.",
+            "if_not_triggered": "Continue to sub-step 2g."
+          },
+          {
+            "sub": "2g",
+            "label": "MINIMAL RISK — default",
+            "article": "95",
+            "question": "Has the system passed all checks above without triggering any category?",
+            "if_triggered": "No mandatory obligations under the AI Act. Voluntary codes of conduct encouraged under Art 95."
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "label": "Identify operator role",
+        "question": "What is the user's role in relation to this AI system?",
+        "guidance": "Roles are defined in Article 3. A provider develops/places on market. A deployer uses it under own authority. Others: importer, distributor, authorised representative.",
+        "articles": [
+          "3"
+        ],
+        "roles": [
+          "provider",
+          "deployer",
+          "importer",
+          "distributor",
+          "authorised_representative",
+          "product_manufacturer"
+        ]
+      },
+      {
+        "step": 4,
+        "label": "Identify specific obligations",
+        "question": "What are the concrete obligations for this role and risk level?",
+        "guidance": "Use the obligations_by_role and obligations_by_type sections. For high-risk: Articles 8–27 (providers), Article 26 (deployers). For GPAI: Articles 53–55. For transparency: Article 50.",
+        "articles": [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "53",
+          "54",
+          "55"
+        ]
+      },
+      {
+        "step": 5,
+        "label": "Check conformity and registration",
+        "question": "Are there conformity assessment, CE marking, or registration requirements?",
+        "guidance": "High-risk systems require conformity assessment (Art. 43), EU declaration of conformity (Art. 47), CE marking (Art. 48), and registration in the EU database (Art. 49, 71).",
+        "articles": [
+          "40",
+          "41",
+          "42",
+          "43",
+          "44",
+          "45",
+          "46",
+          "47",
+          "48",
+          "49",
+          "71"
+        ]
+      },
+      {
+        "step": 6,
+        "label": "Check penalties exposure",
+        "question": "What penalties apply if obligations are not met?",
+        "guidance": "See Article 99 (fines up to €35M / 7% global turnover for prohibited AI, €15M / 3% for high-risk violations, €7.5M / 1.5% for incorrect information). Article 100 for public bodies. Article 101 for GPAI providers.",
+        "articles": [
+          "99",
+          "100",
+          "101"
+        ]
+      }
+    ]
+  },
+  "risk_classification": {
+    "prohibited": {
+      "label": "Prohibited AI Practices",
+      "summary": "AI systems listed in Article 5 are completely banned. Placing on the market, putting into service, or using them is forbidden.",
+      "primary_article": "5",
+      "file": "02_chapter_II.json",
+      "chapter": "CHAPTER II",
+      "practices": [
+        {
+          "id": "prohibited_subliminal",
+          "description": "Subliminal, manipulative or deceptive techniques that distort behaviour causing harm",
+          "article_ref": "5(1)(a)"
+        },
+        {
+          "id": "prohibited_vulnerability_exploitation",
+          "description": "Exploiting vulnerabilities of specific groups (age, disability, social/economic situation)",
+          "article_ref": "5(1)(b)"
+        },
+        {
+          "id": "prohibited_social_scoring_public",
+          "description": "Social scoring by public authorities",
+          "article_ref": "5(1)(c)"
+        },
+        {
+          "id": "prohibited_social_scoring_private",
+          "description": "Social scoring by private operators for unrelated contexts",
+          "article_ref": "5(1)(c)"
+        },
+        {
+          "id": "prohibited_criminal_risk_profiling",
+          "description": "Assessing risk of committing a crime purely based on profiling or personality traits",
+          "article_ref": "5(1)(d)"
+        },
+        {
+          "id": "prohibited_biometric_databases",
+          "description": "Untargeted scraping of facial images from internet/CCTV to build databases",
+          "article_ref": "5(1)(e)"
+        },
+        {
+          "id": "prohibited_emotion_recognition_work_education",
+          "description": "Emotion recognition in workplace or educational institutions",
+          "article_ref": "5(1)(f)"
+        },
+        {
+          "id": "prohibited_biometric_categorisation_sensitive",
+          "description": "Biometric categorisation to infer sensitive attributes (race, political opinions, religion, sexual orientation, etc.)",
+          "article_ref": "5(1)(g)"
+        },
+        {
+          "id": "prohibited_real_time_remote_biometric_law_enforcement",
+          "description": "Real-time remote biometric identification in public spaces by law enforcement (with narrow exceptions)",
+          "article_ref": "5(1)(h)"
+        }
+      ],
+      "keywords": [
+        "subliminal",
+        "manipulation",
+        "social scoring",
+        "mass surveillance",
+        "real-time biometrics",
+        "emotion recognition workplace",
+        "emotion recognition school",
+        "criminal profiling",
+        "facial scraping",
+        "biometric categorisation sensitive"
+      ]
+    },
+    "high_risk": {
+      "label": "High-Risk AI Systems",
+      "summary": "Two pathways to high-risk classification: (1) AI components in safety-regulated products under Annex I legislation; (2) standalone AI systems in the 8 domains listed in Annex III. High-risk systems face the heaviest obligations (Articles 8–49).",
+      "classification_articles": [
+        "6"
+      ],
+      "classification_articles_note": "Article 7 empowers the Commission to amend Annex III via delegated acts. Developers must classify against Annex III as it currently stands — Article 7 is not a classification tool for operators.",
+      "obligations_articles": [
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27"
+      ],
+      "conformity_articles": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49"
+      ],
+      "file_classification": "03_chapter_III.json",
+      "annex_I_pathway": {
+        "description": "AI systems that are safety components of products covered by EU harmonisation legislation listed in Annex I, Section A (e.g. Machinery Regulation, Medical Devices, Radio Equipment, etc.). These require third-party conformity assessment.",
+        "annex_file": "annex_I.json",
+        "article": "6(1)"
+      },
+      "annex_III_pathway": {
+        "description": "Standalone AI systems in one of the 8 high-risk domains listed in Annex III. Providers may self-assess unless it involves biometrics or law enforcement (which require notified body).",
+        "annex_file": "annex_III.json",
+        "article": "6(2)",
+        "domains": [
+          {
+            "domain_id": "HR-1",
+            "name": "Biometrics",
+            "description": "Remote biometric identification systems; biometric categorisation by sensitive attributes; emotion recognition",
+            "note": "Permitted only where Union or national law allows",
+            "keywords": [
+              "face recognition",
+              "fingerprint",
+              "biometric",
+              "iris",
+              "remote identification",
+              "biometric categorisation",
+              "emotion detection"
+            ]
+          },
+          {
+            "domain_id": "HR-2",
+            "name": "Critical Infrastructure",
+            "description": "Safety components in management/operation of critical digital infrastructure, road traffic, water, gas, heating, electricity supply",
+            "keywords": [
+              "critical infrastructure",
+              "power grid",
+              "water utility",
+              "road traffic management",
+              "digital infrastructure safety",
+              "SCADA",
+              "energy grid"
+            ]
+          },
+          {
+            "domain_id": "HR-3",
+            "name": "Education and Vocational Training",
+            "description": "Systems to determine access/admission; evaluate learning outcomes; assess education level; monitor/detect prohibited behaviour in tests",
+            "keywords": [
+              "student admission",
+              "exam monitoring",
+              "proctoring",
+              "learning assessment",
+              "education placement",
+              "school",
+              "university admission",
+              "vocational training"
+            ]
+          },
+          {
+            "domain_id": "HR-4",
+            "name": "Employment and Workers Management",
+            "description": "Recruitment/selection systems; systems affecting work conditions, promotion, termination; performance monitoring; task allocation by behaviour/traits",
+            "keywords": [
+              "hiring",
+              "recruitment",
+              "CV screening",
+              "job application",
+              "employee monitoring",
+              "performance evaluation",
+              "HR AI",
+              "promotion decision",
+              "task allocation",
+              "firing",
+              "termination"
+            ]
+          },
+          {
+            "domain_id": "HR-5",
+            "name": "Essential Private and Public Services",
+            "description": "Public benefit/assistance eligibility; creditworthiness / credit scoring (except fraud detection); insurance pricing (life & health); emergency call prioritisation / dispatch",
+            "keywords": [
+              "credit score",
+              "loan decision",
+              "insurance pricing",
+              "public benefits",
+              "social welfare eligibility",
+              "healthcare eligibility",
+              "emergency dispatch",
+              "triage",
+              "creditworthiness"
+            ]
+          },
+          {
+            "domain_id": "HR-6",
+            "name": "Law Enforcement",
+            "description": "Assessing victim risk; polygraph / lie detection; evidence reliability assessment; recidivism / re-offending risk; criminal profiling",
+            "note": "Permitted only where Union or national law allows",
+            "keywords": [
+              "police",
+              "law enforcement",
+              "crime risk",
+              "recidivism",
+              "lie detector",
+              "polygraph",
+              "criminal investigation",
+              "evidence evaluation",
+              "offending risk"
+            ]
+          },
+          {
+            "domain_id": "HR-7",
+            "name": "Migration, Asylum and Border Control",
+            "description": "Polygraph tools; risk assessment for border crossing persons; asylum/visa/residence permit examination; detection/identification of persons",
+            "note": "Permitted only where Union or national law allows",
+            "keywords": [
+              "border control",
+              "asylum",
+              "visa",
+              "immigration",
+              "refugee",
+              "border check",
+              "migration risk",
+              "travel document verification"
+            ]
+          },
+          {
+            "domain_id": "HR-8",
+            "name": "Administration of Justice and Democratic Processes",
+            "description": "AI assisting judicial authorities with fact/law research; AI influencing election outcomes or voting behaviour",
+            "keywords": [
+              "judiciary",
+              "court",
+              "legal research",
+              "election",
+              "voting",
+              "referendum",
+              "judge",
+              "legal AI",
+              "election influence",
+              "democratic process"
+            ]
+          }
+        ]
+      },
+      "not_high_risk_exception": {
+        "description": "A provider may determine an Annex III system is NOT high-risk if it does not pose a significant risk of harm (Article 6(3)). The provider must document the assessment BEFORE placing the system on the market. Notification to the AI Office or national authority is mandatory only if requested or during EU database registration (Article 49) — there is no standalone Annex for this procedure.",
+        "article": "6(3)",
+        "strict_implementation_rules": [
+          "DEFAULT is high-risk: any system matching an Annex III domain is HIGH-RISK unless the provider can actively demonstrate otherwise.",
+          "The tool MUST NOT confirm derogation on its own. It must prompt the user to provide the specific functional justification for why the system is ancillary or preparatory.",
+          "FOUR-CONDITION TEST (all must be satisfied): (1) narrow procedural or preparatory task only; (2) intended only to improve the result of a previously completed human activity; (3) detects decision patterns or deviations but does not itself make any decision, recommendation, or ranking; (4) designed for a preparatory task only — cannot influence a substantive decision affecting persons.",
+          "PROFILING VOID RULE: if the system performs profiling within the meaning of Article 3(68) of Regulation (EU) 2016/679 (GDPR), the Art 6(3) derogation is automatically void. The system remains high-risk regardless of any ancillary or preparatory claims.",
+          "The documentation must be written, retained, and available to authorities on request. A verbal or informal assessment is insufficient.",
+          "Misclassification penalty: up to €15,000,000 or 3% of global annual turnover (Article 99(3)).",
+          "Example of valid derogation: a spell-checker pre-processing CVs before they reach a separate recruitment scoring tool.",
+          "Example of INVALID derogation: any tool that ranks, scores, filters, or recommends candidates — this is squarely within Annex III(4) regardless of whether a human makes the final decision."
+        ]
+      }
+    },
+    "limited_risk_transparency": {
+      "label": "Transparency Obligations (Limited Risk)",
+      "summary": "AI systems that interact with humans, generate synthetic content, or appear human must meet disclosure requirements under Article 50. No full high-risk regime applies.",
+      "primary_article": "50",
+      "file": "04_chapter_IV.json",
+      "chapter": "CHAPTER IV",
+      "obligations": [
+        {
+          "id": "transparency_chatbot",
+          "description": "Chatbots / conversational AI must disclose they are AI to users (unless obvious from context)",
+          "article_ref": "50(1)"
+        },
+        {
+          "id": "transparency_deepfake",
+          "description": "Operators deploying deep-fake or synthetic media must disclose the content is AI-generated",
+          "article_ref": "50(4)"
+        },
+        {
+          "id": "transparency_emotion_detection",
+          "description": "Emotion recognition and biometric categorisation systems must notify persons being processed",
+          "article_ref": "50(3)"
+        },
+        {
+          "id": "transparency_ai_generated_text",
+          "description": "Providers of GPAI generating text published for public information (news etc.) must mark it machine-generated",
+          "article_ref": "50(2)"
+        }
+      ],
+      "keywords": [
+        "chatbot",
+        "virtual assistant",
+        "deep fake",
+        "synthetic video",
+        "synthetic audio",
+        "AI-generated content",
+        "emotion recognition",
+        "disclosure",
+        "transparency",
+        "conversational AI",
+        "voice assistant"
+      ]
+    },
+    "general_purpose_ai_model": {
+      "label": "General-Purpose AI Models (GPAI)",
+      "summary": "Foundation models / LLMs / multi-modal models with broad capability are regulated under Chapter V (Articles 51–56). Systemic-risk models (above 10^25 FLOPs) face additional obligations.",
+      "chapter": "CHAPTER V",
+      "file": "05_chapter_V.json",
+      "classification_article": "51",
+      "general_obligations_article": "53",
+      "systemic_risk_article": "55",
+      "systemic_risk_threshold": "10^25 floating point operations (FLOPs) used in training",
+      "general_obligations": [
+        "Technical documentation (Annex XI)",
+        "Information to downstream providers (Annex XII)",
+        "Copyright compliance policy",
+        "AI Act compliance policy"
+      ],
+      "systemic_risk_obligations": [
+        "Adversarial testing / red-teaming",
+        "Incident reporting to AI Office",
+        "Cybersecurity protections",
+        "Systemic risk assessment and mitigation"
+      ],
+      "articles": [
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56"
+      ],
+      "annexes": [
+        "annex_XI.json",
+        "annex_XII.json",
+        "annex_XIII.json"
+      ],
+      "keywords": [
+        "LLM",
+        "large language model",
+        "foundation model",
+        "GPT",
+        "BERT",
+        "multimodal",
+        "general purpose",
+        "text generation",
+        "image generation",
+        "GPAI",
+        "frontier model",
+        "base model"
+      ]
+    },
+    "minimal_risk": {
+      "label": "Minimal / No Risk AI Systems",
+      "summary": "All AI systems not falling into prohibited, high-risk, or transparency categories. No mandatory requirements under the AI Act, but voluntary codes of conduct are encouraged (Article 95).",
+      "article": "95",
+      "file": "10_chapter_X.json",
+      "keywords": [
+        "spam filter",
+        "inventory management",
+        "recommendation system",
+        "AI enabled games",
+        "basic automation",
+        "travel itinerary",
+        "weather prediction",
+        "search engine ranking"
+      ]
+    }
+  },
+  "operator_roles": {
+    "provider": {
+      "definition": "A natural or legal person (or public authority) that develops an AI system or general-purpose AI model and places it on the market or puts it into service under their own name or trademark — including where this is done free of charge. (Article 3(3))",
+      "key_obligations_high_risk": [
+        {
+          "obligation": "Risk management system",
+          "article": "9"
+        },
+        {
+          "obligation": "Data governance",
+          "article": "10"
+        },
+        {
+          "obligation": "Technical documentation",
+          "article": "11",
+          "annex": "annex_IV.json"
+        },
+        {
+          "obligation": "Record-keeping / automatic logs",
+          "article": "12"
+        },
+        {
+          "obligation": "Transparency — instructions for use to deployers",
+          "article": "13"
+        },
+        {
+          "obligation": "Human oversight by design",
+          "article": "14"
+        },
+        {
+          "obligation": "Accuracy, robustness, cybersecurity",
+          "article": "15"
+        },
+        {
+          "obligation": "Quality management system",
+          "article": "17"
+        },
+        {
+          "obligation": "Documentation keeping (post-market)",
+          "article": "18"
+        },
+        {
+          "obligation": "Automatically generated logs",
+          "article": "19"
+        },
+        {
+          "obligation": "Corrective actions and incident reporting",
+          "article": "20"
+        },
+        {
+          "obligation": "Cooperation with competent authorities",
+          "article": "21"
+        },
+        {
+          "obligation": "Conformity assessment",
+          "article": "43"
+        },
+        {
+          "obligation": "EU declaration of conformity",
+          "article": "47"
+        },
+        {
+          "obligation": "CE marking",
+          "article": "48"
+        },
+        {
+          "obligation": "Registration in EU database",
+          "article": "49"
+        },
+        {
+          "obligation": "Post-market monitoring",
+          "article": "72"
+        }
+      ],
+      "key_obligations_gpai": [
+        {
+          "obligation": "Technical documentation",
+          "article": "53(1)(a)",
+          "annex": "annex_XI.json"
+        },
+        {
+          "obligation": "Information for downstream providers",
+          "article": "53(1)(b)",
+          "annex": "annex_XII.json"
+        },
+        {
+          "obligation": "Publicly available training-data summary (AI Office template — not a numbered annex)",
+          "article": "53(1)(d)"
+        },
+        {
+          "obligation": "Copyright compliance policy",
+          "article": "53(1)(c)"
+        }
+      ]
+    },
+    "deployer": {
+      "definition": "Any natural or legal person (or public authority) using an AI system under their own authority, except for personal non-professional use. (Article 3(4))",
+      "key_obligations_high_risk": [
+        {
+          "obligation": "Use only per provider instructions",
+          "article": "26(1)"
+        },
+        {
+          "obligation": "Assign human oversight to competent persons",
+          "article": "26(2)"
+        },
+        {
+          "obligation": "Monitor operation for risks",
+          "article": "26(3)"
+        },
+        {
+          "obligation": "Keep logs (where technically feasible)",
+          "article": "26(5)"
+        },
+        {
+          "obligation": "Inform provider of risks and incidents",
+          "article": "26(5)"
+        },
+        {
+          "obligation": "Notify affected workers about AI use",
+          "article": "26(6)"
+        },
+        {
+          "obligation": "Fundamental rights impact assessment (public bodies, certain deployers)",
+          "article": "27"
+        },
+        {
+          "obligation": "Register in EU database (where applicable)",
+          "article": "49(2)"
+        }
+      ],
+      "key_obligations_transparency": [
+        {
+          "obligation": "Disclose AI interaction to users",
+          "article": "50(1)"
+        },
+        {
+          "obligation": "Label deep-fake / synthetic content",
+          "article": "50(4)"
+        }
+      ]
+    },
+    "importer": {
+      "definition": "A natural or legal person established in the Union that places on the market an AI system bearing the name/trademark of a person established outside the Union. (Article 3(6))",
+      "key_obligations": [
+        {
+          "obligation": "Verify provider conformity",
+          "article": "23(1)"
+        },
+        {
+          "obligation": "Do not place non-compliant systems on market",
+          "article": "23(1)"
+        },
+        {
+          "obligation": "Label with own name/address",
+          "article": "23(3)"
+        },
+        {
+          "obligation": "Storage and transport conditions",
+          "article": "23(4)"
+        },
+        {
+          "obligation": "Cooperate with authorities",
+          "article": "23(5)"
+        }
+      ]
+    },
+    "distributor": {
+      "definition": "Any natural or legal person in the supply chain (not provider or importer) that makes an AI system available on the Union market. (Article 3(7))",
+      "key_obligations": [
+        {
+          "obligation": "Verify CE marking and documentation before supply",
+          "article": "24(1)"
+        },
+        {
+          "obligation": "Do not store/transport in ways that compromise conformity",
+          "article": "24(2)"
+        },
+        {
+          "obligation": "Inform provider or importer of non-compliance",
+          "article": "24(3)"
+        },
+        {
+          "obligation": "Cooperate with authorities",
+          "article": "24(4)"
+        }
+      ]
+    },
+    "authorised_representative": {
+      "definition": "A natural or legal person established in the Union with a written mandate from a non-EU provider to act on their behalf. (Article 3(5))",
+      "key_obligations": [
+        {
+          "obligation": "Register in EU database on behalf of provider",
+          "article": "22(3)(a)"
+        },
+        {
+          "obligation": "Hold EU declaration of conformity and technical documentation available",
+          "article": "22(3)(b)"
+        },
+        {
+          "obligation": "Inform provider to take corrective action",
+          "article": "22(3)(c)"
+        },
+        {
+          "obligation": "Cooperate with authorities",
+          "article": "22(3)(d)"
+        }
+      ]
+    },
+    "product_manufacturer": {
+      "definition": "Placing an AI system on the market or putting it into service together with their product under their own name/trademark. Treated as provider. (Article 25(1))",
+      "articles": [
+        "25"
+      ]
+    }
+  },
+  "key_definitions": {
+    "article": "3",
+    "file": "01_chapter_I.json",
+    "critical_terms": [
+      {
+        "term": "AI system",
+        "paragraph_id": "003.001",
+        "summary": "Machine-based system designed to operate with varying levels of autonomy, that may exhibit adaptiveness, and that infers from inputs how to generate outputs such as predictions, content, recommendations, or decisions."
+      },
+      {
+        "term": "General-purpose AI model (GPAI)",
+        "paragraph_id": "003.063",
+        "summary": "AI model trained on large amounts of data with broad capability that can serve a variety of tasks; placed on market independently."
+      },
+      {
+        "term": "Provider",
+        "paragraph_id": "003.003",
+        "summary": "Develops and/or places AI system on market or puts it into service under own name/trademark."
+      },
+      {
+        "term": "Deployer",
+        "paragraph_id": "003.004",
+        "summary": "Uses an AI system under own authority (not personal non-professional use)."
+      },
+      {
+        "term": "High-risk AI system",
+        "paragraph_id": "003.*, Art 6",
+        "summary": "Classified by Article 6 using Annex I or Annex III pathway."
+      },
+      {
+        "term": "Placing on the market",
+        "paragraph_id": "003.009",
+        "summary": "First making available on Union market."
+      },
+      {
+        "term": "Putting into service",
+        "paragraph_id": "003.011",
+        "summary": "Supply for first use in Union."
+      },
+      {
+        "term": "Reasonably foreseeable misuse",
+        "paragraph_id": "003.013",
+        "summary": "Use not intended but foreseeable from behaviour of humans."
+      },
+      {
+        "term": "Intended purpose",
+        "paragraph_id": "003.012",
+        "summary": "Use for which the AI system is intended by the provider."
+      },
+      {
+        "term": "Notified body",
+        "paragraph_id": "003.022",
+        "summary": "Conformity assessment body designated under applicable legislation."
+      },
+      {
+        "term": "Systemic risk (GPAI)",
+        "paragraph_id": "003.065",
+        "summary": "Risk specific to high-impact GPAI models with significant impact on Union market."
+      }
+    ]
+  },
+  "high_risk_obligations_detail": {
+    "description": "All obligations in Articles 8–15 apply to the high-risk AI system. Articles 16–27 specify who bears each obligation (provider vs deployer).",
+    "technical_requirements": [
+      {
+        "article": "9",
+        "title": "Risk management system",
+        "summary": "Continuous iterative process: identify and analyse risks, estimate and evaluate residual risks, adopt risk management measures. Must consider both intended use AND reasonably foreseeable misuse.",
+        "paragraph_ids": "009.*",
+        "keywords": [
+          "risk management",
+          "residual risk",
+          "risk assessment",
+          "foreseeable misuse"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "10",
+        "title": "Data and data governance",
+        "summary": "Training, validation, testing datasets must be subject to data governance. Must be relevant, representative, free of errors where possible, with appropriate statistical properties. Special rules for sensitive data (Art 10(5)).",
+        "paragraph_ids": "010.*",
+        "keywords": [
+          "training data",
+          "data quality",
+          "dataset governance",
+          "bias",
+          "representative data",
+          "sensitive data"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "11",
+        "title": "Technical documentation",
+        "summary": "Comprehensive documentation before placing on market. Content specified in Annex IV.",
+        "paragraph_ids": "011.*",
+        "annex": "annex_IV.json",
+        "keywords": [
+          "technical documentation",
+          "Annex IV",
+          "design documentation"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "12",
+        "title": "Record-keeping",
+        "summary": "High-risk AI systems must enable automatic logging of events. Log retention by deployers.",
+        "paragraph_ids": "012.*",
+        "keywords": [
+          "logging",
+          "audit trail",
+          "event logs",
+          "record keeping"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "13",
+        "title": "Transparency and information to deployers",
+        "summary": "Must come with instructions for use enabling deployers to understand capabilities, limitations, performance, and proper operation. Requirements are fully contained within Article 13 — there is no standalone Annex for instructions for use in the final Act.",
+        "paragraph_ids": "013.*",
+        "keywords": [
+          "transparency",
+          "instructions for use",
+          "capability disclosure",
+          "limitations",
+          "information provision"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "14",
+        "title": "Human oversight",
+        "summary": "Systems must be designed to allow effective human oversight. Risk minimisation must be possible by persons to whom oversight is assigned. Includes monitor, intervene, stop capabilities.",
+        "paragraph_ids": "014.*",
+        "keywords": [
+          "human oversight",
+          "human in the loop",
+          "override",
+          "stop capability",
+          "human control",
+          "HITL"
+        ],
+        "file": "03_chapter_III.json"
+      },
+      {
+        "article": "15",
+        "title": "Accuracy, robustness and cybersecurity",
+        "summary": "Must achieve appropriate levels of accuracy (declared in instructions), be robust against errors and third-party manipulation (adversarial attacks, model poisoning, data poisoning).",
+        "paragraph_ids": "015.*",
+        "keywords": [
+          "accuracy",
+          "robustness",
+          "cybersecurity",
+          "adversarial attack",
+          "model poisoning",
+          "resilience"
+        ],
+        "file": "03_chapter_III.json"
+      }
+    ],
+    "provider_organisational_obligations": [
+      {
+        "article": "16",
+        "title": "Obligations of providers",
+        "summary": "Master list of all provider obligations by reference"
+      },
+      {
+        "article": "17",
+        "title": "Quality management system",
+        "summary": "Documented QMS covering design, development, testing, monitoring. Proportionate to organisation size."
+      },
+      {
+        "article": "18",
+        "title": "Documentation keeping",
+        "summary": "Keep technical documentation and QMS docs for 10 years after last placing on market."
+      },
+      {
+        "article": "19",
+        "title": "Automatically generated logs",
+        "summary": "Keep logs generated automatically for minimum 6 months (or per applicable legislation)."
+      },
+      {
+        "article": "20",
+        "title": "Corrective actions",
+        "summary": "If non-conformity found: withdraw, disable, recall. Notify market surveillance authorities and deployers/users in affected Member States."
+      },
+      {
+        "article": "21",
+        "title": "Cooperation with authorities",
+        "summary": "Provide all information required to demonstrate conformity; cooperate with corrective action requests."
+      }
+    ],
+    "deployer_specific_obligations": [
+      {
+        "article": "26",
+        "title": "Obligations of deployers of high-risk AI systems",
+        "summary": "Use per instructions, ensure human oversight, monitor, keep logs, inform affected workers."
+      },
+      {
+        "article": "27",
+        "title": "Fundamental rights impact assessment",
+        "summary": "Required for: public authorities, private operators using HR AI for creditworthiness/life insurance/emergency services/biometric identification. Must be done before deployment and registered."
+      }
+    ]
+  },
+  "conformity_and_market_access": {
+    "description": "How high-risk AI systems are authorised for the EU market.",
+    "articles": {
+      "40": "Harmonised standards — presumption of conformity if EN standards followed",
+      "41": "Common specifications — Commission may issue binding technical specs",
+      "42": "Presumption of conformity for specific requirements",
+      "43": "Conformity assessment — self-assessment (internal control per Annex VI) OR notified-body assessment per Annex VII. Notified body mandatory for biometric systems and safety-critical Annex I products.",
+      "44": "Certificates — issued by notified bodies, valid up to 5 years",
+      "46": "Derogation — national authority can authorise specific system before conformity assessment for law enforcement / national security emergencies",
+      "47": "EU declaration of conformity — provider declares compliance, content in Annex V",
+      "48": "CE marking — affixed once EU declaration of conformity complete; CE marking rules are in Annex IX (not Annex VII — Annex VII is the notified-body QMS assessment procedure).",
+      "49": "Registration — in EU database (Art 71). Providers before placing on market; deployers for certain systems (e.g. Art 6(1) biometric identification)."
+    },
+    "annexes": {
+      "annex_IV.json": "Technical documentation content requirements",
+      "annex_V.json": "EU declaration of conformity content",
+      "annex_VI.json": "Internal control conformity assessment procedure",
+      "annex_VII.json": "Conformity assessment based on quality management system — notified body",
+      "annex_VIII.json": "EU database registration information"
+    }
+  },
+  "transparency_details": {
+    "article": "50",
+    "file": "04_chapter_IV.json",
+    "obligations": {
+      "50_1": "Providers of AI systems interacting with humans must ensure those systems identified as AI (unless obvious to a reasonably well-informed person). Exception: law enforcement with national authorization.",
+      "50_2": "Providers of GPAI generating text on matters of public interest must mark it machine-generated (applies to online platforms under DSA).",
+      "50_3": "Providers of emotion recognition or biometric categorisation systems must notify users being processed.",
+      "50_4": "Deployers of deep-fake/synthetic video, audio, image, text generation must label as AI-generated. Exception: clearly artistic, creative, satirical purposes with appropriate disclosure."
+    }
+  },
+  "gpai_model_details": {
+    "articles": [
+      "51",
+      "52",
+      "53",
+      "54",
+      "55",
+      "56"
+    ],
+    "file": "05_chapter_V.json",
+    "chapter": "CHAPTER V",
+    "classification": {
+      "article": "51",
+      "systemic_risk_threshold": "Training with more than 10^25 FLOPs",
+      "other_criteria": "Commission may designate model with systemic risk based on other criteria (capabilities, market reach)"
+    },
+    "provider_obligations_all_gpai": {
+      "article": "53",
+      "obligations": [
+        "Technical documentation per Annex XI before market placement",
+        "Provide information to downstream AI system providers per Annex XII",
+        "Copyright-compliant training policy and summary",
+        "Register in EU database"
+      ]
+    },
+    "provider_obligations_systemic_risk": {
+      "article": "55",
+      "obligations": [
+        "Perform model evaluation (adversarial testing) per Article 55(1)(a)",
+        "Track, document and report serious incidents to AI Office",
+        "Implement cybersecurity protections",
+        "Report energy consumption of model"
+      ]
+    },
+    "codes_of_practice": {
+      "article": "56",
+      "summary": "Providers may comply with Art 53/55 obligations via Commission-approved Codes of Practice"
+    }
+  },
+  "innovation_and_sandboxes": {
+    "articles": [
+      "57",
+      "58",
+      "59",
+      "60",
+      "61",
+      "62",
+      "63"
+    ],
+    "file": "06_chapter_VI.json",
+    "chapter": "CHAPTER VI",
+    "summary": "AI regulatory sandboxes allow providers (especially SMEs and start-ups) to develop and test innovative AI in controlled environment with regulatory support and temporary relaxations. Real-world testing also possible under Article 60–61.",
+    "sme_support": "Article 62 provides special measures: reduced fees, priority access, dedicated guidance, administrative simplification."
+  },
+  "governance_and_enforcement": {
+    "ai_office": {
+      "article": "64",
+      "file": "07_chapter_VII.json",
+      "summary": "Established within Commission; oversees GPAI models, coordinates enforcement, develops guidance."
+    },
+    "eu_ai_board": {
+      "article": "65",
+      "file": "07_chapter_VII.json",
+      "summary": "National competent authorities + Commission; coordinates consistent application of AI Act across Member States."
+    },
+    "eu_database": {
+      "article": "71",
+      "file": "08_chapter_VIII.json",
+      "summary": "Public database of registered high-risk AI systems. Required registration before/upon market placement."
+    },
+    "market_surveillance": {
+      "articles": [
+        "72",
+        "73",
+        "74",
+        "75",
+        "76",
+        "77",
+        "78",
+        "79",
+        "80",
+        "81",
+        "82",
+        "83",
+        "84"
+      ],
+      "file": "09_chapter_IX.json",
+      "summary": "Post-market monitoring, incident reporting, authority powers to inspect and withdraw non-compliant systems."
+    },
+    "individual_rights": {
+      "right_to_explanation": {
+        "article": "86",
+        "summary": "Persons subject to high-risk AI decisions have right to explanation from deployer."
+      },
+      "right_to_complain": {
+        "article": "85",
+        "summary": "Any natural person can lodge complaint with national market surveillance authority."
+      },
+      "whistleblower": {
+        "article": "87",
+        "summary": "Persons reporting infringements protected under EU whistleblowing law."
+      }
+    }
+  },
+  "penalties": {
+    "article": "99",
+    "file": "12_chapter_XII.json",
+    "fines": [
+      {
+        "violation": "Prohibited AI practices (Article 5)",
+        "max_fine": "€35,000,000 or 7% of global annual turnover (whichever is higher)"
+      },
+      {
+        "violation": "Non-compliance with high-risk obligations (Articles 6, 8-15, 25, 26, 27, 49, 50, 60)",
+        "max_fine": "€15,000,000 or 3% of global annual turnover"
+      },
+      {
+        "violation": "Supplying incorrect/misleading information to authorities",
+        "max_fine": "€7,500,000 or 1.5% of global annual turnover"
+      },
+      {
+        "violation": "SME/start-up cap (Article 99(6))",
+        "note": "For SMEs including start-ups, fines shall be the LOWER of the percentage or absolute amount specified — not the higher. This is the inverse of the rule for large companies."
+      },
+      {
+        "violation": "GPAI provider obligations (Article 101)",
+        "max_fine": "€15,000,000 or 3% of global annual turnover for general obligations; €3,000,000 or 1% for incorrect information"
+      }
+    ]
+  },
+  "annexes_summary": {
+    "annex_I.json": {
+      "title": "Union harmonisation legislation (Annex I, Section A & B)",
+      "relevance": "Determines Annex I pathway for high-risk classification (Article 6(1)). Includes: Machinery, Medical Devices, IVD, Radio Equipment, Aviation, Vehicles, etc."
+    },
+    "annex_II.json": {
+      "title": "List of criminal offences referred to in Article 5(1)(h)(iii) (Annex II)",
+      "relevance": "Enumerates the serious criminal offences (terrorism, trafficking, sexual exploitation, etc.) for which law enforcement may use real-time remote biometric identification in public spaces under the narrow exception in Article 5(1)(h)(iii)."
+    },
+    "annex_III.json": {
+      "title": "High-Risk AI systems — 8 domains (Article 6(2))",
+      "relevance": "PRIMARY reference for classifying standalone high-risk AI systems."
+    },
+    "annex_IV.json": {
+      "title": "Technical documentation (Article 11)",
+      "relevance": "Specifies what must be in technical documentation for high-risk AI providers."
+    },
+    "annex_V.json": {
+      "title": "EU Declaration of Conformity (Article 47)",
+      "relevance": "Content requirements for the DoC."
+    },
+    "annex_VI.json": {
+      "title": "Internal control conformity assessment procedure (Article 43(1)(a))",
+      "relevance": "Self-assessment procedure for high-risk AI not requiring notified body."
+    },
+    "annex_VII.json": {
+      "title": "Notified body conformity assessment (Article 43(1)(b))",
+      "relevance": "Third-party assessment based on quality management system."
+    },
+    "annex_VIII.json": {
+      "title": "EU database registration information (Article 49 & 71)",
+      "relevance": "Data fields required for EU database registration."
+    },
+    "annex_IX.json": {
+      "title": "Real-world testing registration information (Annex IX — Article 60(4))",
+      "relevance": "Information fields that providers must register in the EU database (Art 71) when conducting real-world testing outside AI regulatory sandboxes."
+    },
+    "annex_X.json": {
+      "title": "List of Union law on large-scale biometric and border IT systems (Annex X)",
+      "relevance": "Enumerates the Union regulations on SIS, Eurodac, EES, ETIAS, VIS and related border/immigration IT systems. Relevant context for Annex III point 1 (biometric identification) and point 7 (migration, asylum and border control management) high-risk categories."
+    },
+    "annex_XI.json": {
+      "title": "Technical documentation for GPAI models (Annex XI — Article 53(1)(a))",
+      "relevance": "Minimum content requirements for the technical documentation that GPAI providers must draw up, keep up-to-date, and provide to the AI Office and national competent authorities on request."
+    },
+    "annex_XII.json": {
+      "title": "Information to be provided to downstream providers (Annex XII — Article 53(1)(b))",
+      "relevance": "Minimum elements GPAI providers must share with downstream AI system providers to enable them to understand the model's capabilities and limitations and comply with their own obligations."
+    },
+    "annex_XIII.json": {
+      "title": "Criteria for designation of GPAI models with systemic risk (Annex XIII — Article 51 and Article 52(4))",
+      "relevance": "Criteria the Commission uses to assess whether a GPAI model has capabilities equivalent to the 10^25 FLOPs threshold, including parameters, training data size, computation, modalities, benchmarks, market reach, and registered end-users."
+    }
+  },
+  "keyword_to_articles": {
+    "_description": "Fast lookup: map domain keywords to relevant articles. Use as a first pass then follow the decision tree.",
+    "biometric_face_recognition": [
+      "5(1)(a)",
+      "5(1)(h)",
+      "6(2)+Annex_III(1)",
+      "50(3)",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "fingerprint_iris_voice_biometric": [
+      "6(2)+Annex_III(1)",
+      "5(1)(g)",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "emotion_recognition": [
+      "5(1)(f)",
+      "6(2)+Annex_III(1)",
+      "50(3)",
+      "9",
+      "10"
+    ],
+    "biometric_categorisation": [
+      "5(1)(g)",
+      "6(2)+Annex_III(1)",
+      "9",
+      "10"
+    ],
+    "remote_identification": [
+      "5(1)(h)",
+      "6(2)+Annex_III(1)",
+      "50(3)",
+      "9"
+    ],
+    "access_control_authentication": [
+      "6(2)+Annex_III(1)",
+      "50(3)",
+      "9",
+      "10"
+    ],
+    "social_scoring": [
+      "5(1)(c)"
+    ],
+    "manipulation_deception_subliminal": [
+      "5(1)(a)",
+      "5(1)(b)",
+      "50(1)"
+    ],
+    "vulnerability_exploitation": [
+      "5(1)(b)",
+      "14"
+    ],
+    "facial_image_database_scraping": [
+      "5(1)(e)"
+    ],
+    "racial_ethnic_political_religion_inference": [
+      "5(1)(g)",
+      "10(5)"
+    ],
+    "sexual_orientation_sensitive_attribute": [
+      "5(1)(g)",
+      "10(5)"
+    ],
+    "election_voting_political_influence": [
+      "5(1)(g)",
+      "6(2)+Annex_III(8)"
+    ],
+    "criminal_risk_scoring_recidivism": [
+      "5(1)(d)",
+      "6(2)+Annex_III(6)",
+      "9",
+      "10"
+    ],
+    "predictive_policing": [
+      "5(1)(d)",
+      "6(2)+Annex_III(6)",
+      "9"
+    ],
+    "polygraph_lie_detection": [
+      "5(1)(b)",
+      "6(2)+Annex_III(6)"
+    ],
+    "law_enforcement_police_investigation": [
+      "5(1)(d)",
+      "5(1)(h)",
+      "6(2)+Annex_III(6)",
+      "9",
+      "10"
+    ],
+    "judicial_court_legal_research": [
+      "6(2)+Annex_III(8)",
+      "9",
+      "14"
+    ],
+    "national_security_military_defense": [
+      "2(3)"
+    ],
+    "recruitment_hiring_HR": [
+      "6(2)+Annex_III(4)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "16",
+      "17",
+      "26",
+      "27"
+    ],
+    "cv_screening_job_application": [
+      "6(2)+Annex_III(4)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "26"
+    ],
+    "employee_performance_monitoring": [
+      "6(2)+Annex_III(4)",
+      "9",
+      "10",
+      "26(9)"
+    ],
+    "workplace_productivity_surveillance": [
+      "6(2)+Annex_III(4)",
+      "26(9)",
+      "5(1)(f)"
+    ],
+    "automated_hiring_firing_promotion": [
+      "6(2)+Annex_III(4)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "26"
+    ],
+    "salary_task_allocation": [
+      "6(2)+Annex_III(4)",
+      "9",
+      "13",
+      "14",
+      "26"
+    ],
+    "contractor_freelancer_gig_worker": [
+      "6(2)+Annex_III(4)",
+      "13",
+      "14",
+      "26"
+    ],
+    "credit_scoring_loan_mortgage": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "16",
+      "26"
+    ],
+    "creditworthiness_financial_assessment": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "26"
+    ],
+    "insurance_pricing_underwriting": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "26"
+    ],
+    "robo_advisor_investment_recommendation": [
+      "6(2)+Annex_III(5)",
+      "13",
+      "14",
+      "50(1)"
+    ],
+    "debt_collection_scoring": [
+      "6(2)+Annex_III(5)",
+      "13",
+      "14"
+    ],
+    "fraud_detection_financial": [
+      "2",
+      "6",
+      "50",
+      "13"
+    ],
+    "anti_money_laundering_compliance": [
+      "2",
+      "50",
+      "13"
+    ],
+    "algorithmic_trading_financial": [
+      "2",
+      "50"
+    ],
+    "medical_device_ai": [
+      "6(1)+Annex_I",
+      "9",
+      "10",
+      "11",
+      "13",
+      "14",
+      "15",
+      "43",
+      "47"
+    ],
+    "healthcare_clinical_diagnosis": [
+      "6(1)+Annex_I",
+      "9",
+      "10",
+      "11",
+      "14",
+      "15",
+      "43"
+    ],
+    "medical_imaging_radiology_pathology": [
+      "6(1)+Annex_I",
+      "9",
+      "10",
+      "11",
+      "15",
+      "43"
+    ],
+    "drug_prescription_therapy": [
+      "6(1)+Annex_I",
+      "13",
+      "14"
+    ],
+    "patient_triage_emergency_dispatch": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "hospital_clinical_decision_support": [
+      "6(1)+Annex_I",
+      "13",
+      "14",
+      "50(1)",
+      "9"
+    ],
+    "mental_health_therapy_chatbot": [
+      "50(1)",
+      "13",
+      "14",
+      "2"
+    ],
+    "elder_care_disability_assistance": [
+      "14",
+      "13",
+      "50(1)",
+      "5(1)(b)"
+    ],
+    "education_admissions_placement": [
+      "6(2)+Annex_III(3)",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "exam_proctoring_monitoring": [
+      "6(2)+Annex_III(3)",
+      "5(1)(f)",
+      "9",
+      "10"
+    ],
+    "student_assessment_grading": [
+      "6(2)+Annex_III(3)",
+      "13",
+      "14"
+    ],
+    "tutoring_learning_management_platform": [
+      "50(1)",
+      "13",
+      "14",
+      "2"
+    ],
+    "university_school_vocational_training": [
+      "6(2)+Annex_III(3)",
+      "9",
+      "10",
+      "14"
+    ],
+    "children_youth_minors_educational": [
+      "5(1)(b)",
+      "6(2)+Annex_III(3)",
+      "14"
+    ],
+    "critical_infrastructure": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "15"
+    ],
+    "power_grid_energy_utility_management": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "10",
+      "15"
+    ],
+    "water_utility_supply": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "10",
+      "15"
+    ],
+    "road_traffic_safety_management": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "15"
+    ],
+    "autonomous_vehicle_self_driving": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "15"
+    ],
+    "drone_uav_robotics_autonomous": [
+      "2",
+      "9",
+      "13",
+      "14",
+      "15"
+    ],
+    "scada_industrial_control_system": [
+      "6(2)+Annex_III(2)",
+      "9",
+      "15"
+    ],
+    "public_benefits_welfare_eligibility": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "14",
+      "22",
+      "26"
+    ],
+    "social_welfare_benefits_assessment": [
+      "6(2)+Annex_III(5)",
+      "9",
+      "10",
+      "13",
+      "22",
+      "26"
+    ],
+    "tax_public_administration_decision": [
+      "22",
+      "13",
+      "14",
+      "26"
+    ],
+    "public_authority_automated_individual_decision": [
+      "22",
+      "13",
+      "14",
+      "26",
+      "6(2)+Annex_III(5)"
+    ],
+    "border_immigration_asylum_visa": [
+      "6(2)+Annex_III(7)",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "migration_refugee_border_control": [
+      "6(2)+Annex_III(7)",
+      "9",
+      "10",
+      "13"
+    ],
+    "chatbot_virtual_assistant_bot": [
+      "50(1)",
+      "3",
+      "2"
+    ],
+    "customer_service_support": [
+      "50(1)",
+      "3",
+      "13"
+    ],
+    "conversational_dialogue_ai": [
+      "50(1)",
+      "3",
+      "2"
+    ],
+    "deepfake_synthetic_media": [
+      "50(4)",
+      "5(1)(a)"
+    ],
+    "voice_cloning_synthetic_audio": [
+      "50(4)",
+      "5(1)(a)"
+    ],
+    "image_video_generation_art": [
+      "50(4)",
+      "51",
+      "52",
+      "53"
+    ],
+    "text_generation_writing_summarisation": [
+      "51",
+      "52",
+      "53",
+      "50(4)",
+      "2"
+    ],
+    "translation_language_tool": [
+      "50(2)",
+      "2",
+      "3"
+    ],
+    "content_moderation_filtering": [
+      "2",
+      "50",
+      "3"
+    ],
+    "social_media_recommendation_feed": [
+      "50",
+      "2"
+    ],
+    "search_engine_ranking": [
+      "2",
+      "50"
+    ],
+    "advertising_targeting_profiling": [
+      "2",
+      "50"
+    ],
+    "code_assistant_programming": [
+      "2",
+      "51",
+      "50"
+    ],
+    "llm_foundation_model_training": [
+      "51",
+      "52",
+      "53",
+      "54",
+      "55",
+      "56",
+      "2",
+      "3"
+    ],
+    "general_purpose_ai_model": [
+      "51",
+      "52",
+      "53",
+      "54",
+      "55",
+      "56",
+      "2"
+    ],
+    "large_language_model_llm": [
+      "51",
+      "52",
+      "53",
+      "50(4)",
+      "2"
+    ],
+    "multimodal_model_vision_language": [
+      "51",
+      "52",
+      "53",
+      "54",
+      "55"
+    ],
+    "model_provider_api_service": [
+      "25",
+      "51",
+      "52",
+      "53"
+    ],
+    "downstream_fine_tuning_integration": [
+      "25",
+      "52",
+      "53",
+      "10"
+    ],
+    "systemic_risk_frontier_compute": [
+      "55",
+      "51",
+      "Annex_XIII"
+    ],
+    "open_source_model_weights_release": [
+      "2",
+      "53"
+    ],
+    "technical_documentation": [
+      "11",
+      "Annex_IV",
+      "16",
+      "17"
+    ],
+    "risk_management_assessment": [
+      "9",
+      "10",
+      "14",
+      "15"
+    ],
+    "data_quality_governance_training_data": [
+      "10",
+      "9",
+      "11"
+    ],
+    "logging_record_keeping_auditability": [
+      "12",
+      "19",
+      "26(5)"
+    ],
+    "human_oversight_control": [
+      "14",
+      "26(2)",
+      "9"
+    ],
+    "transparency_instructions_for_use": [
+      "13",
+      "50",
+      "52",
+      "26"
+    ],
+    "accuracy_robustness_cybersecurity": [
+      "15",
+      "9",
+      "11"
+    ],
+    "post_market_monitoring_reporting": [
+      "72",
+      "73",
+      "20",
+      "26"
+    ],
+    "fundamental_rights_impact_assessment": [
+      "27",
+      "9(9)",
+      "26(9)"
+    ],
+    "quality_management_system": [
+      "17",
+      "18",
+      "9"
+    ],
+    "conformity_assessment_ce_marking": [
+      "43",
+      "47",
+      "48",
+      "49",
+      "16"
+    ],
+    "notified_body_certification_audit": [
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38"
+    ],
+    "registration_eu_database": [
+      "49",
+      "71"
+    ],
+    "harmonised_standard_common_specification": [
+      "40",
+      "41",
+      "42",
+      "11"
+    ],
+    "provider_obligations_placing_market": [
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "9",
+      "10",
+      "11",
+      "43",
+      "47",
+      "49"
+    ],
+    "deployer_responsibilities_high_risk": [
+      "26",
+      "27",
+      "28",
+      "29"
+    ],
+    "importer_obligations": [
+      "23"
+    ],
+    "distributor_obligations": [
+      "24"
+    ],
+    "third_party_ai_system_integration": [
+      "26",
+      "25",
+      "13",
+      "14"
+    ],
+    "ai_system_lifecycle_development": [
+      "9",
+      "12",
+      "72",
+      "73",
+      "17"
+    ],
+    "biometric_data_personal_special_category": [
+      "10(5)",
+      "6(2)+Annex_III(1)",
+      "5(1)(g)"
+    ],
+    "personal_data_profiling": [
+      "10",
+      "2",
+      "9"
+    ],
+    "training_data_dataset_bias": [
+      "10",
+      "9",
+      "11"
+    ],
+    "sme_startup_microenterprise": [
+      "62",
+      "57",
+      "58",
+      "99(6)"
+    ],
+    "sandbox_testing_regulatory": [
+      "57",
+      "58",
+      "59",
+      "60",
+      "61"
+    ],
+    "real_world_conditions_testing": [
+      "60",
+      "Annex_IX"
+    ],
+    "penalties_fines_enforcement": [
+      "99",
+      "100",
+      "101"
+    ],
+    "market_surveillance_authority": [
+      "74",
+      "75",
+      "76",
+      "77",
+      "78"
+    ],
+    "instructions_for_use_manual": [
+      "13",
+      "16",
+      "26"
+    ],
+    "definitions_scope_applicability": [
+      "2",
+      "3",
+      "4"
+    ],
+    "high_risk_self_assessment_exception": [
+      "6(3)",
+      "6(4)",
+      "6",
+      "7"
+    ]
+  },
+  "compliance_checklist_templates": {
+    "high_risk_provider_checklist": [
+      {
+        "item": "Risk management system documented and operational",
+        "article": "9"
+      },
+      {
+        "item": "Data governance framework in place; datasets validated",
+        "article": "10"
+      },
+      {
+        "item": "Technical documentation complete (Annex IV content)",
+        "article": "11"
+      },
+      {
+        "item": "Automatic logging capability implemented",
+        "article": "12"
+      },
+      {
+        "item": "Instructions for use prepared for deployers (Article 13 requirements — no separate Annex in final Act)",
+        "article": "13"
+      },
+      {
+        "item": "Human oversight measures designed in",
+        "article": "14"
+      },
+      {
+        "item": "Accuracy, robustness and cybersecurity tested and documented",
+        "article": "15"
+      },
+      {
+        "item": "Quality management system established",
+        "article": "17"
+      },
+      {
+        "item": "10-year documentation retention policy",
+        "article": "18"
+      },
+      {
+        "item": "Conformity assessment completed (self or notified body)",
+        "article": "43"
+      },
+      {
+        "item": "EU Declaration of Conformity signed (Annex V)",
+        "article": "47"
+      },
+      {
+        "item": "CE marking affixed",
+        "article": "48"
+      },
+      {
+        "item": "Registered in EU database (Annex VIII)",
+        "article": "49"
+      },
+      {
+        "item": "Post-market monitoring plan in place per Article 72 (Annex IX contains CE marking rules — it is not the post-market monitoring template)",
+        "article": "72"
+      }
+    ],
+    "high_risk_deployer_checklist": [
+      {
+        "item": "Use AI system strictly per provider instructions",
+        "article": "26(1)"
+      },
+      {
+        "item": "Assign trained persons for human oversight",
+        "article": "26(2)"
+      },
+      {
+        "item": "Monitor system in operation for anomalies",
+        "article": "26(3)"
+      },
+      {
+        "item": "Retain automatically generated logs minimum 6 months",
+        "article": "26(5)"
+      },
+      {
+        "item": "Inform provider of incidents or risks identified",
+        "article": "26(5)"
+      },
+      {
+        "item": "Notify workers/representatives if workplace HR AI used",
+        "article": "26(6)"
+      },
+      {
+        "item": "Conduct fundamental rights impact assessment (if required)",
+        "article": "27"
+      },
+      {
+        "item": "Register in EU database (if required)",
+        "article": "49(2)"
+      }
+    ],
+    "gpai_provider_checklist": [
+      {
+        "item": "Technical documentation per Annex XI",
+        "article": "53"
+      },
+      {
+        "item": "Downstream provider information sheet per Annex XII",
+        "article": "53"
+      },
+      {
+        "item": "Training data copyright policy published",
+        "article": "53"
+      },
+      {
+        "item": "Registered in EU database",
+        "article": "53"
+      },
+      {
+        "item": "If systemic risk: adversarial testing / red-team completed",
+        "article": "55"
+      },
+      {
+        "item": "If systemic risk: serious incident reporting mechanism in place",
+        "article": "55"
+      },
+      {
+        "item": "If systemic risk: cybersecurity measures implemented",
+        "article": "55"
+      }
+    ]
+  }
+}
