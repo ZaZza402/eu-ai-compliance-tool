@@ -87,25 +87,19 @@ export async function POST(req: Request) {
   try {
     switch (type) {
       case "user.created": {
-        await db.$transaction([
-          db.user.create({
-            data: {
-              id: data.id,
-              email: getPrimaryEmail(data),
-              firstName: data.first_name,
-              lastName: data.last_name,
-              imageUrl: data.image_url,
-              credits: 3, // 3 free analyses on sign-up
-            },
-          }),
-          db.creditEvent.create({
-            data: {
-              userId: data.id,
-              type: "signup",
-              amount: 3,
-            },
-          }),
-        ]);
+        // Credits start at 0 — they are granted on first analyze call
+        // after an IP-based abuse check (see /api/analyze).
+        await db.user.create({
+          data: {
+            id: data.id,
+            email: getPrimaryEmail(data),
+            firstName: data.first_name,
+            lastName: data.last_name,
+            imageUrl: data.image_url,
+            credits: 0,
+            freeCreditsGranted: false,
+          },
+        });
         console.log(`[clerk-webhook] User created: ${data.id}`);
         break;
       }
@@ -119,7 +113,8 @@ export async function POST(req: Request) {
             firstName: data.first_name,
             lastName: data.last_name,
             imageUrl: data.image_url,
-            credits: 3,
+            credits: 0,
+            freeCreditsGranted: false,
           },
           update: {
             email: getPrimaryEmail(data),

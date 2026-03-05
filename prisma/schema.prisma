@@ -16,19 +16,22 @@ datasource db {
 // Synced from Clerk via webhook on user.created / user.updated / user.deleted
 // ----------------------------------------------------------------------------
 model User {
-  id           String        @id           // Clerk user ID (user_...)
-  email        String        @unique
-  firstName    String?
-  lastName     String?
-  imageUrl     String?
-  credits      Int           @default(3)   // 3 free analyses on sign-up
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id                 String        @id           // Clerk user ID (user_...)
+  email              String        @unique
+  firstName          String?
+  lastName           String?
+  imageUrl           String?
+  credits            Int           @default(0)   // 0 until first-use IP check grants them
+  signupIp           String?                     // IP captured on first analyze call
+  freeCreditsGranted Boolean       @default(false) // Has the deferred credit grant run?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
 
   analyses     Analysis[]
   transactions Transaction[]
   creditEvents CreditEvent[]
 
+  @@index([signupIp])   // For fast IP-abuse lookups
   @@map("users")
 }
 
