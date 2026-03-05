@@ -67,7 +67,7 @@ export default function HealthcareAIPage() {
 
         {/* Header */}
         <div className="mb-10">
-          <div className="mb-3 inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+          <div className="mb-3 inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-950 dark:bg-orange-900/30 dark:text-orange-200">
             High Risk — Annex III, Point 5
           </div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -86,10 +86,10 @@ export default function HealthcareAIPage() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-orange-600 dark:text-orange-400" />
             <div>
-              <h2 className="font-semibold text-orange-900 dark:text-orange-200">
+              <h2 className="font-semibold text-foreground">
                 Affected systems under Annex III(5)
               </h2>
-              <ul className="mt-2 space-y-1 text-sm text-orange-800 dark:text-orange-300">
+              <ul className="mt-2 space-y-1 text-sm text-foreground/80">
                 {[
                   "AI-assisted diagnostic imaging and pathology tools",
                   "Clinical decision support systems (CDSS)",

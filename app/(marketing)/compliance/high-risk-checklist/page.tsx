@@ -124,7 +124,7 @@ export default function HighRiskChecklistPage() {
 
           <div className="rounded-lg border border-border bg-card p-5">
             <div className="mb-2 flex items-center gap-2">
-              <span className="rounded bg-orange-100 px-2 py-0.5 text-xs font-bold text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+              <span className="rounded bg-orange-100 px-2 py-0.5 text-xs font-bold text-orange-950 dark:bg-orange-900/30 dark:text-orange-200">
                 Track 2
               </span>
               <h3 className="font-semibold">

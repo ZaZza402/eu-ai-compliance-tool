@@ -268,14 +268,14 @@ export const RISK_COLORS: Record<
     dot: "bg-red-500",
   },
   high_risk: {
-    text: "text-orange-700 dark:text-orange-400",
+    text: "text-orange-800 dark:text-orange-400",
     pillBg: "bg-orange-500/10 dark:bg-orange-500/15",
     pillBorder: "border-orange-500/30 dark:border-orange-500/50",
     accent: "border-l-orange-500",
     dot: "bg-orange-500",
   },
   limited: {
-    text: "text-amber-700 dark:text-amber-400",
+    text: "text-amber-800 dark:text-amber-400",
     pillBg: "bg-amber-500/10 dark:bg-amber-500/15",
     pillBorder: "border-amber-500/30 dark:border-amber-500/50",
     accent: "border-l-amber-500",
@@ -320,7 +320,7 @@ export const TIER_COLORS: Record<
     pillBorder: "border-red-500/30 dark:border-red-500/50",
   },
   PRE_MARKET: {
-    text: "text-amber-700 dark:text-amber-400",
+    text: "text-amber-800 dark:text-amber-400",
     pillBg: "bg-amber-500/10 dark:bg-amber-500/15",
     pillBorder: "border-amber-500/30 dark:border-amber-500/50",
   },

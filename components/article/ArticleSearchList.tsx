@@ -92,52 +92,57 @@ export function ArticleSearchList({ items }: Props) {
 
       {/* Article groups */}
       <div className="space-y-10">
-        {[...groups.entries()].map(([chapterKey, { chapter_title, items: groupItems, isAnnex }]) => (
-          <section key={chapterKey} id={chapterKey.toLowerCase().replace(/\s+/g, "-")}>
-            <div className="mb-3 flex items-center gap-3 border-b border-border pb-2">
-              {isAnnex ? (
-                <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                  Annexes
-                </h2>
-              ) : (
-                <>
+        {[...groups.entries()].map(
+          ([chapterKey, { chapter_title, items: groupItems, isAnnex }]) => (
+            <section
+              key={chapterKey}
+              id={chapterKey.toLowerCase().replace(/\s+/g, "-")}
+            >
+              <div className="mb-3 flex items-center gap-3 border-b border-border pb-2">
+                {isAnnex ? (
                   <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                    {chapterKey}
+                    Annexes
                   </h2>
-                  <span className="text-xs text-muted-foreground">
-                    — {chapter_title}
-                  </span>
-                </>
-              )}
-              <span className="ml-auto rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                {groupItems.length}
-              </span>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {groupItems.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/articles/${item.id}`}
-                  className="group flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/5 hover:shadow-sm"
-                >
-                  {item.isAnnex ? (
-                    <span className="mt-0.5 flex h-6 w-9 shrink-0 items-center justify-center rounded bg-muted font-mono text-[10px] font-bold text-muted-foreground">
-                      <BookOpen className="h-3 w-3" />
-                      <span className="ml-0.5">{romanNumeral(item.id)}</span>
+                ) : (
+                  <>
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      {chapterKey}
+                    </h2>
+                    <span className="text-xs text-muted-foreground">
+                      — {chapter_title}
                     </span>
-                  ) : (
-                    <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-primary group-hover:bg-primary/20">
-                      {item.label}
+                  </>
+                )}
+                <span className="ml-auto rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                  {groupItems.length}
+                </span>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {groupItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/articles/${item.id}`}
+                    className="group flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/5 hover:shadow-sm"
+                  >
+                    {item.isAnnex ? (
+                      <span className="mt-0.5 flex h-6 w-9 shrink-0 items-center justify-center rounded bg-muted font-mono text-[10px] font-bold text-muted-foreground">
+                        <BookOpen className="h-3 w-3" />
+                        <span className="ml-0.5">{romanNumeral(item.id)}</span>
+                      </span>
+                    ) : (
+                      <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-primary group-hover:bg-primary/20">
+                        {item.label}
+                      </span>
+                    )}
+                    <span className="text-sm leading-snug text-foreground/90 group-hover:text-foreground">
+                      {item.title}
                     </span>
-                  )}
-                  <span className="text-sm leading-snug text-foreground/90 group-hover:text-foreground">
-                    {item.title}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        ))}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ),
+        )}
       </div>
     </div>
   );

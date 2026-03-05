@@ -58,7 +58,7 @@ export default async function DashboardLayout({
             <span
               className={
                 credits <= 2
-                  ? "font-bold text-amber-600 dark:text-amber-400"
+                  ? "font-bold text-amber-800 dark:text-amber-400"
                   : "font-bold text-foreground"
               }
             >
@@ -107,7 +107,7 @@ export default async function DashboardLayout({
             <span
               className={
                 credits <= 2
-                  ? "text-amber-600 dark:text-amber-400"
+                  ? "text-amber-800 dark:text-amber-400"
                   : "text-foreground"
               }
             >

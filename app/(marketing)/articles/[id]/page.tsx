@@ -78,7 +78,9 @@ export default async function ArticleDetailPage({ params }: Props) {
     : `Article ${article.article_number}`;
 
   // Reading time — ~200 wpm average
-  const wordCount = (article.full_text ?? "").split(/\s+/).filter(Boolean).length;
+  const wordCount = (article.full_text ?? "")
+    .split(/\s+/)
+    .filter(Boolean).length;
   const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
   const readingTime = `~${readingMinutes} min read`;
 
@@ -166,8 +168,7 @@ export default async function ArticleDetailPage({ params }: Props) {
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Regulation (EU) 2024/1689 · Official Journal of the EU, 12 July
-              2024 ·{" "}
-              <span className="tabular-nums">{readingTime}</span>
+              2024 · <span className="tabular-nums">{readingTime}</span>
             </p>
           </div>
 

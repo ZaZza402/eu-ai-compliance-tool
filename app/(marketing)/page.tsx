@@ -159,7 +159,7 @@ export default function LandingPage() {
                     <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                       Risk Classification
                     </p>
-                    <p className="text-sm font-bold text-orange-700 dark:text-orange-400">
+                    <p className="text-sm font-bold text-orange-800 dark:text-orange-400">
                       High-Risk — Annex III, §4(a)
                     </p>
                   </div>

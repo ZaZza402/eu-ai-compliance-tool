@@ -53,14 +53,14 @@ export const RISK_LEVELS = {
   high_risk: {
     label: "High-Risk",
     color:
-      "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
+      "bg-orange-100 text-orange-950 dark:bg-orange-900/30 dark:text-orange-200",
     dotColor: "bg-orange-500",
     description: "Requires full compliance with Articles 8–15.",
   },
   limited: {
     label: "Limited Transparency",
     color:
-      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+      "bg-yellow-100 text-yellow-900 dark:bg-yellow-900/30 dark:text-yellow-200",
     dotColor: "bg-yellow-500",
     description: "Transparency obligations under Article 50.",
   },
