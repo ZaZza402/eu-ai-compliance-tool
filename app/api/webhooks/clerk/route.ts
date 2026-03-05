@@ -87,8 +87,6 @@ export async function POST(req: Request) {
   try {
     switch (type) {
       case "user.created": {
-        // Credits start at 0 — they are granted on first analyze call
-        // after an IP-based abuse check (see /api/analyze).
         await db.user.create({
           data: {
             id: data.id,
@@ -96,8 +94,7 @@ export async function POST(req: Request) {
             firstName: data.first_name,
             lastName: data.last_name,
             imageUrl: data.image_url,
-            credits: 0,
-            freeCreditsGranted: false,
+            credits: 3,
           },
         });
         console.log(`[clerk-webhook] User created: ${data.id}`);
@@ -113,8 +110,7 @@ export async function POST(req: Request) {
             firstName: data.first_name,
             lastName: data.last_name,
             imageUrl: data.image_url,
-            credits: 0,
-            freeCreditsGranted: false,
+            credits: 3,
           },
           update: {
             email: getPrimaryEmail(data),
