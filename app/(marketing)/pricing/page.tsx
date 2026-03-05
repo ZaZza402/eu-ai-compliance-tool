@@ -176,12 +176,12 @@ export default function PricingPage() {
           </p>
           <p className="text-sm text-muted-foreground">
             Need to get in touch?{" "}
-            <a
-              href="mailto:support@caustic.app"
+            <Link
+              href="/contact"
               className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
             >
-              support@caustic.app
-            </a>
+              Contact us →
+            </Link>
           </p>
         </div>
       </div>

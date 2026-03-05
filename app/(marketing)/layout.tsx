@@ -60,6 +60,12 @@ export default function MarketingLayout({
               Feedback
             </Link>
             <Link
+              href="/contact"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Contact
+            </Link>
+            <Link
               href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689"
               target="_blank"
               rel="noopener noreferrer"
@@ -209,6 +215,11 @@ export default function MarketingLayout({
                 <li>
                   <Link href="/feedback" className="hover:text-foreground">
                     Feedback
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-foreground">
+                    Contact
                   </Link>
                 </li>
               </ul>

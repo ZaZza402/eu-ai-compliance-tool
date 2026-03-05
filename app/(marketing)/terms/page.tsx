@@ -488,12 +488,12 @@ export default function TermsPage() {
               at:
             </P>
             <P>
-              <a
-                href="mailto:support@caustic.app"
+              <Link
+                href="/contact"
                 className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
               >
-                support@caustic.app
-              </a>
+                Contact form →
+              </Link>
             </P>
             <P>We aim to respond to all enquiries within 5 business days.</P>
           </Section>

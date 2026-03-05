@@ -134,13 +134,13 @@ export default function PrivacyPage() {
           <Section id="controller" title="1. Who we are (Data Controller)">
             <P>
               The data controller for Regumatrix is the operator of this
-              service, reachable at{" "}
-              <a
-                href="mailto:support@caustic.app"
+              service, reachable via our{" "}
+              <Link
+                href="/contact"
                 className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
               >
-                support@caustic.app
-              </a>
+                contact form
+              </Link>
               . Where GDPR applies, you have the rights set out in Section 9
               below.
             </P>
@@ -494,13 +494,13 @@ export default function PrivacyPage() {
           <Section id="your-rights" title="9. Your rights (GDPR)">
             <P>
               Under GDPR you have the following rights regarding your personal
-              data. To exercise any right, email us at{" "}
-              <a
-                href="mailto:support@caustic.app"
+              data. To exercise any right, use our{" "}
+              <Link
+                href="/contact"
                 className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
               >
-                support@caustic.app
-              </a>
+                contact form
+              </Link>
               . We will respond within 30 days.
             </P>
             <Ul
@@ -604,13 +604,13 @@ export default function PrivacyPage() {
             <P>
               No method of transmission over the internet is 100% secure. If you
               believe your account has been compromised, contact us immediately
-              at{" "}
-              <a
-                href="mailto:support@caustic.app"
+              via our{" "}
+              <Link
+                href="/contact"
                 className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
               >
-                support@caustic.app
-              </a>
+                contact form
+              </Link>
               .
             </P>
           </Section>
@@ -643,12 +643,12 @@ export default function PrivacyPage() {
               contact us at:
             </P>
             <P>
-              <a
-                href="mailto:support@caustic.app"
+              <Link
+                href="/contact"
                 className="font-medium text-foreground underline underline-offset-2 hover:opacity-80"
               >
-                support@caustic.app
-              </a>
+                Contact form →
+              </Link>
             </P>
             <P>
               Supervisory authority: Data Protection Commission Ireland, 21
