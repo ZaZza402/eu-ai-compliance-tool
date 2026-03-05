@@ -164,6 +164,43 @@ function LoadingState({ step }: { step: number }) {
 }
 
 // ---------------------------------------------------------------------------
+// Scenario starter templates
+// ---------------------------------------------------------------------------
+
+const SCENARIOS: { label: string; template: string }[] = [
+  {
+    label: "HR & Recruitment",
+    template:
+      "We develop an AI recruitment tool that automatically scores and ranks job applicants based on their CV and cover letter. The system uses natural language processing to assess candidate suitability and outputs a ranked shortlist for each open role. It is licensed to employers across the EU. Human HR managers make the final hiring decision, but our ranked list determines which candidates get reviewed. We are the provider — we built and maintain the system.",
+  },
+  {
+    label: "Medical AI",
+    template:
+      "We are building an AI diagnostic assistance tool for radiologists. The system analyses medical imaging (X-rays and CT scans) and flags potential anomalies for the radiologist to review. It is deployed in EU hospitals. The radiologist retains clinical decision-making authority — the AI provides a second opinion but does not make autonomous clinical decisions. We are the software provider; the hospitals are the deployers.",
+  },
+  {
+    label: "Credit Scoring",
+    template:
+      "We provide an AI credit risk scoring service to banks and lenders across the EU. The system analyses applicant financial data and outputs a creditworthiness score that is the primary input to loan approval decisions. The final lending decision is made by the bank's loan officer, but our score heavily influences the outcome. We supply the model as a third-party service (provider) to the financial institutions (deployers).",
+  },
+  {
+    label: "Content Moderation",
+    template:
+      "We operate an online platform with an AI content moderation system that automatically removes or restricts posts flagged as violating our community guidelines. The system affects EU users whose content may be moderated without prior human review. We are both the developer and the operator of this system. Users can submit appeals handled by a human review team.",
+  },
+  {
+    label: "Customer Service Bot",
+    template:
+      "We have deployed a conversational AI assistant on our e-commerce platform to handle customer queries, process return requests, and resolve billing disputes for EU customers. The system can make binding decisions on refund eligibility based on our return policy. Customers can request escalation to a human agent at any point. We built and operate this system ourselves.",
+  },
+  {
+    label: "Biometric Access",
+    template:
+      "We are developing a facial recognition system for physical access control at office buildings and secure facilities. The system scans and identifies individuals at entry points and grants or denies access in real time. It is deployed in the EU and processes biometric data of employees and authorised visitors. We are the provider; the building operators are the deployers.",
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
@@ -368,6 +405,31 @@ export function AnalysisPage({ initialCredits }: Props) {
               <Wand2 className="h-3 w-3" />
               Guided wizard
             </button>
+          </div>
+
+          {/* Scenario starter chips */}
+          <div className="mb-2 flex flex-wrap items-center gap-1.5">
+            <span className="text-xs text-muted-foreground">Start from:</span>
+            {SCENARIOS.map((s) => (
+              <button
+                key={s.label}
+                type="button"
+                disabled={isLoading}
+                onClick={() =>
+                  setValue("description", s.template, {
+                    shouldValidate: false,
+                    shouldDirty: true,
+                  })
+                }
+                className={cn(
+                  "rounded-full border border-border px-2.5 py-0.5 text-xs font-medium",
+                  "text-muted-foreground transition-colors hover:border-foreground/40 hover:bg-muted hover:text-foreground",
+                  "disabled:pointer-events-none disabled:opacity-50",
+                )}
+              >
+                {s.label}
+              </button>
+            ))}
           </div>
           <textarea
             id="description"

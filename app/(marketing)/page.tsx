@@ -37,23 +37,38 @@ export default function LandingPage() {
 
         <div className="container mx-auto max-w-7xl px-4 text-center">
           {/* Badge */}
-          <div className="mb-6 flex justify-center">
+          <div className="mb-8 flex justify-center">
             <div className="inline-flex max-w-[90vw] items-start gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium leading-snug text-muted-foreground">
               <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
-              Grounded in the full 113-article corpus — Regulation EU 2024/1689
+              Regulation (EU) 2024/1689 — full 113-article corpus
             </div>
           </div>
 
           <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Know your EU AI Act obligations{" "}
-            <span className="text-muted-foreground">before you ship.</span>
+            Is your AI system compliant{" "}
+            <span className="text-muted-foreground">with the EU AI Act?</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Describe your AI system. Get an instant, article-grounded compliance
-            analysis: risk classification, operator role, mandatory obligations,
-            and conformity requirements — all cited to the actual regulation.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
+            Describe what your system does. Get risk classification, your exact
+            article obligations, and required actions — every finding cited to
+            the actual regulation. In under a minute.
           </p>
+
+          {/* Quick trust stats */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+            {[
+              "Full 113-article corpus",
+              "7-section structured report",
+              "Results in ~30 seconds",
+              "3 free analyses — no card needed",
+            ].map((s) => (
+              <span key={s} className="flex items-center gap-1.5">
+                <span className="h-1 w-1 rounded-full bg-muted-foreground/40" />
+                {s}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <SignedOut>
@@ -135,19 +150,33 @@ export default function LandingPage() {
       <section className="bg-muted/20 py-20">
         <div className="container mx-auto max-w-7xl px-4">
           <h2 className="mb-3 text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            What you get
+            See it in action
           </h2>
-          <p className="mb-12 text-center text-sm text-muted-foreground">
-            A structured, article-grounded report — risk classification,
-            obligations, key actions, timeline, and penalty exposure.
+          <p className="mb-1 text-center text-sm text-muted-foreground">
+            Real output from a 12-word description.
+          </p>
+          <p className="mb-12 text-center text-xs text-muted-foreground">
+            More specific input → more precise obligations, more targeted
+            actions.
           </p>
 
           <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border bg-card shadow-md">
             {/* Sample banner */}
             <div className="border-b border-border bg-muted/50 px-5 py-2.5">
               <span className="text-xs font-medium text-muted-foreground">
-                ✦ Example — AI-powered CV screening tool deployed in the EU
+                ✦ Sample output — 12-word description
               </span>
+            </div>
+
+            {/* Description trigger */}
+            <div className="flex items-start gap-3 border-b border-border bg-muted/30 px-5 py-3">
+              <div className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                Input
+              </div>
+              <p className="text-sm italic text-muted-foreground">
+                &ldquo;An AI tool that screens and ranks job applicant CVs for
+                employers in the EU.&rdquo;
+              </p>
             </div>
 
             <div className="space-y-4 p-5">
@@ -269,15 +298,21 @@ export default function LandingPage() {
                     penalties of up to €30 000 000 or 6% of total worldwide
                     annual turnover (Art. 99(3))…
                   </p>
-                  <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-card to-transparent" />
                 </div>
                 <div className="h-6" />
               </div>
 
-              <p className="text-center text-xs text-muted-foreground/50">
-                Sample output — your analysis is generated from your own
-                description.
-              </p>
+              <div className="rounded-xl border border-orange-200 bg-orange-50/60 px-4 py-3 dark:border-orange-500/20 dark:bg-orange-900/10">
+                <p className="text-xs font-semibold text-orange-900 dark:text-orange-300">
+                  12 words in. 7 structured sections out.
+                </p>
+                <p className="mt-0.5 text-xs leading-relaxed text-orange-800/80 dark:text-orange-400/80">
+                  Your deployment context, sector, decision type, and oversight
+                  level yield significantly more precise obligations, article
+                  citations, and action timelines.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -311,6 +346,138 @@ export default function LandingPage() {
                 <span className={cn(RISK_COLORS[level].text, "opacity-60")}>
                   — {RISK_PILL_ARTICLES[level]}
                 </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Compliance Deadline Timeline                                         */}
+      {/* ------------------------------------------------------------------ */}
+      <section className="py-20">
+        <div className="container mx-auto max-w-2xl px-4">
+          <h2 className="mb-3 text-center text-2xl font-bold tracking-tight sm:text-3xl">
+            The clock is already running
+          </h2>
+          <p className="mb-12 text-center text-sm text-muted-foreground">
+            EU AI Act obligations are phased in over three years. If your system
+            is high-risk, the full compliance deadline is five months away.
+          </p>
+
+          <div className="relative">
+            {[
+              {
+                date: "Aug 1, 2024",
+                title: "Regulation enters into force",
+                detail:
+                  "Regulation (EU) 2024/1689 published in the Official Journal. The legal framework is live.",
+                status: "done" as const,
+                urgent: false,
+              },
+              {
+                date: "Feb 2, 2025",
+                title: "Prohibited AI — immediate ban",
+                detail:
+                  "All AI practices listed in Article 5 are forbidden, including certain biometric categorisation and real-time remote biometric ID in public spaces.",
+                status: "done" as const,
+                urgent: false,
+              },
+              {
+                date: "Aug 2, 2025",
+                title: "GPAI model obligations apply",
+                detail:
+                  "Providers of general-purpose AI models must comply with transparency, copyright, and systemic-risk obligations (Art. 51–55).",
+                status: "done" as const,
+                urgent: false,
+              },
+              {
+                date: "Today — Mar 2026",
+                title: "You are here",
+                detail: null,
+                status: "current" as const,
+                urgent: false,
+              },
+              {
+                date: "Aug 2, 2026",
+                title: "High-risk AI: full obligations",
+                detail:
+                  "Risk management system, data governance, technical documentation, human oversight, EU database registration — all mandatory. Penalties up to €30M or 6% of global turnover.",
+                status: "upcoming" as const,
+                urgent: true,
+              },
+              {
+                date: "Aug 2, 2027",
+                title: "Legacy high-risk systems",
+                detail:
+                  "High-risk AI already on the market before August 2024 must comply by this extended deadline.",
+                status: "upcoming" as const,
+                urgent: false,
+              },
+            ].map((item, index, arr) => (
+              <div key={index} className="relative flex gap-5">
+                {/* Connector line */}
+                {index < arr.length - 1 && (
+                  <div className="absolute left-2.75 top-6 h-full w-px bg-border" />
+                )}
+                {/* Status dot */}
+                <div
+                  className={`relative z-10 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 ${
+                    item.status === "done"
+                      ? "border-green-500 bg-green-500"
+                      : item.status === "current"
+                        ? "border-primary bg-primary"
+                        : item.urgent
+                          ? "border-orange-500 bg-card"
+                          : "border-border bg-card"
+                  }`}
+                >
+                  {item.status === "done" && (
+                    <span className="text-[10px] font-bold text-white">✓</span>
+                  )}
+                  {item.status === "current" && (
+                    <span className="h-2 w-2 rounded-full bg-white" />
+                  )}
+                </div>
+                {/* Content */}
+                <div className="pb-8">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={`text-xs font-semibold ${
+                        item.status === "done"
+                          ? "text-muted-foreground"
+                          : item.status === "current"
+                            ? "text-primary"
+                            : item.urgent
+                              ? "text-orange-600 dark:text-orange-400"
+                              : "text-muted-foreground"
+                      }`}
+                    >
+                      {item.date}
+                    </span>
+                    {item.urgent && (
+                      <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">
+                        ~5 months away
+                      </span>
+                    )}
+                  </div>
+                  <p
+                    className={`mt-0.5 text-sm font-semibold ${
+                      item.status === "done"
+                        ? "text-muted-foreground"
+                        : item.status === "current"
+                          ? "text-primary"
+                          : "text-foreground"
+                    }`}
+                  >
+                    {item.title}
+                  </p>
+                  {item.detail && (
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      {item.detail}
+                    </p>
+                  )}
+                </div>
               </div>
             ))}
           </div>

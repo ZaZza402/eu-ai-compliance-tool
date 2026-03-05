@@ -162,8 +162,11 @@ export default function PricingPage() {
         {/* Value anchor row */}
         <div className="mt-8 rounded-xl border border-border bg-muted/40 px-6 py-4">
           <p className="text-center text-sm text-muted-foreground">
-            <span className="font-medium text-foreground">All packs, same full tool.</span>{" "}
-            No locked features, no tiers, no subscriptions. The only difference is how many analyses you get and the price per run.
+            <span className="font-medium text-foreground">
+              All packs, same full tool.
+            </span>{" "}
+            No locked features, no tiers, no subscriptions. The only difference
+            is how many analyses you get and the price per run.
           </p>
         </div>
 
