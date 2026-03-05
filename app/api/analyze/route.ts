@@ -73,14 +73,11 @@ export async function POST(req: Request) {
 
   const { description } = parsed.data;
 
-  // ── User fetch + query expansion (parallel) ───────────────────────────────
-  // The free-credit grant now happens at page render (analyze/page.tsx) so the
-  // user always sees their correct balance on arrival. Here we just look up
-  // the existing credit count.
+  // ── Credit check + query expansion (parallel) ─────────────────────────────
   const [dbUser, expandedTerms] = await Promise.all([
     db.user.upsert({
       where: { id: userId },
-      create: { id: userId, email: `${userId}@pending.clerk`, credits: 0, freeCreditsGranted: true },
+      create: { id: userId, email: `${userId}@pending.clerk`, credits: 3 },
       update: {},
       select: { credits: true },
     }),

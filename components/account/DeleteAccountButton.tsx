@@ -1,17 +1,13 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useClerk } from "@clerk/nextjs";
 import { deleteAccount } from "@/app/actions/deleteAccount";
 import { AlertTriangle, Trash2, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/**
- * DeleteAccountButton
- * ====================
- * Two-step confirmation: first click opens a modal, second click executes deletion.
- * Rendered on the Settings page in a "Danger Zone" section.
- */
 export function DeleteAccountButton() {
+  const { signOut } = useClerk();
   const [open, setOpen] = useState(false);
   const [confirmed, setConfirmed] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -24,10 +20,14 @@ export function DeleteAccountButton() {
     setError(null);
     startTransition(async () => {
       const result = await deleteAccount();
-      if (result && "error" in result) {
+      if ("error" in result) {
         setError(result.error);
+        return;
       }
-      // On success, server redirects to "/" — no client action needed
+      // Account deleted — sign out client-side so the JWT is cleared before
+      // redirecting. Without this the user lands on dashboard with a stale
+      // session and gets a crash.
+      await signOut({ redirectUrl: "/" });
     });
   }
 
