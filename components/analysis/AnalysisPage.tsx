@@ -312,7 +312,7 @@ export function AnalysisPage({ initialCredits }: Props) {
             className={cn(
               "text-2xl font-bold",
               credits <= 2 && credits > 0
-                ? "text-amber-700 dark:text-amber-400"
+                ? "text-amber-900 dark:text-amber-400"
                 : credits === 0
                   ? "text-destructive"
                   : "",

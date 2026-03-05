@@ -116,8 +116,19 @@ export default function MarketingLayout({
             <div>
               <p className="mb-3 font-semibold text-foreground">Regulation</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/articles" className="hover:text-foreground">All Articles</Link></li>
-                <li><Link href="/articles/Annex_III" className="hover:text-foreground">Annex III</Link></li>
+                <li>
+                  <Link href="/articles" className="hover:text-foreground">
+                    All Articles
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/articles/Annex_III"
+                    className="hover:text-foreground"
+                  >
+                    Annex III
+                  </Link>
+                </li>
                 <li>
                   <a
                     href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689"
@@ -131,37 +142,111 @@ export default function MarketingLayout({
               </ul>
             </div>
             <div>
-              <p className="mb-3 font-semibold text-foreground">Compliance Guides</p>
+              <p className="mb-3 font-semibold text-foreground">
+                Compliance Guides
+              </p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/compliance/high-risk-checklist" className="hover:text-foreground">High-Risk Checklist</Link></li>
-                <li><Link href="/compliance/healthcare-ai" className="hover:text-foreground">Healthcare AI</Link></li>
-                <li><Link href="/compliance/hr-recruitment" className="hover:text-foreground">HR &amp; Recruitment</Link></li>
-                <li><Link href="/compliance/financial-services" className="hover:text-foreground">Financial Services</Link></li>
-                <li><Link href="/compliance/gpai" className="hover:text-foreground">GPAI / Foundation Models</Link></li>
+                <li>
+                  <Link
+                    href="/compliance/high-risk-checklist"
+                    className="hover:text-foreground"
+                  >
+                    High-Risk Checklist
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/compliance/healthcare-ai"
+                    className="hover:text-foreground"
+                  >
+                    Healthcare AI
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/compliance/hr-recruitment"
+                    className="hover:text-foreground"
+                  >
+                    HR &amp; Recruitment
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/compliance/financial-services"
+                    className="hover:text-foreground"
+                  >
+                    Financial Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/compliance/gpai"
+                    className="hover:text-foreground"
+                  >
+                    GPAI / Foundation Models
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <p className="mb-3 font-semibold text-foreground">Product</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/pricing" className="hover:text-foreground">Pricing</Link></li>
-                <li><Link href="/sign-up" className="hover:text-foreground">Get Started Free</Link></li>
-                <li><Link href="/about" className="hover:text-foreground">About</Link></li>
-                <li><Link href="/feedback" className="hover:text-foreground">Feedback</Link></li>
+                <li>
+                  <Link href="/pricing" className="hover:text-foreground">
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/sign-up" className="hover:text-foreground">
+                    Get Started Free
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-foreground">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/feedback" className="hover:text-foreground">
+                    Feedback
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <p className="mb-3 font-semibold text-foreground">Legal</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-foreground">Terms of Use</Link></li>
+                <li>
+                  <Link href="/privacy" className="hover:text-foreground">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="hover:text-foreground">
+                    Terms of Use
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
 
           {/* Bottom bar */}
           <div className="border-t border-border/40 pt-6 text-center text-xs text-muted-foreground">
-            <p>Regumatrix — AI compliance powered by <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground">Regulation (EU) 2024/1689</a></p>
-            <p className="mt-1">This tool is informational only and does not constitute legal advice.</p>
+            <p>
+              Regumatrix — AI compliance powered by{" "}
+              <a
+                href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-foreground"
+              >
+                Regulation (EU) 2024/1689
+              </a>
+            </p>
+            <p className="mt-1">
+              This tool is informational only and does not constitute legal
+              advice.
+            </p>
           </div>
         </div>
       </footer>

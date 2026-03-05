@@ -199,7 +199,7 @@ export function ProseSection({
 export function MarkdownProse({ content }: { content: string }) {
   return (
     <div
-      className="prose prose-sm dark:prose-invert max-w-none break-words [&_li]:text-sm [&_p]:text-sm [&_pre]:overflow-x-auto [&_strong]:font-semibold [&_table]:overflow-x-auto"
+      className="prose prose-sm dark:prose-invert max-w-none wrap-break-word [&_li]:text-sm [&_p]:text-sm [&_pre]:overflow-x-auto [&_strong]:font-semibold [&_table]:overflow-x-auto"
       dangerouslySetInnerHTML={{ __html: marked.parse(content) as string }}
     />
   );
@@ -291,7 +291,7 @@ function TimelineSection({
               <p className="text-sm font-semibold text-foreground">
                 {entry.date}
                 {entry.alreadyInForce && (
-                  <span className="ml-2 text-[10px] font-medium text-green-600 dark:text-green-400">
+                  <span className="ml-2 text-[10px] font-medium text-green-700 dark:text-green-400">
                     ✓ already in force
                   </span>
                 )}
@@ -316,8 +316,8 @@ function ClarificationsBanner({ items }: { items: string[] }) {
   return (
     <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 dark:border-amber-500/50 dark:bg-amber-500/15">
       <div className="mb-2 flex items-center gap-2">
-        <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
-        <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">
+        <AlertTriangle className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-400" />
+        <p className="text-sm font-semibold text-amber-900 dark:text-amber-300">
           Analysis limitations — key information was missing
         </p>
       </div>
@@ -325,14 +325,14 @@ function ClarificationsBanner({ items }: { items: string[] }) {
         {items.map((item, i) => (
           <li
             key={i}
-            className="flex gap-2 text-xs text-amber-700 dark:text-amber-400"
+            className="flex gap-2 text-xs text-amber-900 dark:text-amber-400"
           >
             <span className="shrink-0">•</span>
             <span>{item}</span>
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-xs text-amber-600 dark:text-amber-500">
+      <p className="mt-2 text-xs text-amber-800 dark:text-amber-500">
         Re-run the analysis with a more detailed description for a more accurate
         result.
       </p>

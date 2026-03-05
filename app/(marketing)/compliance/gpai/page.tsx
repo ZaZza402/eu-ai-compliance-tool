@@ -60,7 +60,7 @@ export default function GPAIPage() {
         </nav>
 
         <div className="mb-10">
-          <div className="mb-3 inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+          <div className="mb-3 inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-950 dark:bg-blue-900/30 dark:text-blue-200">
             GPAI — Articles 51–55
           </div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -96,10 +96,10 @@ export default function GPAIPage() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700 dark:text-amber-400" />
             <div>
-              <h2 className="font-semibold text-amber-900 dark:text-amber-200">
+              <h2 className="font-semibold text-foreground">
                 Systemic risk threshold
               </h2>
-              <p className="mt-1 text-sm text-amber-800 dark:text-amber-300">
+              <p className="mt-1 text-sm text-foreground/80 dark:text-foreground/80">
                 A GPAI model is presumed to pose <strong>systemic risk</strong>{" "}
                 if it was trained using a compute of more than{" "}
                 <strong>10²⁵ floating-point operations (FLOPs)</strong> (Article

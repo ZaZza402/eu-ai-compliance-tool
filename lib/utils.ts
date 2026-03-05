@@ -46,7 +46,7 @@ export function truncate(text: string, maxLength: number): string {
 export const RISK_LEVELS = {
   prohibited: {
     label: "Prohibited",
-    color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+    color: "bg-red-100 text-red-950 dark:bg-red-900/30 dark:text-red-200",
     dotColor: "bg-red-500",
     description: "This AI practice is banned under Article 5.",
   },
@@ -66,14 +66,14 @@ export const RISK_LEVELS = {
   },
   gpai: {
     label: "GPAI",
-    color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+    color: "bg-blue-100 text-blue-950 dark:bg-blue-900/30 dark:text-blue-200",
     dotColor: "bg-blue-500",
     description: "General-Purpose AI Model obligations (Articles 51–55).",
   },
   minimal: {
     label: "Minimal Risk",
     color:
-      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+      "bg-green-100 text-green-950 dark:bg-green-900/30 dark:text-green-200",
     dotColor: "bg-green-500",
     description: "No mandatory obligations. Voluntary codes encouraged.",
   },

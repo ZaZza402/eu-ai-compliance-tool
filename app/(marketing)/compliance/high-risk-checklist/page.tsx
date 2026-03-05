@@ -193,10 +193,10 @@ export default function HighRiskChecklistPage() {
           <div className="flex items-start gap-3">
             <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-green-600" />
             <div>
-              <h2 className="font-semibold text-green-900 dark:text-green-200">
+              <h2 className="font-semibold text-foreground">
                 Article 6(3) exemptions
               </h2>
-              <p className="mt-1 text-sm text-green-800 dark:text-green-300">
+              <p className="mt-1 text-sm text-foreground/80">
                 Even if your system falls in an Annex III domain, it may be
                 exempt if: it performs a narrow procedural task, does not
                 influence human decisions, detects patterns in existing data for

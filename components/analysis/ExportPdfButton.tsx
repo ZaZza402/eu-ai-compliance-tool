@@ -96,7 +96,7 @@ export function ExportPdfButton({ analysisId }: Props) {
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           isLoading && "cursor-not-allowed opacity-60",
           isSuccess &&
-            "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+            "bg-green-100 text-green-950 dark:bg-green-900/30 dark:text-green-200",
           isError && "bg-destructive/10 text-destructive",
           !isLoading &&
             !isSuccess &&
