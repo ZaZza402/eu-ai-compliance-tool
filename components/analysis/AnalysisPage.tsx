@@ -311,7 +311,11 @@ export function AnalysisPage({ initialCredits }: Props) {
           <div
             className={cn(
               "text-2xl font-bold",
-              credits <= 2 && credits > 0 ? "text-amber-600 dark:text-amber-400" : credits === 0 ? "text-destructive" : "",
+              credits <= 2 && credits > 0
+                ? "text-amber-700 dark:text-amber-400"
+                : credits === 0
+                  ? "text-destructive"
+                  : "",
             )}
           >
             {credits}
@@ -330,14 +334,14 @@ export function AnalysisPage({ initialCredits }: Props) {
 
       {/* Low-credit warning */}
       {credits > 0 && credits <= 2 && (
-        <div className="flex items-center justify-between gap-4 rounded-lg border border-amber-500/40 bg-amber-50 px-4 py-2.5 text-sm dark:bg-amber-900/20">
-          <span className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-amber-400 bg-amber-100 px-4 py-2.5 text-sm dark:border-amber-500/40 dark:bg-amber-900/20">
+          <span className="flex items-center gap-2 text-amber-900 dark:text-amber-300">
             <AlertTriangle className="h-4 w-4 shrink-0" />
             You only have {credits} credit{credits !== 1 ? "s" : ""} left.
           </span>
           <Link
             href="/credits"
-            className="shrink-0 text-xs font-semibold text-amber-700 underline underline-offset-2 hover:text-amber-900 dark:text-amber-400"
+            className="shrink-0 text-xs font-semibold text-amber-900 underline underline-offset-2 hover:text-amber-950 dark:text-amber-400 dark:hover:text-amber-200"
           >
             Top up →
           </Link>
