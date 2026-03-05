@@ -9,24 +9,36 @@ export default async function AnalyzePage() {
   const user = await currentUser();
   if (!user) return null;
 
-  // Upsert ensures the user exists in DB even if Clerk webhook was delayed.
-  // credits defaults to 0 — the free credit grant happens in /api/analyze
-  // after an IP-based abuse check on first submission.
-  // Upsert ensures the user row exists even if the Clerk webhook was delayed.
-  // credits: 0 is safe — the deferred IP-based grant runs in /api/analyze on
-  // first submission, not here on page load.
-  const dbUser = await db.user.upsert({
-    where: { id: user.id },
-    create: {
-      id: user.id,
-      email: user.emailAddresses[0]?.emailAddress ?? "",
-      firstName: user.firstName,
-      lastName: user.lastName,
-      credits: 0,
-    },
-    update: {},
-    select: { credits: true },
-  });
+  const email = user.emailAddresses[0]?.emailAddress ?? "";
 
-  return <AnalysisPage initialCredits={dbUser.credits} />;
+  // Try to upsert the user row. If the email already exists under a different
+  // Clerk ID (e.g. a dev-era test account with the same email), the unique
+  // constraint on `email` throws a P2002. In that case fall back to a
+  // findFirst by email so the page still renders — the API route handles
+  // proper user resolution on first submission.
+  let credits = 0;
+  try {
+    const dbUser = await db.user.upsert({
+      where: { id: user.id },
+      create: {
+        id: user.id,
+        email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        credits: 0,
+      },
+      update: {},
+      select: { credits: true },
+    });
+    credits = dbUser.credits;
+  } catch {
+    // Unique email conflict — find whichever row owns this email
+    const existing = await db.user.findFirst({
+      where: { email },
+      select: { credits: true },
+    });
+    credits = existing?.credits ?? 0;
+  }
+
+  return <AnalysisPage initialCredits={credits} />;
 }
