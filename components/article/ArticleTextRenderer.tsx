@@ -13,6 +13,7 @@
  */
 
 import { cn } from "@/lib/utils";
+import { DefinitionSearchList } from "./DefinitionSearchList";
 
 interface Props {
   text: string;
@@ -34,7 +35,10 @@ function cleanText(raw: string): string {
 function splitLettered(
   text: string,
 ): Array<{ type: "text" | "letter"; label?: string; body: string }> {
-  const parts = text.split(/(?=^\([a-z]{1,2}\)\s)/m).map((s) => s.trim()).filter(Boolean);
+  const parts = text
+    .split(/(?=^\([a-z]{1,2}\)\s)/m)
+    .map((s) => s.trim())
+    .filter(Boolean);
   if (parts.length <= 1) return [{ type: "text", body: text }];
   return parts.map((part) => {
     const match = part.match(/^\(([a-z]{1,2})\)\s*([\s\S]*)/);
@@ -77,37 +81,7 @@ export function ArticleTextRenderer({ text, className }: Props) {
 
     return (
       <div className={cn("space-y-1", className)}>
-        <p className="mb-4 text-sm leading-relaxed text-foreground/90">
-          {preamble}
-        </p>
-        <div className="space-y-3">
-          {entries.map((entry, i) => (
-            <div
-              key={i}
-              className={cn(
-                "flex gap-3 rounded-lg px-3 py-2",
-                entry.body
-                  ? "bg-muted/40"
-                  : "border border-dashed border-border bg-transparent",
-              )}
-            >
-              {entry.num && (
-                <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-[11px] font-bold text-primary self-start">
-                  ({entry.num})
-                </span>
-              )}
-              {entry.body ? (
-                <p className="text-sm leading-relaxed text-foreground/90 whitespace-pre-line">
-                  {entry.body}
-                </p>
-              ) : (
-                <p className="text-xs italic text-muted-foreground">
-                  Definition not captured in source data.
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+        <DefinitionSearchList preamble={preamble} definitions={entries} />
       </div>
     );
   }
@@ -120,7 +94,9 @@ export function ArticleTextRenderer({ text, className }: Props) {
     return (
       <div className={cn("space-y-1", className)}>
         {first.type === "text" && first.body && (
-          <p className="text-sm leading-relaxed text-foreground/90">{first.body}</p>
+          <p className="text-sm leading-relaxed text-foreground/90">
+            {first.body}
+          </p>
         )}
         <ul className="ml-1 mt-1 space-y-1.5">
           {rest.map((seg, i) =>
@@ -134,8 +110,13 @@ export function ArticleTextRenderer({ text, className }: Props) {
                 </span>
               </li>
             ) : (
-              <li key={i} className="text-sm leading-relaxed text-foreground/90">{seg.body}</li>
-            )
+              <li
+                key={i}
+                className="text-sm leading-relaxed text-foreground/90"
+              >
+                {seg.body}
+              </li>
+            ),
           )}
         </ul>
       </div>

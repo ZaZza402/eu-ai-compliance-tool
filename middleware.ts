@@ -33,7 +33,6 @@ const isProtectedRoute = createRouteMatcher([
   "/api/export(.*)",
   "/api/share(.*)",
   "/api/credits(.*)",
-  "/api/webhook(?!/clerk)(.*)", // allow /api/webhooks/clerk
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

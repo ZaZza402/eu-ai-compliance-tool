@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { retriever } from "@/lib/retriever";
 import { ArticleTextRenderer } from "@/components/article/ArticleTextRenderer";
+import { ArticlePageClient } from "@/components/article/ArticlePageClient";
 import { ChevronLeft, ChevronRight, Scale } from "lucide-react";
 import fs from "fs";
 import path from "path";
@@ -71,6 +72,34 @@ export default async function ArticleDetailPage({ params }: Props) {
   const prevId = !isAnnex && articleNum > 1 ? String(articleNum - 1) : null;
   const nextId = !isAnnex && articleNum < 113 ? String(articleNum + 1) : null;
 
+  // Label shown in UI (e.g. "Article 6" or "Annex III")
+  const articleLabel = isAnnex
+    ? article.chapter
+    : `Article ${article.article_number}`;
+
+  // Reading time — ~200 wpm average
+  const wordCount = (article.full_text ?? "").split(/\s+/).filter(Boolean).length;
+  const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
+  const readingTime = `~${readingMinutes} min read`;
+
+  // Related articles — same chapter, exclude current, up to 4
+  const jsonDir = path.join(process.cwd(), "eu_ai_act_json");
+  const indexData = JSON.parse(
+    fs.readFileSync(path.join(jsonDir, "article_index.json"), "utf-8"),
+  ) as {
+    articles: Array<{ article: string; title: string; chapter: string }>;
+  };
+
+  const related = !isAnnex
+    ? indexData.articles
+        .filter(
+          (a) =>
+            a.chapter === article.chapter &&
+            a.article !== String(article.article_number),
+        )
+        .slice(0, 4)
+    : [];
+
   // JSON-LD for this specific article
   const jsonLd = {
     "@context": "https://schema.org",
@@ -94,6 +123,14 @@ export default async function ArticleDetailPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Sticky mini-bar + copy button (client) */}
+      <ArticlePageClient
+        fullText={article.full_text ?? ""}
+        articleLabel={articleLabel}
+        articleTitle={article.title}
+        readingTime={readingTime}
       />
 
       <div className="py-12">
@@ -121,9 +158,7 @@ export default async function ArticleDetailPage({ params }: Props) {
                 {article.chapter}
               </span>
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                {isAnnex
-                  ? article.chapter
-                  : `Article ${article.article_number}`}
+                {articleLabel}
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -131,7 +166,8 @@ export default async function ArticleDetailPage({ params }: Props) {
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Regulation (EU) 2024/1689 · Official Journal of the EU, 12 July
-              2024
+              2024 ·{" "}
+              <span className="tabular-nums">{readingTime}</span>
             </p>
           </div>
 
@@ -184,12 +220,35 @@ export default async function ArticleDetailPage({ params }: Props) {
             </div>
           )}
 
+          {/* Related articles */}
+          {related.length > 0 && (
+            <div className="mt-10">
+              <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                More from {article.chapter}
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {related.map((rel) => (
+                  <Link
+                    key={rel.article}
+                    href={`/articles/${rel.article}`}
+                    className="group rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 hover:bg-accent"
+                  >
+                    <span className="block font-mono text-[11px] text-primary">
+                      Article {rel.article}
+                    </span>
+                    <span className="mt-0.5 block text-sm font-medium group-hover:text-primary">
+                      {rel.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* CTA */}
           <div className="mt-12 rounded-xl border border-primary/20 bg-primary/5 p-6">
             <h2 className="mb-1 text-base font-semibold">
-              Does{" "}
-              {isAnnex ? article.chapter : `Article ${article.article_number}`}{" "}
-              apply to your AI system?
+              Does {articleLabel} apply to your AI system?
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
               Regumatrix analyses your specific AI system against all 113
