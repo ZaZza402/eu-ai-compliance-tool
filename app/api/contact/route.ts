@@ -1,14 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+ï»¿import { NextRequest, NextResponse } from "next/server";
 import { contactLimiter } from "@/lib/rate-limit";
 
-// nodemailer must be require()'d — ESM import causes "Unexpected token 'export'" in Next.js serverless
+// nodemailer must be require()'d -- ESM import causes "Unexpected token 'export'" in Next.js serverless
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const nodemailer = require("nodemailer");
 
-// ---------------------------------------------------------------------------
-// Config — only SMTP_USER (your email) and SMTP_PASS (password) needed.
-// Host and port are hard-coded for mail.alecsdesign.xyz.
-// ---------------------------------------------------------------------------
 const SMTP_USER = process.env.SMTP_USER ?? "info@alecsdesign.xyz";
 const SMTP_PASS = process.env.SMTP_PASS ?? "";
 const TO_EMAIL  = process.env.SMTP_USER ?? "info@alecsdesign.xyz";
@@ -22,11 +18,7 @@ const SUBJECT_LABELS: Record<string, string> = {
   partnership: "Partnership",
 };
 
-// ---------------------------------------------------------------------------
-// POST /api/contact
-// ---------------------------------------------------------------------------
 export async function POST(req: NextRequest) {
-  // Rate-limit by IP
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     req.headers.get("x-real-ip") ??
@@ -40,7 +32,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Parse body
   let body: Record<string, string>;
   try {
     body = await req.json();
@@ -60,35 +51,33 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Dev safety: skip send if password not configured
   if (!SMTP_PASS) {
-    console.warn("[contact] SMTP_PASS not set — skipping send (dev mode)");
+    console.warn("[contact] SMTP_PASS not set -- skipping send (dev mode)");
     return NextResponse.json({ ok: true, sent: false });
   }
 
   const label = SUBJECT_LABELS[category] ?? "Contact";
 
-  // --- Plain text ---
   const extras: string[] = [];
   if (company)  extras.push(`Company      : ${company}`);
   if (browser)  extras.push(`Browser / OS : ${browser}`);
   if (aiSystem) extras.push(`AI System    : ${aiSystem}`);
   if (orderId)  extras.push(`Order ID     : ${orderId}`);
 
+  const hr = "------------------------------------------------";
   const textBody = [
     `[Regumatrix] ${label}`,
-    "¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦",
+    hr,
     `From     : ${name} <${email}>`,
     `Category : ${label}`,
     ...(extras.length ? ["", ...extras] : []),
     "",
-    "¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦",
+    hr,
     message.trim(),
-    "¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦",
+    hr,
     "Reply directly to this email to reach the sender.",
   ].join("\n");
 
-  // --- HTML ---
   const safe = (s: string) =>
     s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -109,7 +98,7 @@ export async function POST(req: NextRequest) {
 <table width="100%" cellpadding="0" cellspacing="0"
   style="max-width:560px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e4e4e7">
   <tr><td style="background:#18181b;padding:20px 28px">
-    <p style="margin:0;color:#fff;font-size:17px;font-weight:700">?? Regumatrix</p>
+    <p style="margin:0;color:#fff;font-size:17px;font-weight:700">Regumatrix</p>
     <p style="margin:4px 0 0;color:#a1a1aa;font-size:12px">New message from the contact form</p>
   </td></tr>
   <tr><td style="padding:20px 28px 0">
@@ -143,7 +132,7 @@ export async function POST(req: NextRequest) {
     const transporter = nodemailer.createTransport({
       host:   "mail.alecsdesign.xyz",
       port:   587,
-      secure: false, // STARTTLS
+      secure: false,
       auth:   { user: SMTP_USER, pass: SMTP_PASS },
     });
 
