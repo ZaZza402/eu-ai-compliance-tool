@@ -41,7 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${article.chapter} — ${article.title}`
     : `Article ${article.article_number} — ${article.title}`;
 
-  const snippet = (article.full_text ?? "").slice(0, 200).replace(/\n/g, " ").trim();
+  const snippet = (article.full_text ?? "")
+    .slice(0, 200)
+    .replace(/\n/g, " ")
+    .trim();
 
   return {
     title: shortTitle,
@@ -118,14 +121,17 @@ export default async function ArticleDetailPage({ params }: Props) {
                 {article.chapter}
               </span>
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                {isAnnex ? article.chapter : `Article ${article.article_number}`}
+                {isAnnex
+                  ? article.chapter
+                  : `Article ${article.article_number}`}
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               {article.title}
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Regulation (EU) 2024/1689 · Official Journal of the EU, 12 July 2024
+              Regulation (EU) 2024/1689 · Official Journal of the EU, 12 July
+              2024
             </p>
           </div>
 
@@ -155,10 +161,11 @@ export default async function ArticleDetailPage({ params }: Props) {
 
             <div className="mt-8 border-t border-border pt-4">
               <p className="text-xs text-muted-foreground">
-                Source: Regulation (EU) 2024/1689 of the European Parliament and of the
-                Council — the EU Artificial Intelligence Act.
+                Source: Regulation (EU) 2024/1689 of the European Parliament and
+                of the Council — the EU Artificial Intelligence Act.
                 <br />
-                Published in the Official Journal of the European Union, 12 July 2024.
+                Published in the Official Journal of the European Union, 12 July
+                2024.
               </p>
             </div>
           </div>
@@ -192,12 +199,15 @@ export default async function ArticleDetailPage({ params }: Props) {
           {/* CTA */}
           <div className="mt-12 rounded-xl border border-primary/20 bg-primary/5 p-6">
             <h2 className="mb-1 text-base font-semibold">
-              Does {isAnnex ? article.chapter : `Article ${article.article_number}`} apply to your AI system?
+              Does{" "}
+              {isAnnex ? article.chapter : `Article ${article.article_number}`}{" "}
+              apply to your AI system?
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              Regumatrix analyses your specific AI system against all 113 articles and
-              tells you exactly which obligations apply, your operator role, and the
-              key actions you need to take — grounded in the actual regulation text.
+              Regumatrix analyses your specific AI system against all 113
+              articles and tells you exactly which obligations apply, your
+              operator role, and the key actions you need to take — grounded in
+              the actual regulation text.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

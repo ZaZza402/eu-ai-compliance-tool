@@ -12,7 +12,7 @@ import { db } from "@/lib/db";
  */
 export async function POST(
   _req: NextRequest,
-  { params }: { params: Promise<{ analysisId: string }> }
+  { params }: { params: Promise<{ analysisId: string }> },
 ) {
   const { userId } = await auth();
   if (!userId) {
@@ -56,7 +56,7 @@ export async function POST(
  */
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: Promise<{ analysisId: string }> }
+  { params }: { params: Promise<{ analysisId: string }> },
 ) {
   const { userId } = await auth();
   if (!userId) {

@@ -30,17 +30,32 @@ interface AnnexEntry {
 
 function loadData() {
   const jsonDir = path.join(process.cwd(), "eu_ai_act_json");
-  const indexRaw = fs.readFileSync(path.join(jsonDir, "article_index.json"), "utf-8");
-  const lookupRaw = fs.readFileSync(path.join(jsonDir, "article_lookup.json"), "utf-8");
+  const indexRaw = fs.readFileSync(
+    path.join(jsonDir, "article_index.json"),
+    "utf-8",
+  );
+  const lookupRaw = fs.readFileSync(
+    path.join(jsonDir, "article_lookup.json"),
+    "utf-8",
+  );
   const index = JSON.parse(indexRaw) as { articles: ArticleEntry[] };
-  const lookup = JSON.parse(lookupRaw) as Record<string, { title: string; chapter: string; file: string }>;
+  const lookup = JSON.parse(lookupRaw) as Record<
+    string,
+    { title: string; chapter: string; file: string }
+  >;
 
   // Group articles by chapter
-  const groups = new Map<string, { chapter_title: string; articles: ArticleEntry[] }>();
+  const groups = new Map<
+    string,
+    { chapter_title: string; articles: ArticleEntry[] }
+  >();
   for (const art of index.articles) {
     const key = art.chapter;
     if (!groups.has(key)) {
-      groups.set(key, { chapter_title: art.chapter_title ?? art.chapter, articles: [] });
+      groups.set(key, {
+        chapter_title: art.chapter_title ?? art.chapter,
+        articles: [],
+      });
     }
     groups.get(key)!.articles.push(art);
   }
@@ -73,36 +88,41 @@ export default function ArticlesIndexPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             All 113 articles and 13 annexes of the Artificial Intelligence Act.
-            Click any article to read the full text and check your compliance obligations.
+            Click any article to read the full text and check your compliance
+            obligations.
           </p>
         </div>
 
         {/* Article groups by chapter */}
         <div className="space-y-10">
-          {Array.from(groups.entries()).map(([chapter, { chapter_title, articles }]) => (
-            <section key={chapter}>
-              <div className="mb-3 flex items-center gap-3">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                  {chapter}
-                </h2>
-                <span className="text-xs text-muted-foreground">{chapter_title}</span>
-              </div>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {articles.map((art) => (
-                  <Link
-                    key={art.article}
-                    href={`/articles/${art.article}`}
-                    className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                  >
-                    <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-primary">
-                      Art. {art.article}
-                    </span>
-                    <span className="text-sm leading-snug">{art.title}</span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ))}
+          {Array.from(groups.entries()).map(
+            ([chapter, { chapter_title, articles }]) => (
+              <section key={chapter}>
+                <div className="mb-3 flex items-center gap-3">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    {chapter}
+                  </h2>
+                  <span className="text-xs text-muted-foreground">
+                    {chapter_title}
+                  </span>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {articles.map((art) => (
+                    <Link
+                      key={art.article}
+                      href={`/articles/${art.article}`}
+                      className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
+                    >
+                      <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-primary">
+                        Art. {art.article}
+                      </span>
+                      <span className="text-sm leading-snug">{art.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ),
+          )}
 
           {/* Annexes */}
           <section>
@@ -136,10 +156,13 @@ export default function ArticlesIndexPage() {
 
         {/* CTA */}
         <div className="mt-16 rounded-xl border border-primary/20 bg-primary/5 p-8 text-center">
-          <h2 className="mb-2 text-xl font-bold">Check your AI system&apos;s obligations</h2>
+          <h2 className="mb-2 text-xl font-bold">
+            Check your AI system&apos;s obligations
+          </h2>
           <p className="mb-6 text-muted-foreground">
-            Don&apos;t just read the articles — find out exactly which ones apply to your
-            specific AI system, your role, and your deployment context.
+            Don&apos;t just read the articles — find out exactly which ones
+            apply to your specific AI system, your role, and your deployment
+            context.
           </p>
           <Link
             href="/sign-up"

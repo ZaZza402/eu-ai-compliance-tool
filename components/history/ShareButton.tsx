@@ -15,7 +15,9 @@ interface Props {
  * Calls DELETE /api/share/[analysisId] to revoke it.
  */
 export function ShareButton({ analysisId, initialShareUrl }: Props) {
-  const [shareUrl, setShareUrl] = useState<string | null>(initialShareUrl ?? null);
+  const [shareUrl, setShareUrl] = useState<string | null>(
+    initialShareUrl ?? null,
+  );
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [revoking, setRevoking] = useState(false);
@@ -83,7 +85,11 @@ export function ShareButton({ analysisId, initialShareUrl }: Props) {
           title="Revoke share link"
           className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive disabled:opacity-60"
         >
-          {revoking ? <Loader2 className="h-3 w-3 animate-spin" /> : <X className="h-3 w-3" />}
+          {revoking ? (
+            <Loader2 className="h-3 w-3 animate-spin" />
+          ) : (
+            <X className="h-3 w-3" />
+          )}
           Revoke
         </button>
       )}

@@ -47,8 +47,10 @@ function parseDefinitions(text: string): Array<{ num: string; body: string }> {
 
 // Detect whether a paragraph is a numbered definitions list
 function isDefinitionsList(text: string): boolean {
-  return /^\s*For the purposes of this Regulation/i.test(text) &&
-    /\(\d+\)/.test(text);
+  return (
+    /^\s*For the purposes of this Regulation/i.test(text) &&
+    /\(\d+\)/.test(text)
+  );
 }
 
 export function ArticleTextRenderer({ text, className }: Props) {
@@ -61,7 +63,9 @@ export function ArticleTextRenderer({ text, className }: Props) {
 
     return (
       <div className={cn("space-y-1", className)}>
-        <p className="mb-4 text-sm leading-relaxed text-foreground/90">{preamble}</p>
+        <p className="mb-4 text-sm leading-relaxed text-foreground/90">
+          {preamble}
+        </p>
         <div className="space-y-3">
           {entries.map((entry, i) => (
             <div
@@ -96,7 +100,12 @@ export function ArticleTextRenderer({ text, className }: Props) {
 
   // Default: whitespace-preserved paragraph
   return (
-    <p className={cn("whitespace-pre-line text-sm leading-relaxed text-foreground/90", className)}>
+    <p
+      className={cn(
+        "whitespace-pre-line text-sm leading-relaxed text-foreground/90",
+        className,
+      )}
+    >
       {cleaned}
     </p>
   );

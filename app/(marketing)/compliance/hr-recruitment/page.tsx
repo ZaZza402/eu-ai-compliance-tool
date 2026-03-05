@@ -14,13 +14,34 @@ export const metadata: Metadata = {
 };
 
 const obligations = [
-  { art: "Art. 9", text: "Documented risk management covering bias, fairness and discrimination risks" },
-  { art: "Art. 10", text: "Training data must not encode historical discrimination or proxy variables" },
-  { art: "Art. 12", text: "Log all decisions and retain records for at least 6 months" },
-  { art: "Art. 13", text: "Instructions for use must clearly state limitations and data requirements" },
-  { art: "Art. 14", text: "Human oversight: hiring decisions must not be fully automated" },
-  { art: "Art. 26", text: "Deployers (employers) must conduct a fundamental rights impact assessment" },
-  { art: "Art. 50", text: "AI-generated content used in hiring must be marked as AI-generated" },
+  {
+    art: "Art. 9",
+    text: "Documented risk management covering bias, fairness and discrimination risks",
+  },
+  {
+    art: "Art. 10",
+    text: "Training data must not encode historical discrimination or proxy variables",
+  },
+  {
+    art: "Art. 12",
+    text: "Log all decisions and retain records for at least 6 months",
+  },
+  {
+    art: "Art. 13",
+    text: "Instructions for use must clearly state limitations and data requirements",
+  },
+  {
+    art: "Art. 14",
+    text: "Human oversight: hiring decisions must not be fully automated",
+  },
+  {
+    art: "Art. 26",
+    text: "Deployers (employers) must conduct a fundamental rights impact assessment",
+  },
+  {
+    art: "Art. 50",
+    text: "AI-generated content used in hiring must be marked as AI-generated",
+  },
 ];
 
 export default function HRRecruitmentPage() {
@@ -28,7 +49,9 @@ export default function HRRecruitmentPage() {
     <div className="py-16">
       <div className="container mx-auto max-w-3xl px-4">
         <nav className="mb-8 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">Home</Link>
+          <Link href="/" className="hover:text-foreground">
+            Home
+          </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground">HR &amp; Recruitment AI</span>
         </nav>
@@ -41,10 +64,11 @@ export default function HRRecruitmentPage() {
             EU AI Act: HR &amp; Recruitment AI Compliance
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">
-            AI systems used in employment decisions — including CV screening, candidate
-            ranking, performance evaluation, and promotion decisions — are explicitly
-            listed as <strong>high-risk in Annex III, point 4</strong>.
-            Compliance is mandatory from August 2026.
+            AI systems used in employment decisions — including CV screening,
+            candidate ranking, performance evaluation, and promotion decisions —
+            are explicitly listed as{" "}
+            <strong>high-risk in Annex III, point 4</strong>. Compliance is
+            mandatory from August 2026.
           </p>
         </div>
 
@@ -75,14 +99,23 @@ export default function HRRecruitmentPage() {
         </div>
 
         <div className="mb-10">
-          <h2 className="mb-4 text-xl font-bold">Key obligations for HR AI providers and deployers</h2>
+          <h2 className="mb-4 text-xl font-bold">
+            Key obligations for HR AI providers and deployers
+          </h2>
           <div className="space-y-3">
             {obligations.map((o) => (
               <div key={o.art} className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
                 <div>
-                  <Link href={`/articles/${o.art.replace("Art. ", "")}`} className="text-xs font-mono font-semibold text-primary hover:underline">{o.art}</Link>
-                  <span className="ml-2 text-sm text-foreground/90">{o.text}</span>
+                  <Link
+                    href={`/articles/${o.art.replace("Art. ", "")}`}
+                    className="text-xs font-mono font-semibold text-primary hover:underline"
+                  >
+                    {o.art}
+                  </Link>
+                  <span className="ml-2 text-sm text-foreground/90">
+                    {o.text}
+                  </span>
                 </div>
               </div>
             ))}
@@ -92,24 +125,34 @@ export default function HRRecruitmentPage() {
         <div className="mb-10 rounded-lg border border-border bg-card p-5">
           <h2 className="mb-2 font-semibold">GDPR interaction</h2>
           <p className="text-sm text-muted-foreground">
-            Article 22 of GDPR already restricts fully automated decisions in employment.
-            The EU AI Act adds a separate layer: the AI system itself must meet high-risk
-            requirements regardless of whether the final decision is automated or
-            human-reviewed. Both regimes apply simultaneously.
+            Article 22 of GDPR already restricts fully automated decisions in
+            employment. The EU AI Act adds a separate layer: the AI system
+            itself must meet high-risk requirements regardless of whether the
+            final decision is automated or human-reviewed. Both regimes apply
+            simultaneously.
           </p>
         </div>
 
         <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
-          <h2 className="mb-2 text-lg font-bold">Check your HR AI system now</h2>
+          <h2 className="mb-2 text-lg font-bold">
+            Check your HR AI system now
+          </h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            Get a precise analysis of your specific tool — whether you&apos;re the provider
-            building it or the employer deploying it. Know your obligations before August 2026.
+            Get a precise analysis of your specific tool — whether you&apos;re
+            the provider building it or the employer deploying it. Know your
+            obligations before August 2026.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/sign-up" className="inline-flex h-9 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
+            <Link
+              href="/sign-up"
+              className="inline-flex h-9 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+            >
               Get a free compliance report →
             </Link>
-            <Link href="/articles/26" className="inline-flex h-9 items-center rounded-lg border border-border px-4 text-sm hover:bg-accent">
+            <Link
+              href="/articles/26"
+              className="inline-flex h-9 items-center rounded-lg border border-border px-4 text-sm hover:bg-accent"
+            >
               Read Article 26
             </Link>
           </div>

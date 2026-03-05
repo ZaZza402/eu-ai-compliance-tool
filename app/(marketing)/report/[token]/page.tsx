@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { formatDate, cn } from "@/lib/utils";
-import { type RiskLevel, RISK_COLORS, RISK_LABELS } from "@/lib/analysis-schema";
+import {
+  type RiskLevel,
+  RISK_COLORS,
+  RISK_LABELS,
+} from "@/lib/analysis-schema";
 import { PublicReportViewer } from "@/components/report/PublicReportViewer";
 
 interface Props {
@@ -62,7 +66,10 @@ export default async function SharedReportPage({ params }: Props) {
             Regumatrix
           </Link>
           . Run your own free analysis →{" "}
-          <Link href="/sign-up" className="font-semibold text-primary hover:underline">
+          <Link
+            href="/sign-up"
+            className="font-semibold text-primary hover:underline"
+          >
             Get started
           </Link>
         </div>
@@ -70,8 +77,12 @@ export default async function SharedReportPage({ params }: Props) {
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">EU AI Act Compliance Report</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{formatDate(analysis.createdAt)}</p>
+            <h1 className="text-2xl font-bold tracking-tight">
+              EU AI Act Compliance Report
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {formatDate(analysis.createdAt)}
+            </p>
           </div>
           {knownRisk && (
             <div
@@ -82,7 +93,12 @@ export default async function SharedReportPage({ params }: Props) {
                 RISK_COLORS[knownRisk].text,
               )}
             >
-              <span className={cn("h-2 w-2 rounded-full", RISK_COLORS[knownRisk].dot)} />
+              <span
+                className={cn(
+                  "h-2 w-2 rounded-full",
+                  RISK_COLORS[knownRisk].dot,
+                )}
+              />
               {RISK_LABELS[knownRisk]}
             </div>
           )}
@@ -97,10 +113,12 @@ export default async function SharedReportPage({ params }: Props) {
         </div>
 
         {/* Meta */}
-        {(analysis.roleFound) && (
+        {analysis.roleFound && (
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <div>
-              <span className="font-medium text-foreground">Operator role:</span>{" "}
+              <span className="font-medium text-foreground">
+                Operator role:
+              </span>{" "}
               <span className="capitalize">{analysis.roleFound}</span>
             </div>
           </div>

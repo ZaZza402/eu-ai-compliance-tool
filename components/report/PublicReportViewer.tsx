@@ -38,7 +38,8 @@ export function PublicReportViewer({ result, articlesHit, analysisId }: Props) {
   }
 
   const resultText = isLegacyResult(result) ? result.text : "";
-  if (!resultText) return <p className="text-muted-foreground">No analysis data.</p>;
+  if (!resultText)
+    return <p className="text-muted-foreground">No analysis data.</p>;
 
   return (
     <div className="rounded-xl border border-border bg-card shadow-sm">
