@@ -116,8 +116,10 @@ export default function ContactPage() {
   const [errorMsg, setErrorMsg] = useState("");
 
   const selectedCat = CATEGORIES.find((c) => c.id === form.category);
-  const showExtra = (field: string) =>
-    selectedCat?.extraFields?.includes(field as never) ?? false;
+  const showExtra = (field: string): boolean => {
+    const cat = selectedCat as { extraFields?: readonly string[] } | undefined;
+    return cat?.extraFields?.includes(field) ?? false;
+  };
 
   function set(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -125,7 +127,12 @@ export default function ContactPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.category || !form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (
+      !form.category ||
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.message.trim()
+    ) {
       setErrorMsg("Please fill in all required fields.");
       setStatus("error");
       return;
@@ -200,8 +207,7 @@ export default function ContactPage() {
             {/* Category picker */}
             <div>
               <label className="mb-2.5 block text-sm font-medium">
-                What is this about?{" "}
-                <span className="text-destructive">*</span>
+                What is this about? <span className="text-destructive">*</span>
               </label>
               <div className="grid gap-2.5 sm:grid-cols-2">
                 {CATEGORIES.map((cat) => {
@@ -240,7 +246,10 @@ export default function ContactPage() {
             {/* Name + Email */}
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium" htmlFor="name">
+                <label
+                  className="mb-1.5 block text-sm font-medium"
+                  htmlFor="name"
+                >
                   Your name <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -254,7 +263,10 @@ export default function ContactPage() {
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium" htmlFor="email">
+                <label
+                  className="mb-1.5 block text-sm font-medium"
+                  htmlFor="email"
+                >
                   Your email <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -272,7 +284,10 @@ export default function ContactPage() {
             {/* Contextual extra fields */}
             {showExtra("company") && (
               <div>
-                <label className="mb-1.5 block text-sm font-medium" htmlFor="company">
+                <label
+                  className="mb-1.5 block text-sm font-medium"
+                  htmlFor="company"
+                >
                   Company / Organisation
                 </label>
                 <input
@@ -287,7 +302,10 @@ export default function ContactPage() {
             )}
             {showExtra("browser") && (
               <div>
-                <label className="mb-1.5 block text-sm font-medium" htmlFor="browser">
+                <label
+                  className="mb-1.5 block text-sm font-medium"
+                  htmlFor="browser"
+                >
                   Browser &amp; OS{" "}
                   <span className="text-xs font-normal text-muted-foreground">
                     (helps us reproduce the bug)
@@ -302,7 +320,10 @@ export default function ContactPage() {
                   className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
                 <div className="mt-2">
-                  <label className="mb-1.5 block text-sm font-medium" htmlFor="aiSystem">
+                  <label
+                    className="mb-1.5 block text-sm font-medium"
+                    htmlFor="aiSystem"
+                  >
                     AI system description{" "}
                     <span className="text-xs font-normal text-muted-foreground">
                       (if relevant to the bug)
@@ -321,7 +342,10 @@ export default function ContactPage() {
             )}
             {showExtra("orderId") && (
               <div>
-                <label className="mb-1.5 block text-sm font-medium" htmlFor="orderId">
+                <label
+                  className="mb-1.5 block text-sm font-medium"
+                  htmlFor="orderId"
+                >
                   Order / Transaction ID{" "}
                   <span className="text-xs font-normal text-muted-foreground">
                     (if you have one)
@@ -340,7 +364,10 @@ export default function ContactPage() {
 
             {/* Message */}
             <div>
-              <label className="mb-1.5 block text-sm font-medium" htmlFor="message">
+              <label
+                className="mb-1.5 block text-sm font-medium"
+                htmlFor="message"
+              >
                 Message <span className="text-destructive">*</span>
               </label>
               <textarea
