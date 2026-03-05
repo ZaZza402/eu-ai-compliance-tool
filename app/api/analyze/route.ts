@@ -73,87 +73,17 @@ export async function POST(req: Request) {
 
   const { description } = parsed.data;
 
-  // ── User fetch + deferred free-credit grant + query expansion (parallel) ─
-  // expandQuery and the user credit setup run in parallel to save latency.
+  // ── User fetch + query expansion (parallel) ───────────────────────────────
+  // The free-credit grant now happens at page render (analyze/page.tsx) so the
+  // user always sees their correct balance on arrival. Here we just look up
+  // the existing credit count.
   const [dbUser, expandedTerms] = await Promise.all([
-    (async () => {
-      // Fetch or create user (credits default 0 — granted below after IP check)
-      let user: { credits: number; freeCreditsGranted: boolean } =
-        await db.user.upsert({
-        where: { id: userId },
-        create: { id: userId, email: `${userId}@pending.clerk`, credits: 0, freeCreditsGranted: false },
-        update: {},
-        select: { credits: true, freeCreditsGranted: true },
-      });
-
-      // ── Deferred free-credit grant with IP-abuse check ──────────────────
-      // Free credits are NOT given at signup — they're granted here on first
-      // use, after checking whether this IP has already sponsored >1 free
-      // account in the last 30 days (prevents multi-account farming).
-      if (!user.freeCreditsGranted) {
-        if (user.credits > 0) {
-          // Legacy user (exists before this feature) — already has credits;
-          // just mark as granted so we skip this block on future requests.
-          await db.user.update({
-            where: { id: userId },
-            data: { freeCreditsGranted: true },
-          });
-          user = { credits: user.credits, freeCreditsGranted: true };
-        } else {
-          // New user — run IP check
-          const clientIp =
-            (req as Request & { headers: Headers }).headers
-              .get("x-forwarded-for")
-              ?.split(",")[0]
-              ?.trim() ??
-            (req as Request & { headers: Headers }).headers.get("x-real-ip") ??
-            "unknown";
-
-          // Count distinct accounts from this IP that already received free credits
-          // within the last 30 days (excluding the current user).
-          const recentIpAccounts =
-            clientIp !== "unknown"
-              ? await db.user.count({
-                  where: {
-                    signupIp: clientIp,
-                    freeCreditsGranted: true,
-                    id: { not: userId },
-                    createdAt: {
-                      gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
-                    },
-                  },
-                })
-              : 0;
-
-          // Allow ≤ 1 prior account from this IP in 30 days (2 total incl. this one).
-          const creditsToGrant = recentIpAccounts < 2 ? 3 : 0;
-
-          const updated = await db.user.update({
-            where: { id: userId },
-            data: {
-              credits: { increment: creditsToGrant },
-              freeCreditsGranted: true,
-              signupIp: clientIp,
-            },
-            select: { credits: true, freeCreditsGranted: true },
-          });
-
-          if (creditsToGrant > 0) {
-            await db.creditEvent.create({
-              data: { userId, type: "signup", amount: creditsToGrant },
-            });
-          } else {
-            console.warn(
-              `[analyze] Free credits denied for userId=${userId} — IP ${clientIp} has ${recentIpAccounts} recent accounts`,
-            );
-          }
-
-          user = updated;
-        }
-      }
-
-      return user;
-    })(),
+    db.user.upsert({
+      where: { id: userId },
+      create: { id: userId, email: `${userId}@pending.clerk`, credits: 0, freeCreditsGranted: true },
+      update: {},
+      select: { credits: true },
+    }),
     expandQuery(description),
   ]);
 
