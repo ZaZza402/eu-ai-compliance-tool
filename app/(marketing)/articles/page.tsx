@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { BookOpen, Scale } from "lucide-react";
+import { Scale } from "lucide-react";
+import { ArticleSearchList } from "@/components/article/ArticleSearchList";
 
 export const metadata: Metadata = {
   title: "EU AI Act — All 113 Articles & Annexes",
@@ -22,61 +23,56 @@ interface ArticleEntry {
   chapter_title?: string;
 }
 
-interface AnnexEntry {
-  id: string;
-  title: string;
-  chapter: string;
-}
-
-function loadData() {
+function loadItems() {
   const jsonDir = path.join(process.cwd(), "eu_ai_act_json");
-  const indexRaw = fs.readFileSync(
-    path.join(jsonDir, "article_index.json"),
-    "utf-8",
-  );
-  const lookupRaw = fs.readFileSync(
-    path.join(jsonDir, "article_lookup.json"),
-    "utf-8",
-  );
-  const index = JSON.parse(indexRaw) as { articles: ArticleEntry[] };
-  const lookup = JSON.parse(lookupRaw) as Record<
-    string,
-    { title: string; chapter: string; file: string }
-  >;
+  const index = JSON.parse(
+    fs.readFileSync(path.join(jsonDir, "article_index.json"), "utf-8"),
+  ) as { articles: ArticleEntry[] };
+  const lookup = JSON.parse(
+    fs.readFileSync(path.join(jsonDir, "article_lookup.json"), "utf-8"),
+  ) as Record<string, { title: string; chapter: string; file: string }>;
 
-  // Group articles by chapter
-  const groups = new Map<
-    string,
-    { chapter_title: string; articles: ArticleEntry[] }
-  >();
+  const chapterTitles = new Map<string, string>();
   for (const art of index.articles) {
-    const key = art.chapter;
-    if (!groups.has(key)) {
-      groups.set(key, {
-        chapter_title: art.chapter_title ?? art.chapter,
-        articles: [],
-      });
+    if (!chapterTitles.has(art.chapter)) {
+      chapterTitles.set(art.chapter, art.chapter_title ?? art.chapter);
     }
-    groups.get(key)!.articles.push(art);
   }
 
-  // Extract annexes from lookup
-  const annexes: AnnexEntry[] = Object.entries(lookup)
-    .filter(([k]) => k.startsWith("Annex_"))
-    .map(([k, v]) => ({ id: k, title: v.title, chapter: v.chapter }))
-    .sort((a, b) => a.chapter.localeCompare(b.chapter));
+  const articleItems = index.articles.map((art) => ({
+    id: art.article,
+    label: `Art. ${art.article}`,
+    title: art.title,
+    chapter: art.chapter,
+    chapter_title: chapterTitles.get(art.chapter) ?? art.chapter,
+    isAnnex: false,
+  }));
 
-  return { groups, annexes };
+  const annexItems = Object.entries(lookup)
+    .filter(([k]) => k.startsWith("Annex_"))
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([k, v]) => ({
+      id: k,
+      label: k.replace("_", " "),
+      title: v.title,
+      chapter: v.chapter,
+      chapter_title: "Annexes I \u2013 XIII",
+      isAnnex: true,
+    }));
+
+  return [...articleItems, ...annexItems];
 }
 
 export default function ArticlesIndexPage() {
-  const { groups, annexes } = loadData();
+  const items = loadItems();
+  const articleCount = items.filter((i) => !i.isAnnex).length;
+  const annexCount = items.filter((i) => i.isAnnex).length;
 
   return (
     <div className="py-16">
       <div className="container mx-auto max-w-4xl px-4">
         {/* Header */}
-        <div className="mb-12 text-center">
+        <div className="mb-10 text-center">
           <div className="mb-4 flex justify-center">
             <div className="flex items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 text-sm text-muted-foreground">
               <Scale className="h-3.5 w-3.5" />
@@ -87,72 +83,25 @@ export default function ArticlesIndexPage() {
             EU AI Act — Full Article Reference
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            All 113 articles and 13 annexes of the Artificial Intelligence Act.
-            Click any article to read the full text and check your compliance
-            obligations.
+            All {articleCount} articles and {annexCount} annexes of the
+            Artificial Intelligence Act. Search or browse by chapter.
           </p>
+          <div className="mt-4 flex justify-center gap-4 text-sm text-muted-foreground">
+            <span>
+              <strong className="text-foreground">{articleCount}</strong>{" "}
+              articles
+            </span>
+            <span>·</span>
+            <span>
+              <strong className="text-foreground">{annexCount}</strong> annexes
+            </span>
+            <span>·</span>
+            <span>13 chapters</span>
+          </div>
         </div>
 
-        {/* Article groups by chapter */}
-        <div className="space-y-10">
-          {Array.from(groups.entries()).map(
-            ([chapter, { chapter_title, articles }]) => (
-              <section key={chapter}>
-                <div className="mb-3 flex items-center gap-3">
-                  <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                    {chapter}
-                  </h2>
-                  <span className="text-xs text-muted-foreground">
-                    {chapter_title}
-                  </span>
-                </div>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {articles.map((art) => (
-                    <Link
-                      key={art.article}
-                      href={`/articles/${art.article}`}
-                      className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                    >
-                      <span className="mt-0.5 shrink-0 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-primary">
-                        Art. {art.article}
-                      </span>
-                      <span className="text-sm leading-snug">{art.title}</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            ),
-          )}
-
-          {/* Annexes */}
-          <section>
-            <div className="mb-3 flex items-center gap-3">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                Annexes
-              </h2>
-              <span className="text-xs text-muted-foreground">I – XIII</span>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {annexes.map((ann) => (
-                <Link
-                  key={ann.id}
-                  href={`/articles/${ann.id}`}
-                  className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                >
-                  <span className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-xs font-semibold text-muted-foreground">
-                    <BookOpen className="inline h-3 w-3" />
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-xs font-semibold text-muted-foreground">
-                      {ann.chapter}
-                    </div>
-                    <div className="text-sm leading-snug">{ann.title}</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
+        {/* Search + grouped list */}
+        <ArticleSearchList items={items} />
 
         {/* CTA */}
         <div className="mt-16 rounded-xl border border-primary/20 bg-primary/5 p-8 text-center">

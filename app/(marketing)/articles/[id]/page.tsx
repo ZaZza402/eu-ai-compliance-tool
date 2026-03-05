@@ -138,22 +138,10 @@ export default async function ArticleDetailPage({ params }: Props) {
           {/* Article text */}
           <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
             {article.paragraphs.length > 0 ? (
-              <div className="space-y-6">
-                {article.paragraphs.map((para) => {
-                  const isAnnexContent = para.id.endsWith(".content");
-                  return (
-                    <div key={para.id} className="group">
-                      {!isAnnexContent && (
-                        <div className="mb-1.5">
-                          <span className="rounded bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
-                            §{para.id}
-                          </span>
-                        </div>
-                      )}
-                      <ArticleTextRenderer text={para.text} />
-                    </div>
-                  );
-                })}
+              <div className="space-y-5">
+                {article.paragraphs.map((para) => (
+                  <ArticleTextRenderer key={para.id} text={para.text} />
+                ))}
               </div>
             ) : (
               <ArticleTextRenderer text={article.full_text} />

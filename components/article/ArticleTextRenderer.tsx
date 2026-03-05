@@ -29,6 +29,20 @@ function cleanText(raw: string): string {
     .trim();
 }
 
+// Render a paragraph that may contain lettered sub-lists: (a) text; (b) text
+// Returns segments split by lettered items
+function splitLettered(
+  text: string,
+): Array<{ type: "text" | "letter"; label?: string; body: string }> {
+  const parts = text.split(/(?=^\([a-z]{1,2}\)\s)/m).map((s) => s.trim()).filter(Boolean);
+  if (parts.length <= 1) return [{ type: "text", body: text }];
+  return parts.map((part) => {
+    const match = part.match(/^\(([a-z]{1,2})\)\s*([\s\S]*)/);
+    if (!match) return { type: "text" as const, body: part };
+    return { type: "letter" as const, label: match[1], body: match[2].trim() };
+  });
+}
+
 // Split a numbered definition block into entries like [(1, "term means ..."), ...]
 function parseDefinitions(text: string): Array<{ num: string; body: string }> {
   // Match patterns like: (1) text, (10) text, (10) 'term' means text
@@ -98,7 +112,36 @@ export function ArticleTextRenderer({ text, className }: Props) {
     );
   }
 
-  // Default: whitespace-preserved paragraph
+  // Default: whitespace-preserved paragraph — check for lettered sub-lists
+  const segments = splitLettered(cleaned);
+
+  if (segments.length > 1) {
+    const [first, ...rest] = segments;
+    return (
+      <div className={cn("space-y-1", className)}>
+        {first.type === "text" && first.body && (
+          <p className="text-sm leading-relaxed text-foreground/90">{first.body}</p>
+        )}
+        <ul className="ml-1 mt-1 space-y-1.5">
+          {rest.map((seg, i) =>
+            seg.type === "letter" ? (
+              <li key={i} className="flex items-start gap-2">
+                <span className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground">
+                  ({seg.label})
+                </span>
+                <span className="text-sm leading-relaxed text-foreground/90">
+                  {seg.body}
+                </span>
+              </li>
+            ) : (
+              <li key={i} className="text-sm leading-relaxed text-foreground/90">{seg.body}</li>
+            )
+          )}
+        </ul>
+      </div>
+    );
+  }
+
   return (
     <p
       className={cn(
