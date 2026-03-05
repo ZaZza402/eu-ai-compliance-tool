@@ -7,16 +7,16 @@ export const runtime = "nodejs";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const nodemailer = require("nodemailer");
 
-const SMTP_USER = process.env.SMTP_USER ?? "info@alecsdesign.xyz";
+const SMTP_USER = process.env.SMTP_USER ?? "start@alecsdesign.xyz";
 const SMTP_PASS = process.env.SMTP_PASS ?? "";
-const TO_EMAIL  = process.env.SMTP_USER ?? "info@alecsdesign.xyz";
+const TO_EMAIL  = process.env.SMTP_USER ?? "start@alecsdesign.xyz";
 
 const SUBJECT_LABELS: Record<string, string> = {
-  general:     "General Inquiry",
-  bug:         "Bug Report",
-  feature:     "Feature Request",
-  billing:     "Billing",
-  legal:       "Legal / GDPR",
+  general: "General Inquiry",
+  bug: "Bug Report",
+  feature: "Feature Request",
+  billing: "Billing",
+  legal: "Legal / GDPR",
   partnership: "Partnership",
 };
 
@@ -42,8 +42,14 @@ export async function POST(req: NextRequest) {
   }
 
   const {
-    category = "", name = "", email = "", message = "",
-    company = "", browser = "", aiSystem = "", orderId = "",
+    category = "",
+    name = "",
+    email = "",
+    message = "",
+    company = "",
+    browser = "",
+    aiSystem = "",
+    orderId = "",
   } = body;
 
   if (!category || !name.trim() || !email.trim() || !message.trim()) {
@@ -61,10 +67,10 @@ export async function POST(req: NextRequest) {
   const label = SUBJECT_LABELS[category] ?? "Contact";
 
   const extras: string[] = [];
-  if (company)  extras.push(`Company      : ${company}`);
-  if (browser)  extras.push(`Browser / OS : ${browser}`);
+  if (company) extras.push(`Company      : ${company}`);
+  if (browser) extras.push(`Browser / OS : ${browser}`);
   if (aiSystem) extras.push(`AI System    : ${aiSystem}`);
-  if (orderId)  extras.push(`Order ID     : ${orderId}`);
+  if (orderId) extras.push(`Order ID     : ${orderId}`);
 
   const hr = "------------------------------------------------";
   const textBody = [
@@ -132,24 +138,27 @@ export async function POST(req: NextRequest) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host:   "mail.alecsdesign.xyz",
+      host:   "mail.privateemail.com",
       port:   587,
-      secure: false,
-      auth:   { user: SMTP_USER, pass: SMTP_PASS },
+      secure: false, // STARTTLS on 587
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
 
     await transporter.sendMail({
-      from:    `"Regumatrix Contact" <${SMTP_USER}>`,
-      to:      TO_EMAIL,
+      from: `"Regumatrix Contact" <${SMTP_USER}>`,
+      to: TO_EMAIL,
       replyTo: `"${name}" <${email}>`,
       subject: `[Regumatrix] ${label} from ${name}`,
-      text:    textBody,
-      html:    htmlBody,
+      text: textBody,
+      html: htmlBody,
     });
 
     return NextResponse.json({ ok: true, sent: true });
   } catch (err) {
     console.error("[contact] SMTP error:", err);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 },
+    );
   }
 }
