@@ -2,9 +2,10 @@ import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { Scale } from "lucide-react";
+import { Scale, Zap } from "lucide-react";
 import { DesktopNav, MobileNav } from "@/components/layout/SidebarNav";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { db } from "@/lib/db";
 
 /**
  * Dashboard layout — wraps all authenticated app pages.
@@ -17,6 +18,12 @@ export default async function DashboardLayout({
 }) {
   const user = await currentUser();
   if (!user) redirect("/sign-in");
+
+  const dbUser = await db.user.findUnique({
+    where: { id: user.id },
+    select: { credits: true },
+  });
+  const credits = dbUser?.credits ?? 0;
 
   return (
     <div className="flex min-h-screen">
@@ -37,6 +44,24 @@ export default async function DashboardLayout({
 
         {/* Navigation — Client Component so usePathname() works for active state */}
         <DesktopNav />
+
+        {/* Credits badge */}
+        <div className="mx-3 mb-2">
+          <Link
+            href="/credits"
+            className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-sm transition-colors hover:bg-accent"
+          >
+            <span className="flex items-center gap-1.5 text-muted-foreground">
+              <Zap className="h-3.5 w-3.5" />
+              Credits
+            </span>
+            <span
+              className={credits <= 2 ? "font-bold text-amber-600 dark:text-amber-400" : "font-bold text-foreground"}
+            >
+              {credits}
+            </span>
+          </Link>
+        </div>
 
         {/* User area */}
         <div className="border-t border-sidebar-border p-4">
@@ -70,6 +95,15 @@ export default async function DashboardLayout({
           </Link>
         </div>
         <div className="flex items-center gap-2">
+          <Link
+            href="/credits"
+            className="flex items-center gap-1 rounded-md border border-border bg-background px-2 py-1 text-xs font-medium transition-colors hover:bg-accent"
+          >
+            <Zap className="h-3 w-3" />
+            <span className={credits <= 2 ? "text-amber-600 dark:text-amber-400" : "text-foreground"}>
+              {credits}
+            </span>
+          </Link>
           <ThemeToggle />
           <UserButton afterSignOutUrl="/" />
         </div>

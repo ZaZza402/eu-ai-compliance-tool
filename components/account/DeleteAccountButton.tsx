@@ -24,10 +24,14 @@ export function DeleteAccountButton() {
         setError(result.error);
         return;
       }
-      // Account deleted — sign out client-side so the JWT is cleared before
-      // redirecting. Without this the user lands on dashboard with a stale
-      // session and gets a crash.
-      await signOut({ redirectUrl: "/" });
+      // The Clerk user is already deleted on the server — calling signOut()
+      // against a removed account can hang indefinitely, which keeps
+      // isPending=true and the button stuck on "Deleting…".
+      // Fire signOut without awaiting (clears local Clerk state best-effort),
+      // then force a full-page navigation immediately. The middleware will
+      // detect the invalid JWT and redirect to sign-in cleanly.
+      signOut().catch(() => {});
+      window.location.href = "/";
     });
   }
 

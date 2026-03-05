@@ -28,7 +28,7 @@ import Link from "next/link";
 import { type StoredStructuredResult } from "@/lib/analysis-schema";
 
 const LS_KEY = "eu_ai_last_description";
-const COUNTDOWN_SECS = 10;
+const COUNTDOWN_SECS = 5;
 
 // ---------------------------------------------------------------------------
 // Types
@@ -308,7 +308,14 @@ export function AnalysisPage({ initialCredits }: Props) {
           </p>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold">{credits}</div>
+          <div
+            className={cn(
+              "text-2xl font-bold",
+              credits <= 2 && credits > 0 ? "text-amber-600 dark:text-amber-400" : credits === 0 ? "text-destructive" : "",
+            )}
+          >
+            {credits}
+          </div>
           <div className="text-xs text-muted-foreground">credits left</div>
           {credits === 0 && (
             <Link
@@ -320,6 +327,22 @@ export function AnalysisPage({ initialCredits }: Props) {
           )}
         </div>
       </div>
+
+      {/* Low-credit warning */}
+      {credits > 0 && credits <= 2 && (
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-amber-500/40 bg-amber-50 px-4 py-2.5 text-sm dark:bg-amber-900/20">
+          <span className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
+            <AlertTriangle className="h-4 w-4 shrink-0" />
+            You only have {credits} credit{credits !== 1 ? "s" : ""} left.
+          </span>
+          <Link
+            href="/credits"
+            className="shrink-0 text-xs font-semibold text-amber-700 underline underline-offset-2 hover:text-amber-900 dark:text-amber-400"
+          >
+            Top up →
+          </Link>
+        </div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
