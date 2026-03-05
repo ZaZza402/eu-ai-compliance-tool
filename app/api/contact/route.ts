@@ -1,7 +1,9 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { contactLimiter } from "@/lib/rate-limit";
 
-// nodemailer must be require()'d -- ESM import causes "Unexpected token 'export'" in Next.js serverless
+// Force Node.js runtime -- Edge runtime cannot use require() or native Node modules
+export const runtime = "nodejs";
+
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const nodemailer = require("nodemailer");
 
