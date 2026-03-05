@@ -14,14 +14,8 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "productivity", "legal"],
     icons: [
       {
-        src: "/icon-192.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "maskable",
-      },
-      {
-        src: "/icon-512.png",
-        sizes: "512x512",
+        src: "/icon",
+        sizes: "32x32",
         type: "image/png",
         purpose: "any",
       },
@@ -32,7 +26,7 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: "Analyse",
         description: "Run a new EU AI Act compliance analysis",
         url: "/analyze",
-        icons: [{ src: "/icon-192.png", sizes: "192x192" }],
+        icons: [{ src: "/icon", sizes: "32x32" }],
       },
     ],
   };
