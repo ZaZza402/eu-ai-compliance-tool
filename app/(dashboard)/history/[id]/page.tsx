@@ -10,6 +10,7 @@ import {
 } from "@/lib/analysis-schema";
 import { HistoryDetailClient } from "@/components/history/HistoryDetailClient";
 import { RerunButton } from "@/components/history/RerunButton";
+import { ShareButton } from "@/components/history/ShareButton";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "Analysis Detail" };
@@ -34,6 +35,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
       roleFound: true,
       createdAt: true,
       creditsUsed: true,
+      shareToken: true,
     },
   });
 
@@ -64,6 +66,14 @@ export default async function AnalysisDetailPage({ params }: Props) {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <RerunButton description={analysis.description} />
+          <ShareButton
+            analysisId={analysis.id}
+            initialShareUrl={
+              analysis.shareToken
+                ? `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://regumatrix.eu"}/report/${analysis.shareToken}`
+                : undefined
+            }
+          />
           {knownRisk && (
             <div
               className={cn(

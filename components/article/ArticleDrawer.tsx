@@ -17,6 +17,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { X, BookOpen, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ArticleTextRenderer } from "@/components/article/ArticleTextRenderer";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -228,9 +229,7 @@ export function ArticleDrawer({ articleNum, onClose }: Props) {
                             </div>
                           )}
                           {/* Paragraph text */}
-                          <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90">
-                            {para.text}
-                          </p>
+                          <ArticleTextRenderer text={para.text} />
                         </div>
                       </div>
                     );
@@ -238,9 +237,7 @@ export function ArticleDrawer({ articleNum, onClose }: Props) {
                 </div>
               ) : (
                 /* Fallback to full_text if no structured paragraphs */
-                <p className="text-sm leading-relaxed text-foreground/90">
-                  {article.full_text}
-                </p>
+                <ArticleTextRenderer text={article.full_text} />
               )}
 
               {/* Footer note */}

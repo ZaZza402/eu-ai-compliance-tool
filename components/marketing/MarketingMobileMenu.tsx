@@ -14,6 +14,7 @@ interface NavLinkItem {
 }
 
 const NAV_LINKS: NavLinkItem[] = [
+  { href: "/articles", label: "Articles" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/feedback", label: "Feedback" },

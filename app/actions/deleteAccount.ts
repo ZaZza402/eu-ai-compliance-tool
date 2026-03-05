@@ -14,7 +14,9 @@ import { db } from "@/lib/db";
  * clear the session before redirecting. (Server-side redirect after Clerk
  * deletion leaves the client JWT cached, causing a dashboard crash.)
  */
-export async function deleteAccount(): Promise<{ error: string } | { success: true }> {
+export async function deleteAccount(): Promise<
+  { error: string } | { success: true }
+> {
   const { userId } = await auth();
   if (!userId) return { error: "Not authenticated." };
 

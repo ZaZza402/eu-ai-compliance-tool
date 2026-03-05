@@ -30,6 +30,12 @@ export default function MarketingLayout({
           {/* Nav links */}
           <nav className="hidden items-center gap-6 text-sm md:flex">
             <Link
+              href="/articles"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Articles
+            </Link>
+            <Link
               href="/pricing"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >

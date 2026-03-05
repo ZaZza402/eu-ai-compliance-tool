@@ -56,7 +56,11 @@ export default async function DashboardLayout({
               Credits
             </span>
             <span
-              className={credits <= 2 ? "font-bold text-amber-600 dark:text-amber-400" : "font-bold text-foreground"}
+              className={
+                credits <= 2
+                  ? "font-bold text-amber-600 dark:text-amber-400"
+                  : "font-bold text-foreground"
+              }
             >
               {credits}
             </span>
@@ -100,7 +104,13 @@ export default async function DashboardLayout({
             className="flex items-center gap-1 rounded-md border border-border bg-background px-2 py-1 text-xs font-medium transition-colors hover:bg-accent"
           >
             <Zap className="h-3 w-3" />
-            <span className={credits <= 2 ? "text-amber-600 dark:text-amber-400" : "text-foreground"}>
+            <span
+              className={
+                credits <= 2
+                  ? "text-amber-600 dark:text-amber-400"
+                  : "text-foreground"
+              }
+            >
               {credits}
             </span>
           </Link>

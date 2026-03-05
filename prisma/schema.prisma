@@ -50,6 +50,7 @@ model Analysis {
   riskLevel   String?                       // prohibited | high_risk | limited | gpai | minimal
   roleFound   String?                       // provider | deployer | importer | distributor
   creditsUsed Int      @default(1)
+  shareToken  String?  @unique              // Opaque token for public shareable report link
   createdAt   DateTime @default(now())
 
   @@index([userId])

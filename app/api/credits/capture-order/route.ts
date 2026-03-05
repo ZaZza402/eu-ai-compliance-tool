@@ -41,7 +41,13 @@ export async function POST(req: Request) {
   // packKey cannot be used to upgrade to a more expensive pack for free.
   const pending = await db.transaction.findUnique({
     where: { paypalOrderId: orderId },
-    select: { status: true, creditsPurchased: true, amountUsd: true, packName: true, userId: true },
+    select: {
+      status: true,
+      creditsPurchased: true,
+      amountUsd: true,
+      packName: true,
+      userId: true,
+    },
   });
 
   if (pending?.status === "completed") {
@@ -51,10 +57,18 @@ export async function POST(req: Request) {
   // Determine credits/amount from DB record if available; fall back to user-supplied
   // packKey only for legacy orders that pre-date this server-side record (none in prod).
   const resolvedPack = pending
-    ? { credits: pending.creditsPurchased, amountUsd: pending.amountUsd, packName: pending.packName }
+    ? {
+        credits: pending.creditsPurchased,
+        amountUsd: pending.amountUsd,
+        packName: pending.packName,
+      }
     : (() => {
         const p = CREDIT_PACKS[packKey as PackKey];
-        return { credits: p.credits, amountUsd: parseFloat(p.price), packName: p.name };
+        return {
+          credits: p.credits,
+          amountUsd: parseFloat(p.price),
+          packName: p.name,
+        };
       })();
 
   // Ownership check — ensure this order belongs to the authenticated user
