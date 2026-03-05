@@ -954,7 +954,7 @@ export function StructuredComplianceReportPdf({
                 },
               ]}
             >
-              Plain English explanation — no legal terminology.
+              Plain-language explanation — no legal terminology.
             </Text>
             {result.plainLanguageSummary
               .split(/\n+/)
