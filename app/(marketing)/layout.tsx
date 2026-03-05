@@ -60,15 +60,16 @@ export default function MarketingLayout({
           {/* Auth actions */}
           <div className="flex items-center gap-3">
             <ThemeToggle />
+            {/* Hidden on mobile — the hamburger drawer handles auth on small screens */}
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="rounded-md border border-border px-3 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground">
+                <button className="hidden rounded-md border border-border px-3 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground md:inline-flex">
                   Sign in
                 </button>
               </SignInButton>
               <Link
                 href="/sign-up"
-                className="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
+                className="hidden rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
               >
                 Get Started Free
               </Link>
@@ -76,7 +77,7 @@ export default function MarketingLayout({
             <SignedIn>
               <Link
                 href="/dashboard"
-                className="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
+                className="hidden rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
               >
                 Dashboard
               </Link>
