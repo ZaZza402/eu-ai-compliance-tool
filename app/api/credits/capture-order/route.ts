@@ -9,7 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { capturePayPalOrder, type PackKey } from "@/lib/paypal";
+import { capturePayPalOrder, CREDIT_PACKS, type PackKey } from "@/lib/paypal";
 
 const RequestSchema = z.object({
   orderId: z.string().min(1),
@@ -36,15 +36,30 @@ export async function POST(req: Request) {
 
   const { orderId, packKey } = parsed.data;
 
-  // Check for duplicate capture (idempotency guard)
-  const existing = await db.transaction.findUnique({
+  // ── Security: look up the authoritative pack details from our DB ─────────
+  // The create-order endpoint wrote these server-side, so the user-submitted
+  // packKey cannot be used to upgrade to a more expensive pack for free.
+  const pending = await db.transaction.findUnique({
     where: { paypalOrderId: orderId },
+    select: { status: true, creditsPurchased: true, amountUsd: true, packName: true, userId: true },
   });
-  if (existing) {
-    if (existing.status === "completed") {
-      return NextResponse.json({ success: true, alreadyCaptured: true });
-    }
-    // If it's pending/failed, continue to retry the capture
+
+  if (pending?.status === "completed") {
+    return NextResponse.json({ success: true, alreadyCaptured: true });
+  }
+
+  // Determine credits/amount from DB record if available; fall back to user-supplied
+  // packKey only for legacy orders that pre-date this server-side record (none in prod).
+  const resolvedPack = pending
+    ? { credits: pending.creditsPurchased, amountUsd: pending.amountUsd, packName: pending.packName }
+    : (() => {
+        const p = CREDIT_PACKS[packKey as PackKey];
+        return { credits: p.credits, amountUsd: parseFloat(p.price), packName: p.name };
+      })();
+
+  // Ownership check — ensure this order belongs to the authenticated user
+  if (pending && pending.userId !== userId) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   try {
@@ -57,9 +72,9 @@ export async function POST(req: Request) {
         create: {
           userId,
           paypalOrderId: orderId,
-          creditsPurchased: capture.credits,
-          amountUsd: capture.amountUsd,
-          packName: capture.packName,
+          creditsPurchased: resolvedPack.credits,
+          amountUsd: resolvedPack.amountUsd,
+          packName: resolvedPack.packName,
           status: "completed",
         },
         update: {
@@ -71,17 +86,17 @@ export async function POST(req: Request) {
         create: {
           id: userId,
           email: `${userId}@pending.clerk`,
-          credits: capture.credits,
+          credits: resolvedPack.credits,
         },
         update: {
-          credits: { increment: capture.credits },
+          credits: { increment: resolvedPack.credits },
         },
       }),
       db.creditEvent.create({
         data: {
           userId,
           type: "purchase",
-          amount: capture.credits,
+          amount: resolvedPack.credits,
           referenceId: orderId,
         },
       }),
@@ -89,8 +104,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      creditsAdded: capture.credits,
-      packName: capture.packName,
+      creditsAdded: resolvedPack.credits,
+      packName: resolvedPack.packName,
     });
   } catch (err) {
     console.error("[capture-order] Error:", err);

@@ -1,9 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { contactLimiter } from "@/lib/rate-limit";
 
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "info@alecsdesign.xyz";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
 export async function POST(req: NextRequest) {
+  // ── Rate limit (keyed on IP) ────────────────────────────────────────
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown";
+  const rateLimit = contactLimiter.check(ip);
+  if (!rateLimit.allowed) {
+    const retryAfterSec = Math.ceil((rateLimit.resetAt - Date.now()) / 1000);
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429, headers: { "Retry-After": retryAfterSec.toString() } },
+    );
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {

@@ -8,6 +8,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { db } from "@/lib/db";
 import { createPayPalOrder, CREDIT_PACKS, type PackKey } from "@/lib/paypal";
 
 const RequestSchema = z.object({
@@ -40,6 +41,22 @@ export async function POST(req: Request) {
 
   try {
     const order = await createPayPalOrder(packKey as PackKey);
+
+    // ── Security: record the authoritative pack details server-side ───────
+    // Storing credits/amount here means capture-order reads from DB rather
+    // than trusting the user-supplied packKey, preventing a pack-upgrade attack
+    // (e.g. create starter order then capture claiming pro pack).
+    await db.transaction.create({
+      data: {
+        userId,
+        paypalOrderId: order.id,
+        creditsPurchased: pack.credits,
+        amountUsd: parseFloat(pack.price),
+        packName: pack.name,
+        status: "pending",
+      },
+    });
+
     return NextResponse.json({
       orderId: order.id,
       pack: { name: pack.name, credits: pack.credits, price: pack.price },

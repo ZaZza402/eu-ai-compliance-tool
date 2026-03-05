@@ -89,3 +89,12 @@ export const analyzeLimiter = new SlidingWindowRateLimiter({
   limit: 5,
   windowMs: 60_000,
 });
+
+/**
+ * Singleton rate limiter for /api/contact (public, keyed on IP).
+ * 5 submissions per IP per 10 minutes — prevents Resend quota abuse.
+ */
+export const contactLimiter = new SlidingWindowRateLimiter({
+  limit: 5,
+  windowMs: 10 * 60_000,
+});
