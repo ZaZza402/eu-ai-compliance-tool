@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "@/components/providers";
@@ -79,6 +79,17 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
+};
+
 // JSON-LD structured data for the SoftwareApplication
 const jsonLd = {
   "@context": "https://schema.org",
@@ -121,7 +132,6 @@ export default function RootLayout({
       <html lang="en" className={inter.variable} suppressHydrationWarning>
         <head>
           {/* PWA / mobile */}
-          <meta name="theme-color" content="#1d4ed8" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta

@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 
 const SMTP_USER = process.env.SMTP_USER ?? "start@alecsdesign.xyz";
 const SMTP_PASS = process.env.SMTP_PASS ?? "";
-const TO_EMAIL  = process.env.SMTP_USER ?? "start@alecsdesign.xyz";
+const TO_EMAIL = process.env.SMTP_USER ?? "start@alecsdesign.xyz";
 
 const SUBJECT_LABELS: Record<string, string> = {
   general: "General Inquiry",
@@ -138,8 +138,8 @@ export async function POST(req: NextRequest) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host:   "mail.privateemail.com",
-      port:   587,
+      host: "mail.privateemail.com",
+      port: 587,
       secure: false, // STARTTLS on 587
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
