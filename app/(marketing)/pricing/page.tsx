@@ -8,49 +8,46 @@ export const metadata: Metadata = {
     "Simple credit-based pricing. Buy once, credits never expire. 3 free analyses on every new account — no credit card required.",
 };
 
+const INCLUDED_IN_ALL = [
+  "Full 7-section structured compliance report",
+  "Risk classification with regulation grounding",
+  "Applicable obligations per article",
+  "Key actions with compliance deadlines",
+  "Penalty exposure analysis",
+  "PDF export of every report",
+  "Permanent analysis history",
+];
+
 const PACKS = [
   {
     name: "Starter",
     price: "$9",
     credits: 10,
     perAnalysis: "$0.90",
-    features: [
-      "10 compliance analyses",
-      "Full 7-section structured report",
-      "Risk classification & article grounding",
-      "Key actions with compliance deadlines",
-      "PDF export of every report",
-    ],
-    cta: "Buy Starter",
+    savings: null,
+    scope: "Try it on 3–5 AI systems",
     highlight: false,
+    cta: "Get Starter",
   },
   {
     name: "Growth",
     price: "$29",
     credits: 40,
     perAnalysis: "$0.73",
-    features: [
-      "40 compliance analyses",
-      "Everything in Starter",
-      "Best value for regular use",
-      "Ideal for teams reviewing multiple products",
-    ],
-    cta: "Buy Growth",
+    savings: "Save 19%",
+    scope: "Suitable for 10–15 AI systems",
     highlight: true,
+    cta: "Get Growth",
   },
   {
     name: "Pro",
     price: "$79",
     credits: 120,
     perAnalysis: "$0.66",
-    features: [
-      "120 compliance analyses",
-      "Everything in Growth",
-      "Lowest per-analysis cost",
-      "API access (coming soon)",
-    ],
-    cta: "Buy Pro",
+    savings: "Save 27%",
+    scope: "Organisation-wide reviews",
     highlight: false,
+    cta: "Get Pro",
   },
 ];
 
@@ -70,15 +67,13 @@ export default function PricingPage() {
             <span className="text-muted-foreground">not to get rich.</span>
           </h1>
           <p className="mt-5 text-muted-foreground">
-            Buy a credit pack once. Credits never expire. Each compliance
-            analysis costs 1 credit.
+            Buy credits once. They never expire. Every pack unlocks the full
+            tool — more credits just means more analyses for less per run.
           </p>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
             A professional pre-screening engagement — just the discovery call
             where an expert figures out what your tool does — starts at around
             €500. For the cost of that call you can run over 500 analyses here.
-            These prices exist to keep this tool online and available, nothing
-            more.
           </p>
         </div>
 
@@ -99,27 +94,42 @@ export default function PricingPage() {
                 </div>
               )}
 
+              {/* Price block */}
               <div className="mb-6">
                 <h2 className="text-lg font-semibold">{pack.name}</h2>
-                <div className="mt-2 flex items-baseline gap-1">
+                <div className="mt-2 flex items-baseline gap-2">
                   <span className="text-4xl font-bold">{pack.price}</span>
                   <span className="text-sm text-muted-foreground">
                     one-time
                   </span>
+                  {pack.savings && (
+                    <span className="ml-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                      {pack.savings}
+                    </span>
+                  )}
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {pack.credits} analyses · {pack.perAnalysis} each
+                <p className="mt-1 text-sm font-medium text-foreground">
+                  {pack.credits} analyses
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {pack.perAnalysis} per analysis · {pack.scope}
                 </p>
               </div>
 
-              <ul className="mb-8 flex-1 space-y-3">
-                {pack.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm">
-                    <span className="mt-0.5 text-green-500">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+              {/* What's included — same for all packs */}
+              <div className="mb-8 flex-1">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Everything included
+                </p>
+                <ul className="space-y-2.5">
+                  {INCLUDED_IN_ALL.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <span className="mt-0.5 text-green-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <SignedOut>
                 <Link
@@ -147,6 +157,14 @@ export default function PricingPage() {
               </SignedIn>
             </div>
           ))}
+        </div>
+
+        {/* Value anchor row */}
+        <div className="mt-8 rounded-xl border border-border bg-muted/40 px-6 py-4">
+          <p className="text-center text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">All packs, same full tool.</span>{" "}
+            No locked features, no tiers, no subscriptions. The only difference is how many analyses you get and the price per run.
+          </p>
         </div>
 
         {/* FAQ */}
