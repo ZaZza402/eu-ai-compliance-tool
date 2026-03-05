@@ -89,11 +89,12 @@ export default function AboutPage() {
           <p>
             So I built it. The engine retrieves the relevant articles from the
             full corpus, builds a grounded legal context, and runs a structured
-            7-section analysis — risk classification, operator role, applicable
-            obligations, key actions with deadlines, a compliance timeline, and
-            penalty exposure — with every single claim cited to the actual
-            regulation. Article numbers. Annex references. The real text, not a
-            summary of a summary.
+            8-section analysis — risk classification, operator role, applicable
+            obligations, key actions with deadlines, a compliance timeline,
+            penalty exposure, and a plain-language summary that translates the
+            legal findings into plain English — with every single claim cited to
+            the actual regulation. Article numbers. Annex references. The real
+            text, not a summary of a summary.
           </p>
 
           <p>

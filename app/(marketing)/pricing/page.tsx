@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const INCLUDED_IN_ALL = [
-  "Full 7-section structured compliance report",
+  "Full 8-section structured compliance report",
   "Risk classification with regulation grounding",
   "Applicable obligations per article",
   "Key actions with compliance deadlines",

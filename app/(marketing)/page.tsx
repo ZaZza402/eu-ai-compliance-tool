@@ -59,7 +59,7 @@ export default function LandingPage() {
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
             {[
               "Full 113-article corpus",
-              "7-section structured report",
+              "8-section structured report",
               "Results in ~30 seconds",
               "3 free analyses — no card needed",
             ].map((s) => (
@@ -126,7 +126,7 @@ export default function LandingPage() {
               {
                 step: "03",
                 title: "Get your compliance picture",
-                body: "Receive your risk classification, operator role, specific article obligations, and key actions — with every claim cited to the regulation.",
+                body: "Receive 8 structured sections — risk classification, operator role, obligations, key actions, timeline, penalty exposure, and a plain-language summary — every finding cited to the regulation.",
               },
             ].map(({ step, title, body }) => (
               <div
@@ -305,13 +305,35 @@ export default function LandingPage() {
 
               <div className="rounded-xl border border-orange-200 bg-orange-50/60 px-4 py-3 dark:border-orange-500/20 dark:bg-orange-900/10">
                 <p className="text-xs font-semibold text-orange-900 dark:text-orange-300">
-                  12 words in. 7 structured sections out.
+                  12 words in. 8 structured sections out.
                 </p>
                 <p className="mt-0.5 text-xs leading-relaxed text-orange-800/80 dark:text-orange-400/80">
-                  Your deployment context, sector, decision type, and oversight
-                  level yield significantly more precise obligations, article
-                  citations, and action timelines.
+                  Scope · Risk classification · Operator role · Obligations ·
+                  Key actions · Timeline · Penalty exposure · Plain language
+                  summary. Your deployment context, sector, and oversight level
+                  yield significantly more precise citations and action
+                  timelines.
                 </p>
+              </div>
+
+              {/* PDF download */}
+              <div className="flex items-center justify-between rounded-xl border border-border bg-muted/30 px-4 py-3">
+                <div>
+                  <p className="text-xs font-semibold text-foreground">
+                    See the full report
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Download a complete example PDF — the same format every
+                    analysis generates.
+                  </p>
+                </div>
+                <a
+                  href="/EU_AI_Act_Compliance_Report_example.pdf"
+                  download
+                  className="ml-4 shrink-0 inline-flex h-8 items-center justify-center rounded-lg border border-border px-3 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  Download PDF →
+                </a>
               </div>
             </div>
           </div>
@@ -510,7 +532,7 @@ export default function LandingPage() {
               },
               {
                 q: "How long does an analysis take?",
-                a: "Typically 20–40 seconds. The engine retrieves all relevant articles from the corpus, builds an article-grounded context, and runs a structured 7-section reasoning workflow. The loading screen shows each step in real time.",
+                a: "Typically 20–40 seconds. The engine retrieves all relevant articles from the corpus, builds an article-grounded context, and runs a structured 8-section reasoning workflow. The loading screen shows each step in real time.",
               },
               {
                 q: "Am I charged if an analysis fails?",
