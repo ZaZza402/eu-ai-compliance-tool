@@ -435,7 +435,7 @@ export function AnalysisPage({ initialCredits }: Props) {
             id="description"
             {...register("description")}
             rows={7}
-            placeholder={`Describe what your AI system does, including:\n• What it predicts, decides, or generates\n• Who it affects (e.g. job applicants, patients, students)\n• How it's used (automated decision vs. human review)\n• Where it's deployed (EU market, affected EU persons)\n• Your role (building it yourself vs. using a third-party system)`}
+            placeholder={`Describe what your AI system does, including:\n• What it predicts, decides, or generates\n• Who it affects (e.g. job applicants, patients, students)\n• How it's used (automated decision vs. human review)\n• Where it's deployed (EU market, affected EU persons)\n• Your role (building it yourself vs. using a third-party system)\n\nYou can write in any language — the analysis will follow.`}
             disabled={isLoading}
             className={cn(
               "w-full resize-none rounded-lg border bg-background px-4 py-3 text-sm shadow-sm placeholder:text-muted-foreground/60",
