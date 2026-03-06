@@ -3,6 +3,8 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MarketingMobileMenu } from "@/components/marketing/MarketingMobileMenu";
 import { CookieConsentController } from "@/components/cookie/CookieConsent";
+import { LegislationBadge } from "@/components/ui/LegislationBadge";
+import { UpdateAlertsForm } from "@/components/newsletter/UpdateAlertsForm";
 
 /**
  * Marketing layout — public pages (landing, pricing, docs).
@@ -117,6 +119,23 @@ export default function MarketingLayout({
       {/* ------------------------------------------------------------------ */}
       <footer className="border-t border-border/40 py-10">
         <div className="container mx-auto max-w-7xl px-4">
+          {/* Update alerts */}
+          <div className="mb-8 rounded-xl border border-border bg-muted/20 px-6 py-5 sm:flex sm:items-start sm:gap-12">
+            <div className="mb-4 shrink-0 sm:mb-0 sm:max-w-xs">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Stay informed
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                The EU AI Act is a living regulatory framework. Subscribe for a
+                brief notification when our corpus is updated to reflect an
+                amendment or corrigendum.
+              </p>
+            </div>
+            <div className="flex-1">
+              <UpdateAlertsForm />
+            </div>
+          </div>
+
           {/* Link grid */}
           <div className="mb-8 grid grid-cols-2 gap-6 text-sm sm:grid-cols-4">
             <div>
@@ -258,6 +277,7 @@ export default function MarketingLayout({
               This tool is informational only and does not constitute legal
               advice.
             </p>
+            <LegislationBadge variant="footer" />
           </div>
         </div>
       </footer>

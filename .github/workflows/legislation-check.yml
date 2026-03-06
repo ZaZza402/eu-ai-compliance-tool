@@ -1,0 +1,45 @@
+name: Update legislation check date
+
+# Runs at 08:00 UTC every day.
+# Updates `lastChecked` in legislation-status.json, then commits + pushes,
+# which triggers a Vercel re-deploy so the site always shows today's date.
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch: # Allow ad-hoc manual trigger from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-check-date:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update lastChecked date
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          node -e "
+            const fs = require('fs');
+            const p = 'eu_ai_act_json/legislation-status.json';
+            const s = JSON.parse(fs.readFileSync(p, 'utf-8'));
+            s.lastChecked = '$TODAY';
+            fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
+            console.log('lastChecked set to', '$TODAY');
+          "
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add eu_ai_act_json/legislation-status.json
+          # Only commit if the staged diff is non-empty
+          git diff --staged --quiet || (
+            git commit -m "chore: corpus check date $(date -u +%Y-%m-%d) [skip ci]" &&
+            git push
+          )

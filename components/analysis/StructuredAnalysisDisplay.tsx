@@ -29,6 +29,7 @@ import {
 import { ArticleBadge } from "@/components/analysis/ArticleBadge";
 import { ExportPdfButton } from "@/components/analysis/ExportPdfButton";
 import { cn } from "@/lib/utils";
+import legislationStatus from "@/eu_ai_act_json/legislation-status.json";
 
 // ---------------------------------------------------------------------------
 // Article ref normalisation
@@ -39,6 +40,16 @@ import { cn } from "@/lib/utils";
 function normalizeArticleRef(ref: string): string {
   const idx = ref.indexOf("(");
   return idx > 0 ? ref.slice(0, idx).trim() : ref.trim();
+}
+
+function formatStatusDate(iso: string): string {
+  const [year, month, day] = iso.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function uniqueBaseArticles(refs: string[]): string[] {
@@ -323,10 +334,7 @@ function ClarificationsBanner({ items }: { items: string[] }) {
       </div>
       <ul className="space-y-1 pl-2">
         {items.map((item, i) => (
-          <li
-            key={i}
-            className="flex gap-2 text-xs text-muted-foreground"
-          >
+          <li key={i} className="flex gap-2 text-xs text-muted-foreground">
             <span className="shrink-0">•</span>
             <span>{item}</span>
           </li>
@@ -483,6 +491,13 @@ export function StructuredAnalysisDisplay({
               {result.articlesReferenced.length !== 1 ? "s" : ""} consulted
             </span>
           )}
+          <span className="flex items-center gap-1 opacity-80">
+            <span className="relative flex h-1.5 w-1.5 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
+            </span>
+            Corpus verified {formatStatusDate(legislationStatus.lastChecked)}
+          </span>
         </div>
         <a href="/feedback" className="hover:text-foreground hover:underline">
           Found an inaccuracy? Report it →

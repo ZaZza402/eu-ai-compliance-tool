@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import { Scale } from "lucide-react";
 import { ArticleSearchList } from "@/components/article/ArticleSearchList";
+import { LegislationBadge } from "@/components/ui/LegislationBadge";
 
 export const metadata: Metadata = {
   title: "EU AI Act — All 113 Articles & Annexes",
@@ -98,6 +99,7 @@ export default function ArticlesIndexPage() {
             <span>·</span>
             <span>13 chapters</span>
           </div>
+          <LegislationBadge variant="inline" />
         </div>
 
         {/* Search + grouped list */}

@@ -98,3 +98,12 @@ export const contactLimiter = new SlidingWindowRateLimiter({
   limit: 5,
   windowMs: 10 * 60_000,
 });
+
+/**
+ * Singleton rate limiter for /api/newsletter (public, keyed on IP).
+ * 3 subscriptions per IP per hour — prevents list-flooding abuse.
+ */
+export const newsletterLimiter = new SlidingWindowRateLimiter({
+  limit: 3,
+  windowMs: 60 * 60_000,
+});

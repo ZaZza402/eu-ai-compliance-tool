@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { RISK_COLORS, RISK_LABELS } from "@/lib/analysis-schema";
 import type { RiskLevel } from "@/lib/analysis-schema";
 import { TestimonialsSection } from "@/components/marketing/TestimonialsSection";
+import { LegislationBadge } from "@/components/ui/LegislationBadge";
 
 export const metadata: Metadata = {
   title: "Regumatrix — Article-Grounded EU AI Act Compliance Checker",
@@ -68,6 +69,9 @@ export default function LandingPage() {
                 {s}
               </span>
             ))}
+          </div>
+          <div className="mt-3 flex justify-center">
+            <LegislationBadge variant="pill" />
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
