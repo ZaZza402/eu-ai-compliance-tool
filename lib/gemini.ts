@@ -10,10 +10,10 @@ import { generateObject } from "ai";
 import { retriever } from "@/lib/retriever";
 import { AnalysisOutputSchema } from "@/lib/analysis-schema";
 
-// The model we're using — Gemini 3.1 Flash Lite: fast, cheap, large context window.
+// The model we're using — Gemini 2.5 Flash Lite: fast, generous quota (4K RPM / 4M TPM).
 // rather than a floating alias. Analysis output for a regulatory tool must be reproducible;
 // a silent upstream model update can change how the model interprets legal concepts overnight.
-const MODEL = "gemini-3.1-flash-lite";
+const MODEL = "gemini-2.5-flash-lite";
 
 // ---------------------------------------------------------------------------
 // System prompt — injected with the article-grounded context
