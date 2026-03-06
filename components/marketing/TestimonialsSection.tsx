@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Testimonial data ─────────────────────────────────────────────────────────
@@ -11,7 +12,7 @@ const TESTIMONIALS = [
     name: "James Thornton",
     role: "Product Lead",
     company: "MedTech startup, Berlin",
-    initials: "JT",
+    photo: "/testimonials-headshots/james-thornton.webp",
   },
   {
     quote:
@@ -19,7 +20,7 @@ const TESTIMONIALS = [
     name: "Camille Bertrand",
     role: "Head of Legal & Compliance",
     company: "FinTech scale-up, Paris",
-    initials: "CB",
+    photo: "/testimonials-headshots/camille-bertrand.webp",
   },
   {
     quote:
@@ -27,7 +28,7 @@ const TESTIMONIALS = [
     name: "Mateo Sánchez",
     role: "Founder",
     company: "B2B SaaS, Madrid",
-    initials: "MS",
+    photo: "/testimonials-headshots/mateo-sanchez.webp",
   },
   {
     quote:
@@ -35,7 +36,7 @@ const TESTIMONIALS = [
     name: "Annika Rydberg",
     role: "Chief Compliance Officer",
     company: "AI infrastructure firm, Stockholm",
-    initials: "AR",
+    photo: "/testimonials-headshots/annika-rydberg.webp",
   },
   {
     quote:
@@ -43,7 +44,7 @@ const TESTIMONIALS = [
     name: "Luka Petrović",
     role: "CTO",
     company: "EdTech scale-up, Ljubljana",
-    initials: "LP",
+    photo: "/testimonials-headshots/luka-petrovic.webp",
   },
   {
     quote:
@@ -51,7 +52,7 @@ const TESTIMONIALS = [
     name: "Priya Nair",
     role: "ML Engineer",
     company: "Independent consultant, Amsterdam",
-    initials: "PN",
+    photo: "/testimonials-headshots/priya-nair.webp",
   },
 ];
 
@@ -151,10 +152,7 @@ export function TestimonialsSection() {
         </div>
 
         {/* ── Desktop: static 2 × 3 grid ─────────────────────────────────── */}
-        <div
-          ref={gridRef}
-          className="hidden gap-6 lg:grid lg:grid-cols-3"
-        >
+        <div ref={gridRef} className="hidden gap-6 lg:grid lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <TestimonialCard
               key={t.name}
@@ -176,7 +174,7 @@ function TestimonialCard({
   name,
   role,
   company,
-  initials,
+  photo,
   visible,
   delay,
 }: {
@@ -184,7 +182,7 @@ function TestimonialCard({
   name: string;
   role: string;
   company: string;
-  initials: string;
+  photo: string;
   visible: boolean;
   delay: number;
 }) {
@@ -220,11 +218,15 @@ function TestimonialCard({
 
       {/* Attribution */}
       <figcaption className="mt-6 flex items-center gap-3">
-        <div
-          aria-hidden
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary"
-        >
-          {initials}
+        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full" aria-hidden>
+          <Image
+            src={photo}
+            alt=""
+            fill
+            sizes="40px"
+            className="object-cover"
+            draggable={false}
+          />
         </div>
         <div>
           <p className="text-sm font-semibold text-foreground">{name}</p>
