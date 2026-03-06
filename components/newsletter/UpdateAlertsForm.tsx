@@ -1,15 +1,23 @@
 "use client";
 
-import { useState, useId } from "react";
+import { useState, useId, useEffect } from "react";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
+
+const LS_KEY = "regumatrix_newsletter_subscribed";
 
 export function UpdateAlertsForm() {
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  // null = unknown until hydrated; true = already subscribed
+  const [alreadySubscribed, setAlreadySubscribed] = useState<boolean | null>(null);
   const checkboxId = useId();
+
+  useEffect(() => {
+    setAlreadySubscribed(localStorage.getItem(LS_KEY) === "1");
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,6 +39,7 @@ export function UpdateAlertsForm() {
         setErrorMsg(data.error ?? "Something went wrong. Please try again.");
         setState("error");
       } else {
+        localStorage.setItem(LS_KEY, "1");
         setState("success");
       }
     } catch {
@@ -39,19 +48,11 @@ export function UpdateAlertsForm() {
     }
   }
 
-  if (state === "success") {
-    return (
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-500/15 text-green-600 dark:text-green-400">
-          ✓
-        </span>
-        <span>
-          You&apos;re subscribed — we&apos;ll notify you when the corpus is
-          updated.
-        </span>
-      </div>
-    );
-  }
+  // Hidden until JS hydrates — avoids a flash of the form for returning subscribers
+  if (alreadySubscribed === null) return null;
+
+  // Returning subscriber — hide the whole box
+  if (alreadySubscribed || state === "success") return null;
 
   return (
     <div>
