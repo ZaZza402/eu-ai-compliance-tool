@@ -12,7 +12,9 @@ export function UpdateAlertsForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   // null = unknown until hydrated; true = already subscribed
-  const [alreadySubscribed, setAlreadySubscribed] = useState<boolean | null>(null);
+  const [alreadySubscribed, setAlreadySubscribed] = useState<boolean | null>(
+    null,
+  );
   const checkboxId = useId();
 
   useEffect(() => {

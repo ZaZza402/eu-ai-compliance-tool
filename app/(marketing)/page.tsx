@@ -6,6 +6,7 @@ import { RISK_COLORS, RISK_LABELS } from "@/lib/analysis-schema";
 import type { RiskLevel } from "@/lib/analysis-schema";
 import { TestimonialsSection } from "@/components/marketing/TestimonialsSection";
 import { LegislationBadge } from "@/components/ui/LegislationBadge";
+import { ComplianceTimeline } from "@/components/marketing/ComplianceTimeline";
 
 export const metadata: Metadata = {
   title: "Regumatrix — Article-Grounded EU AI Act Compliance Checker",
@@ -379,136 +380,9 @@ export default function LandingPage() {
       </section>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Compliance Deadline Timeline                                         */}
+      {/* Compliance Deadline Timeline — fully date-driven, no manual updates  */}
       {/* ------------------------------------------------------------------ */}
-      <section className="py-20">
-        <div className="container mx-auto max-w-2xl px-4">
-          <h2 className="mb-3 text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            The clock is already running
-          </h2>
-          <p className="mb-12 text-center text-sm text-muted-foreground">
-            EU AI Act obligations are phased in over three years. If your system
-            is high-risk, the full compliance deadline is five months away.
-          </p>
-
-          <div className="relative">
-            {[
-              {
-                date: "Aug 1, 2024",
-                title: "Regulation enters into force",
-                detail:
-                  "Regulation (EU) 2024/1689 published in the Official Journal. The legal framework is live.",
-                status: "done" as const,
-                urgent: false,
-              },
-              {
-                date: "Feb 2, 2025",
-                title: "Prohibited AI — immediate ban",
-                detail:
-                  "All AI practices listed in Article 5 are forbidden, including certain biometric categorisation and real-time remote biometric ID in public spaces.",
-                status: "done" as const,
-                urgent: false,
-              },
-              {
-                date: "Aug 2, 2025",
-                title: "GPAI model obligations apply",
-                detail:
-                  "Providers of general-purpose AI models must comply with transparency, copyright, and systemic-risk obligations (Art. 51–55).",
-                status: "done" as const,
-                urgent: false,
-              },
-              {
-                date: "Today — Mar 2026",
-                title: "You are here",
-                detail: null,
-                status: "current" as const,
-                urgent: false,
-              },
-              {
-                date: "Aug 2, 2026",
-                title: "High-risk AI: full obligations",
-                detail:
-                  "Risk management system, data governance, technical documentation, human oversight, EU database registration — all mandatory. Penalties up to €30M or 6% of global turnover.",
-                status: "upcoming" as const,
-                urgent: true,
-              },
-              {
-                date: "Aug 2, 2027",
-                title: "Legacy high-risk systems",
-                detail:
-                  "High-risk AI already on the market before August 2024 must comply by this extended deadline.",
-                status: "upcoming" as const,
-                urgent: false,
-              },
-            ].map((item, index, arr) => (
-              <div key={index} className="relative flex gap-5">
-                {/* Connector line */}
-                {index < arr.length - 1 && (
-                  <div className="absolute left-2.75 top-6 h-full w-px bg-border" />
-                )}
-                {/* Status dot */}
-                <div
-                  className={`relative z-10 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 ${
-                    item.status === "done"
-                      ? "border-green-500 bg-green-500"
-                      : item.status === "current"
-                        ? "border-primary bg-primary"
-                        : item.urgent
-                          ? "border-orange-500 bg-card"
-                          : "border-border bg-card"
-                  }`}
-                >
-                  {item.status === "done" && (
-                    <span className="text-[10px] font-bold text-white">✓</span>
-                  )}
-                  {item.status === "current" && (
-                    <span className="h-2 w-2 rounded-full bg-white" />
-                  )}
-                </div>
-                {/* Content */}
-                <div className="pb-8">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span
-                      className={`text-xs font-semibold ${
-                        item.status === "done"
-                          ? "text-muted-foreground"
-                          : item.status === "current"
-                            ? "text-primary"
-                            : item.urgent
-                              ? "text-orange-600 dark:text-orange-400"
-                              : "text-muted-foreground"
-                      }`}
-                    >
-                      {item.date}
-                    </span>
-                    {item.urgent && (
-                      <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">
-                        ~5 months away
-                      </span>
-                    )}
-                  </div>
-                  <p
-                    className={`mt-0.5 text-sm font-semibold ${
-                      item.status === "done"
-                        ? "text-muted-foreground"
-                        : item.status === "current"
-                          ? "text-primary"
-                          : "text-foreground"
-                    }`}
-                  >
-                    {item.title}
-                  </p>
-                  {item.detail && (
-                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                      {item.detail}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ComplianceTimeline />
 
       <TestimonialsSection />
 
