@@ -314,10 +314,10 @@ function TimelineSection({
 function ClarificationsBanner({ items }: { items: string[] }) {
   if (!items.length) return null;
   return (
-    <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 dark:border-amber-500/50 dark:bg-amber-500/15">
+    <div className="rounded-xl border border-border bg-muted/60 p-4">
       <div className="mb-2 flex items-center gap-2">
-        <AlertTriangle className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-400" />
-        <p className="text-sm font-semibold text-amber-900 dark:text-amber-300">
+        <AlertTriangle className="h-4 w-4 shrink-0 text-muted-foreground" />
+        <p className="text-sm font-semibold text-foreground">
           Analysis limitations — key information was missing
         </p>
       </div>
@@ -325,14 +325,14 @@ function ClarificationsBanner({ items }: { items: string[] }) {
         {items.map((item, i) => (
           <li
             key={i}
-            className="flex gap-2 text-xs text-amber-900 dark:text-amber-400"
+            className="flex gap-2 text-xs text-muted-foreground"
           >
             <span className="shrink-0">•</span>
             <span>{item}</span>
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-xs text-amber-800 dark:text-amber-500">
+      <p className="mt-2 text-xs text-muted-foreground">
         Re-run the analysis with a more detailed description for a more accurate
         result.
       </p>

@@ -45,9 +45,9 @@ export default async function SettingsPage() {
           Financial transaction records are retained for 7 years as required by
           law; all other data is deleted immediately.
         </p>
-        <div className="mb-5 flex items-start gap-2.5 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3">
-          <span className="mt-0.5 text-amber-500">⚠</span>
-          <p className="text-sm text-amber-700 dark:text-amber-400">
+        <div className="mb-5 flex items-start gap-2.5 rounded-lg border border-destructive/25 bg-destructive/5 px-4 py-3">
+          <span className="mt-0.5 text-destructive">↓</span>
+          <p className="text-sm text-foreground/80">
             <span className="font-semibold">Save your reports first.</span> All
             your compliance analyses will be wiped permanently. Download any PDF
             reports you want to keep before proceeding.

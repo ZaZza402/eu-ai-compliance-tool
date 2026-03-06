@@ -57,7 +57,7 @@ export default function TermsPage() {
             Effective date: 28 February 2026 &nbsp;·&nbsp; Last updated: 28
             February 2026
           </p>
-          <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-200">
+          <p className="mt-4 rounded-lg border border-border bg-muted/60 px-4 py-3 text-sm text-foreground/80">
             <strong>
               This tool is informational only and does not constitute legal
               advice.

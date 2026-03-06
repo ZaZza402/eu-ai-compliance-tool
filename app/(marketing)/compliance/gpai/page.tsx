@@ -92,9 +92,9 @@ export default function GPAIPage() {
         </div>
 
         {/* Systemic risk threshold */}
-        <div className="mb-10 rounded-xl border border-amber-300 bg-amber-50 p-6 dark:border-amber-700/40 dark:bg-amber-900/20">
+        <div className="mb-10 rounded-xl border border-border bg-muted/60 p-6">
           <div className="flex items-start gap-3">
-            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700 dark:text-amber-400" />
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
             <div>
               <h2 className="font-semibold text-foreground">
                 Systemic risk threshold
