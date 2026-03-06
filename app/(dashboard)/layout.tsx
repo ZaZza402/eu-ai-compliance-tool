@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
@@ -36,19 +35,23 @@ export default async function DashboardLayout({
         <div className="flex h-14 items-center border-b border-sidebar-border px-5">
           <Link
             href="/"
-            className="flex items-center gap-2 font-semibold text-sidebar-foreground"
+            className="flex items-center gap-2 text-sidebar-foreground"
           >
-            <Image
-              src="/regumatrix-logo-vector.svg"
-              alt=""
-              width={22}
-              height={22}
-              className="dark:invert"
-              unoptimized
-              priority
+            <span
+              className="block h-5.5 w-5.5 shrink-0 bg-sidebar-foreground"
+              style={{
+                maskImage: "url(/regumatrix-logo-vector.svg)",
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskImage: "url(/regumatrix-logo-vector.svg)",
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+              }}
               aria-hidden
             />
-            <span className="text-sm">Regumatrix</span>
+            <span className="text-sm font-semibold">Regumatrix</span>
           </Link>
         </div>
 
@@ -103,18 +106,22 @@ export default async function DashboardLayout({
         <div className="flex items-center gap-3">
           {/* Hamburger — opens the slide-in drawer */}
           <MobileNav />
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Image
-              src="/regumatrix-logo-vector.svg"
-              alt=""
-              width={22}
-              height={22}
-              className="dark:invert"
-              unoptimized
-              priority
+          <Link href="/" className="flex items-center gap-2">
+            <span
+              className="block h-5.5 w-5.5 shrink-0 bg-foreground"
+              style={{
+                maskImage: "url(/regumatrix-logo-vector.svg)",
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskImage: "url(/regumatrix-logo-vector.svg)",
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+              }}
               aria-hidden
             />
-            <span className="text-sm">Regumatrix</span>
+            <span className="text-sm font-semibold">Regumatrix</span>
           </Link>
         </div>
         <div className="flex items-center gap-2">
