@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { trackEvent } from "@/lib/analytics";
 import {
   Wand2,
   CheckCircle2,
@@ -320,14 +321,17 @@ export function AnalysisPage({ initialCredits }: Props) {
       setResult(data.analysis);
       setCredits((prev) => Math.max(0, prev - 1));
       localStorage.removeItem(LS_KEY);
+      trackEvent("analysis_complete", {
+        risk_tier: data.analysis.riskLevel ?? "unknown",
+      });
       // 80 ms delay so the fade-in transition is visible
       setTimeout(() => setShowResult(true), 80);
       startCountdown(data.id);
     } catch (err) {
       if (err instanceof Error && err.name === "AbortError") return;
-      setError(
-        err instanceof Error ? err.message : "An unexpected error occurred.",
-      );
+      const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      trackEvent("analysis_error", { error_message: msg });
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
