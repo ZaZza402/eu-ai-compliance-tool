@@ -2,7 +2,7 @@
  * POST /api/analyze
  * =================
  * Core analysis endpoint. Accepts a user's AI system description,
- * runs it through the EU AI Act retriever + Gemini 2.5 Flash (generateObject),
+ * runs it through the EU AI Act retriever + Gemini 3.1 Flash Lite (generateObject),
  * saves the structured result to DB, deducts 1 credit, and returns JSON.
  *
  * No streaming — returns the complete structured analysis in a single JSON

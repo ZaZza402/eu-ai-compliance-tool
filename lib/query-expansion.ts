@@ -71,7 +71,7 @@ Output: e-commerce, retail, recommendation system, collaborative filtering, purc
 export async function expandQuery(description: string): Promise<string> {
   try {
     const { text } = await generateText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-3.1-flash-lite"),
       system: EXPANSION_SYSTEM,
       prompt: description,
       maxOutputTokens: 150,
