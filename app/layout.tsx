@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   creator: "Regumatrix",
   publisher: "Regumatrix",
   manifest: "/manifest.webmanifest",
+  alternates: {
+    canonical: BASE_URL,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

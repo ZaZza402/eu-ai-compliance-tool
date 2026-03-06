@@ -5,19 +5,38 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Regumatrix — EU AI Act Compliance",
     short_name: "Regumatrix",
     description:
-      "Instantly check your EU AI Act compliance. Risk classification, obligations, and key actions grounded in Regulation EU 2024/1689.",
+      "Instant EU AI Act compliance check grounded in the full 113-article corpus of Regulation EU 2024/1689.",
+    id: "/",
     start_url: "/",
+    scope: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#1d4ed8",
+    theme_color: "#09090b",
     orientation: "portrait-primary",
-    categories: ["business", "productivity", "legal"],
+    lang: "en-GB",
+    categories: ["business", "productivity"],
     icons: [
       {
-        src: "/icon",
+        src: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        src: "/favicon-32x32.png",
         sizes: "32x32",
         type: "image/png",
+      },
+      {
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
         purpose: "any",
+      },
+      {
+        src: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
       },
     ],
     shortcuts: [
@@ -26,8 +45,9 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: "Analyse",
         description: "Run a new EU AI Act compliance analysis",
         url: "/analyze",
-        icons: [{ src: "/icon", sizes: "32x32" }],
+        icons: [{ src: "/android-chrome-192x192.png", sizes: "192x192" }],
       },
     ],
   };
 }
+
