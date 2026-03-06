@@ -126,12 +126,25 @@ function annexAsArticle(
   num: string,
   meta?: { title: string; chapter: string; file: string },
 ): ArticleContent {
-  // Normalise the key into the filename the annex file loader expects.
-  // getAnnex() handles "Annex_III", "Annex III", "annex_iii", etc.
-  let cleaned = num.trim().toLowerCase().replace(/ /g, "_");
-  if (!cleaned.startsWith("annex_"))
-    cleaned = "annex_" + cleaned.replace(/^_/, "");
-  const filename = cleaned.endsWith(".json") ? cleaned : cleaned + ".json";
+  // Prefer the pre-indexed filename (correct casing, e.g. "annex_I.json")
+  // over a lowercased reconstruction. On Linux (Vercel) the FS is case-sensitive,
+  // so "annex_i.json" would 404 even though the file is "annex_I.json".
+  let filename: string;
+  if (meta?.file) {
+    filename = meta.file;
+  } else {
+    // Fallback: look up via the lookup table before reconstructing
+    const lookup = getArticleLookup();
+    const lookupMeta = lookup[num.trim()];
+    if (lookupMeta?.file) {
+      filename = lookupMeta.file;
+    } else {
+      let cleaned = num.trim().toLowerCase().replace(/ /g, "_");
+      if (!cleaned.startsWith("annex_"))
+        cleaned = "annex_" + cleaned.replace(/^_/, "");
+      filename = cleaned.endsWith(".json") ? cleaned : cleaned + ".json";
+    }
+  }
 
   try {
     const d = loadJson<FlatAnnexData>(filename);
@@ -273,20 +286,30 @@ class EUAIActRetriever {
   // ------------------------------------------------------------------
 
   getAnnex(annexId: string): AnnexContent {
-    let cleaned = annexId.trim().toLowerCase().replace(/ /g, "_");
-    if (!cleaned.startsWith("annex_"))
-      cleaned = "annex_" + cleaned.replace(/^_/, "");
-    if (!cleaned.endsWith(".json")) cleaned += ".json";
-
+    // Look up the correct filename (with proper casing) from the index first.
+    // On Linux (Vercel) the FS is case-sensitive, so lowercasing would break
+    // "annex_I.json" → "annex_i.json" lookups.
+    const lookup = getArticleLookup();
+    const meta = lookup[annexId.trim()];
+    let filename: string;
+    if (meta?.file) {
+      filename = meta.file;
+    } else {
+      let cleaned = annexId.trim().toLowerCase().replace(/ /g, "_");
+      if (!cleaned.startsWith("annex_"))
+        cleaned = "annex_" + cleaned.replace(/^_/, "");
+      if (!cleaned.endsWith(".json")) cleaned += ".json";
+      filename = cleaned;
+    }
     try {
-      const data = loadJson(cleaned);
-      return { annex_id: annexId, source_file: cleaned, data };
+      const data = loadJson(filename);
+      return { annex_id: annexId, source_file: filename, data };
     } catch {
       return {
         annex_id: annexId,
-        source_file: cleaned,
+        source_file: filename,
         data: {},
-        error: `Annex file '${cleaned}' not found.`,
+        error: `Annex file '${filename}' not found.`,
       };
     }
   }
