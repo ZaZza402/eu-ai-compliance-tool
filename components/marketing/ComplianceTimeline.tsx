@@ -105,7 +105,10 @@ export function ComplianceTimeline() {
     const list: Slot[] = [];
     MILESTONES.forEach((m, i) => {
       if (i === insertBefore) {
-        list.push({ kind: "current", label: `Today — ${formatMonthYear(today)}` });
+        list.push({
+          kind: "current",
+          label: `Today — ${formatMonthYear(today)}`,
+        });
       }
       list.push({
         kind: "milestone",
@@ -118,13 +121,16 @@ export function ComplianceTimeline() {
       });
     });
     if (insertBefore === MILESTONES.length) {
-      list.push({ kind: "current", label: `Today — ${formatMonthYear(today)}` });
+      list.push({
+        kind: "current",
+        label: `Today — ${formatMonthYear(today)}`,
+      });
     }
 
     // Dynamic subtitle — find the next urgent deadline for the "high-risk" sentence
     const nextUrgent =
       firstUpcomingIdx !== -1
-        ? MILESTONES.slice(firstUpcomingIdx).find((m) => m.urgent) ?? null
+        ? (MILESTONES.slice(firstUpcomingIdx).find((m) => m.urgent) ?? null)
         : null;
 
     const sub = nextUrgent
