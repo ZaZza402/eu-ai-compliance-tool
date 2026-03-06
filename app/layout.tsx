@@ -38,6 +38,25 @@ export const metadata: Metadata = {
   creator: "Regumatrix",
   publisher: "Regumatrix",
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
+  appleWebApp: {
+    title: "Regumatrix",
+    capable: true,
+    statusBarStyle: "default",
+    startupImage: "/regumatrix-logo-loading-pwa.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -131,15 +150,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={inter.variable} suppressHydrationWarning>
         <head>
-          {/* PWA / mobile */}
+          {/* PWA — Chrome / Android (apple-* tags handled by metadata.appleWebApp above) */}
           <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="default"
-          />
-          <meta name="apple-mobile-web-app-title" content="Regumatrix" />
-          <link rel="apple-touch-icon" href="/icon-192.png" />
           {/* JSON-LD */}
           <script
             type="application/ld+json"

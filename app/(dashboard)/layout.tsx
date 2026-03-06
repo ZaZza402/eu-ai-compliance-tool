@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { Scale, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { DesktopNav, MobileNav } from "@/components/layout/SidebarNav";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { db } from "@/lib/db";
@@ -37,8 +38,17 @@ export default async function DashboardLayout({
             href="/"
             className="flex items-center gap-2 font-semibold text-sidebar-foreground"
           >
-            <Scale className="h-4 w-4 shrink-0" />
-            <span className="text-sm">EU AI Act</span>
+            <Image
+              src="/regumatrix-logo-vector.svg"
+              alt=""
+              width={22}
+              height={22}
+              className="dark:invert"
+              unoptimized
+              priority
+              aria-hidden
+            />
+            <span className="text-sm">Regumatrix</span>
           </Link>
         </div>
 
@@ -94,8 +104,17 @@ export default async function DashboardLayout({
           {/* Hamburger — opens the slide-in drawer */}
           <MobileNav />
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Scale className="h-4 w-4 shrink-0" />
-            <span className="text-sm">EU AI Act</span>
+            <Image
+              src="/regumatrix-logo-vector.svg"
+              alt=""
+              width={22}
+              height={22}
+              className="dark:invert"
+              unoptimized
+              priority
+              aria-hidden
+            />
+            <span className="text-sm">Regumatrix</span>
           </Link>
         </div>
         <div className="flex items-center gap-2">

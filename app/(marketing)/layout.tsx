@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MarketingMobileMenu } from "@/components/marketing/MarketingMobileMenu";
@@ -24,9 +25,17 @@ export default function MarketingLayout({
         <div className="container mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <span className="text-lg leading-none">⚖️</span>
-            <span className="hidden sm:inline-block">Regumatrix</span>
-            <span className="sm:hidden">Regumatrix</span>
+            <Image
+              src="/regumatrix-logo-vector.svg"
+              alt=""
+              width={26}
+              height={26}
+              className="dark:invert"
+              unoptimized
+              priority
+              aria-hidden
+            />
+            <span>Regumatrix</span>
           </Link>
 
           {/* Nav links */}
