@@ -282,9 +282,9 @@ export default function TermsPage() {
             </P>
             <Ul
               items={[
-                "Starter — 10 credits for USD 9.00 (USD 0.90 per analysis)",
-                "Growth — 40 credits for USD 29.00 (USD 0.73 per analysis)",
-                "Pro — 120 credits for USD 79.00 (USD 0.66 per analysis)",
+                "Pilot — 10 credits for USD 9.00 (USD 0.90 per analysis)",
+                "Mission — 40 credits for USD 29.00 (USD 0.73 per analysis)",
+                "Command — 120 credits for USD 79.00 (USD 0.66 per analysis)",
               ]}
             />
             <P>

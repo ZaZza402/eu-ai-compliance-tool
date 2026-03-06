@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Credits" };
 
 const PACKS = [
   {
-    name: "Starter",
+    name: "Pilot",
     price: 9,
     credits: 10,
     popular: false,
@@ -17,7 +17,7 @@ const PACKS = [
     perCredit: "$0.90",
   },
   {
-    name: "Growth",
+    name: "Mission",
     price: 29,
     credits: 40,
     popular: true,
@@ -25,7 +25,7 @@ const PACKS = [
     perCredit: "$0.73",
   },
   {
-    name: "Pro",
+    name: "Command",
     price: 79,
     credits: 120,
     popular: false,

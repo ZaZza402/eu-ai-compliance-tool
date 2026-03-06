@@ -112,7 +112,16 @@ export function DeleteAccountButton() {
                 ))}
               </ul>
 
-              <div className="mt-5">
+              <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2.5">
+                <span className="shrink-0 text-amber-500">⚠</span>
+                <p className="text-xs leading-relaxed text-amber-700 dark:text-amber-400">
+                  <span className="font-semibold">Download your reports before continuing.</span>{" "}
+                  Every compliance analysis in your history will be deleted
+                  permanently and cannot be recovered.
+                </p>
+              </div>
+
+              <div className="mt-4">
                 <label
                   htmlFor="confirm-delete"
                   className="mb-1.5 block text-xs font-medium text-foreground"

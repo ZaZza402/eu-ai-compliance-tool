@@ -19,9 +19,9 @@ import {
 // ---------------------------------------------------------------------------
 
 export const CREDIT_PACKS = {
-  starter: { name: "Starter", price: "9.00", credits: 10 },
-  growth: { name: "Growth", price: "29.00", credits: 40 },
-  pro: { name: "Pro", price: "79.00", credits: 120 },
+  starter: { name: "Pilot", price: "9.00", credits: 10 },
+  growth: { name: "Mission", price: "29.00", credits: 40 },
+  pro: { name: "Command", price: "79.00", credits: 120 },
 } as const;
 
 export type PackKey = keyof typeof CREDIT_PACKS;

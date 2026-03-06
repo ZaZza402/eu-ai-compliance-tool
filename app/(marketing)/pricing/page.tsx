@@ -20,34 +20,34 @@ const INCLUDED_IN_ALL = [
 
 const PACKS = [
   {
-    name: "Starter",
+    name: "Pilot",
     price: "$9",
     credits: 10,
     perAnalysis: "$0.90",
     savings: null,
     scope: "Try it on 3–5 AI systems",
     highlight: false,
-    cta: "Get Starter",
+    cta: "Get Pilot",
   },
   {
-    name: "Growth",
+    name: "Mission",
     price: "$29",
     credits: 40,
     perAnalysis: "$0.73",
     savings: "Save 19%",
     scope: "Suitable for 10–15 AI systems",
     highlight: true,
-    cta: "Get Growth",
+    cta: "Get Mission",
   },
   {
-    name: "Pro",
+    name: "Command",
     price: "$79",
     credits: 120,
     perAnalysis: "$0.66",
     savings: "Save 27%",
     scope: "Organisation-wide reviews",
     highlight: false,
-    cta: "Get Pro",
+    cta: "Get Command",
   },
 ];
 
