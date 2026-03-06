@@ -329,7 +329,8 @@ export function AnalysisPage({ initialCredits }: Props) {
       startCountdown(data.id);
     } catch (err) {
       if (err instanceof Error && err.name === "AbortError") return;
-      const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      const msg =
+        err instanceof Error ? err.message : "An unexpected error occurred.";
       trackEvent("analysis_error", { error_message: msg });
       setError(msg);
     } finally {

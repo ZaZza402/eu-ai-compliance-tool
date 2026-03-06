@@ -218,7 +218,10 @@ function TestimonialCard({
 
       {/* Attribution */}
       <figcaption className="mt-6 flex items-center gap-3">
-        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full" aria-hidden>
+        <div
+          className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full"
+          aria-hidden
+        >
           <Image
             src={photo}
             alt=""

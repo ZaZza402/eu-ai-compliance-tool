@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /analyze
+Disallow: /history
+Disallow: /credits
+Disallow: /settings
+Disallow: /api/
+
+Sitemap: https://regumatrix.eu/sitemap.xml
+Host: https://regumatrix.eu
